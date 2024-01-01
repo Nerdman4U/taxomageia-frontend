@@ -1,6 +1,6 @@
 
-const TaxonParentItem = ({item}: {item:string}) => {
-  return <p className="text-sm text-gray-400 mb-4">{item}</p>
+const TaxonParentItem = ({name}: {name:string}) => {
+  return <p className="text-sm text-gray-400 mb-4">{name}</p>
 }
 
 export default TaxonParentItem

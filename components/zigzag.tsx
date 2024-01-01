@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Taxon from './taxon'
+import TaxonPreviewItem from './taxon-preview-item'
 
 import FeatImage01 from '@/public/images/features-03-image-01.png'
 import FeatImage02 from '@/public/images/features-03-image-02.png'
@@ -7,7 +7,7 @@ import FeatImage03 from '@/public/images/features-03-image-03.png'
 
 import rank from '../interfaces/rank.interface'
 
-const Zigzag = ({ranks}: {ranks: rank[]}) => {
+const Zigzag = ({ranks, handleSelectRankClick, handleClearSelectRankClick}: {ranks: rank[], handleSelectRankClick: any, handleClearSelectRankClick: any}) => {
   
   return (
     <section id="creatures">
@@ -23,14 +23,10 @@ const Zigzag = ({ranks}: {ranks: rank[]}) => {
 
           {/* Items */}
           <div className="grid gap-20">
-
             { 
-              ranks.map(r => <Taxon rank={r} />)
+              ranks.map(r => <TaxonPreviewItem key={r.identifier} rank={r} handleSelectRankClick={handleSelectRankClick} handleClearSelectRankClick={handleClearSelectRankClick} />)
             }
-
-
           </div>
-
         </div>
       </div>
     </section>

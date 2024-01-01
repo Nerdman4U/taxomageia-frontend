@@ -6,10 +6,11 @@ import metamorphosis from '@/interfaces/metamorphosis.interface'
 
 import FeatImage01 from '@/public/images/features-03-image-01.png'
 
-const Taxon = ({rank}: {rank: rank}) => {
+const TaxonPreviewItem = ({rank, handleSelectRankClick, handleClearSelectRankClick}: {rank: rank, handleSelectRankClick: any, handleClearSelectRankClick: any}) => {
   if (!rank?.identifier) {
     return null
   }
+  const identifier = rank.identifier
   const name = rank.identifier
   const taxonRank = rank.taxonRank 
   const taxonParent = rank.taxonParent
@@ -38,8 +39,13 @@ const Taxon = ({rank}: {rank: rank}) => {
     <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6" data-aos="fade-right">
       <div className="md:pr-4 lg:pr-12 xl:pr-16">
         <div className="font-architects-daughter text-xl text-purple-600 mb-2">{taxonRank}</div>
-        <h3 className="h3 mb-3">{name}</h3>
-        { taxonRanks.map((r => <TaxonParentItem item={r} /> ))  }
+        <h3 className="h3 mb-3"><a id={identifier} onClick={handleSelectRankClick}>{name}</a></h3>
+
+        { 
+          taxonRanks.map((name => {
+            return <TaxonParentItem key={name} name={name}/> 
+          }))
+        }
 
         <ul className="text-lg text-gray-400 -mb-2">
           <li className="flex items-center mb-2">
@@ -58,4 +64,4 @@ const Taxon = ({rank}: {rank: rank}) => {
  
 }
 
-export default Taxon
+export default TaxonPreviewItem

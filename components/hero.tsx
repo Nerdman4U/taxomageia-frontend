@@ -3,7 +3,7 @@ import VideoThumb from '@/public/images/hero-image-01.jpg'
 import ModalVideo from '@/components/modal-video'
 
 import FeatImage01 from '@/public/images/features-03-image-01.png'
-import Orc01 from '@/public/images/orc-01-1920.jpg'
+import Orc01 from '@/public/images/orc-01.png'
 
 export default function Hero() {
   return (
@@ -40,7 +40,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <Image className="max-w-full mx-auto md:max-w-none h-auto" src={Orc01} width={540} height={405} alt="Features 01" />
+          <Image className="max-w-full mx-auto md:max-w-none h-auto" src={Orc01} width={430} height={576} priority={true} alt="Banner" />
 
           {/* <ModalVideo
             thumb={VideoThumb}
