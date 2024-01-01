@@ -1,4 +1,4 @@
-import rank from '../interfaces/rank.interface'
+import rank from '../interfaces/taxon.interface'
 
 export default function Features({ranks}: {ranks: rank[]}) {
   const amount = ranks?.length || ""

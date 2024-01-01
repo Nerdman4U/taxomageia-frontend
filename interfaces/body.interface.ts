@@ -13,16 +13,16 @@ interface body {
   description?: string;
   updatedAt?: Date;
   createdAt?: Date;
-  skills?: divergence[];
-  mins?: divergence[];
-  maxes?: divergence[];
-  growths?: divergence[];
+  skills?: attribute[] | [];
+  mins?: attribute[] | [];
+  maxes?: attribute[] | [];
+  growths?: attribute[] | [];
   bodySegments?: bodySegment[];
   locomotion?: string
   diet?: string
   reproduction?: string
   size?: size;
-  powerlist: powerlist;
+  powers: powerlist;
   center?: string
   centerSides?: number
   centerSegments?: string[]

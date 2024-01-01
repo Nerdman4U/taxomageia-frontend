@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { rank } from './rank.interface.js';
+import { rank } from './taxon.interface.js';
 
 interface biomagicalClassification {
   id?: number;

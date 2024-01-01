@@ -1,6 +1,6 @@
 import metamorphosisChain from './metamorphosis_chain.interface.js';
 
-type rank = {
+type taxon = {
   id?: number;
   identifier: string;
   taxonRank: string;
@@ -8,7 +8,7 @@ type rank = {
   description?: string;
   url?: string[];
   parentId?: number;
-  categories?: rank[];
+  categories?: taxon[];
   ages?: metamorphosisChain[];
   createdAt?: Date;
   updatedAt?: Date;
@@ -20,5 +20,5 @@ type rank = {
 
 type powerlist = { properties: string[], abilities: any }
 
-export default rank
+export default taxon
 
