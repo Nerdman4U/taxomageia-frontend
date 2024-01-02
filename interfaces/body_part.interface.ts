@@ -1,11 +1,12 @@
 interface bodyPart {
   id?: number;
   identifier: string;
-  type: string
-  genotypeChange?: string
-  genotypeSource?: string | undefined;
-  description?: string | undefined;
-  toughness?: number | undefined;
+  type: string;
+  genotypeChange?: string;
+  genotypeSource?: string;
+  description_fi?: string;
+  description_en?: string;
+  toughness?: number;
   location?: string
   createdAt?: Date;
   updatedAt?: Date;

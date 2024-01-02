@@ -10,7 +10,8 @@ interface body {
   materia: string
   genotypeChange?: string
   genotypeSource?: string;
-  description?: string;
+  description_fi?: string;
+  description_en?: string;
   updatedAt?: Date;
   createdAt?: Date;
   skills?: attribute[] | [];

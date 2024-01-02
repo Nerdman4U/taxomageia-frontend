@@ -11,11 +11,11 @@ const TaxonPreviewItem = ({rank, handleSelectRankClick, handleClearSelectRankCli
     return null
   }
   const identifier = rank.identifier
-  const name = rank.identifier
+  const name = rank.name_en || rank.name_fi || identifier
   const taxonRank = rank.taxonRank 
   const taxonParent = rank.taxonParent
   const taxonRanks = rank.taxonRanks || []
-  const description = rank.description
+  const description = rank.description_en || rank.description_fi || ''
   // const existences = rank.ages || []  
   // const metamorphoses: metamorphosis[] = []
   // if ( existences.length > 0 ) {

@@ -26,8 +26,7 @@ type powers = {
 const BodyPowersTableRow = ({powerName, value}: bodyPowersTableRowProps) => {
   return ( 
     <tr><td>{powerName}</td><td>{value}</td></tr> 
-
-    )
+  )
 }
 
 const BodyPowers = ({ powers }: { powers: powers }) => {
@@ -40,7 +39,7 @@ const BodyPowers = ({ powers }: { powers: powers }) => {
           <tbody>     
            {
              Object.keys(powers.abilities).map((key) => (
-              <BodyPowersTableRow powerName={key} value={powers.abilities[key]} />               
+              <BodyPowersTableRow key={key} powerName={key} value={powers.abilities[key]} />               
              ))
            }
           </tbody>
@@ -57,12 +56,13 @@ const BodyPowers = ({ powers }: { powers: powers }) => {
 
 const BodyPart = ({ bodyPart }: { bodyPart: bodyPart }) => {
   const type = bodyPart?.type || "Unknown";
+  const desc = bodyPart?.description_en || bodyPart?.description_fi || "Unknown"
   return (
     <Table striped bordered hover variant="dark">
       <caption>Body of this metamorphosis.</caption>
       <tbody>
         <tr><td>Type</td><td>{type}</td></tr>
-        <tr><td>Description</td><td>{bodyPart?.description}</td></tr>
+        <tr><td>Description</td><td>{desc}</td></tr>
         <tr><td>Location</td><td>{bodyPart?.location}</td></tr>
         <tr><td>Organs</td><td>{
           bodyPart?.organs?.map((organ) => (
@@ -76,13 +76,14 @@ const BodyPart = ({ bodyPart }: { bodyPart: bodyPart }) => {
 
 const BodySegment = ({ bodySegment }: { bodySegment: bodySegment }) => {
   const type = bodySegment?.type || "Unknown";
+  const desc = bodySegment?.description_en || bodySegment?.description_fi || "Unknown"
   return (
     <Table striped bordered hover variant="dark">
       <caption>Body of this metamorphosis.</caption>
       <tbody>
         <tr><td>Type</td><td>{type}</td></tr>
         <tr><td>Percentage</td><td>{bodySegment?.percentage}</td></tr>
-        <tr><td>Description</td><td>{bodySegment?.description}</td></tr>
+        <tr><td>Description</td><td>{desc}</td></tr>
         <tr><td>BodyParts</td><td>{ 
             bodySegment?.bodyParts?.map((bodyPart) => (
              <BodyPart key={bodyPart.identifier} bodyPart={bodyPart} />
@@ -117,7 +118,7 @@ const Body = ({ body }: { body: body }) => {
   const type = body?.type || "Unknown";
   const materia = body?.materia || "Unknown";
   const powers = body?.powers || "Unknown";
-  const description = body?.description || "Unknown";
+  const description = body?.description_en || body?.description_fi || "No description available"
   const segments = body?.bodySegments || []
   const centerSides = body?.centerSides || 0
   const symmetricSides = ( centerSides > 1 ) ? centerSides : "No" 
@@ -185,9 +186,10 @@ const Existence = ({ existence }: { existence: metamorphosisChain }) => {
 const Taxon = ({ taxon, handleClearSelectRankClick }: {taxon: taxon | undefined, handleClearSelectRankClick: any}) => {
   if (!taxon) return
   const identifier = taxon?.identifier || "Unknown";  
+  const name = taxon?.name_en || taxon?.name_fi || identifier
   const taxonRank = taxon?.taxonRank || "Unknown";
   const taxonParent = taxon?.taxonParent || "Unknown";
-  const description = taxon?.description || "Unknown";
+  const description = taxon?.description_en || taxon?.description_fi || "Unknown"
   const existences = taxon?.ages || []; 
 
   const mmCount = existences.reduce((sum, i) => { 
@@ -217,7 +219,7 @@ const Taxon = ({ taxon, handleClearSelectRankClick }: {taxon: taxon | undefined,
           <div className="py-12 md:py-20 border-t border-gray-800">
             <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
               {/* <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">Reach goals that matter</div> */}
-              <h1 className="h2 mb-4">{identifier}</h1>
+              <h1 className="h2 mb-4">{name}</h1>
               <p className="text-xl text-gray-400">It has {existences.length} {existences_word}, {mmCount} {metamorphoses_word} and {bodyCount} {body_word}</p>
             </div>
 
@@ -277,9 +279,12 @@ Existence.propTypes = {
 Taxon.propTypes = {
   taxon: PropTypes.shape({
     identifier: PropTypes.string.isRequired,
+    name_fi: PropTypes.string,
+    name_en: PropTypes.string,
     taxonRank: PropTypes.string.isRequired,
     taxonParent: PropTypes.string,
-    description: PropTypes.string,
+    description_fi: PropTypes.string,
+    description_en: PropTypes.string,
     ages: PropTypes.array.isRequired,
   }),
   handleClearSelectRankClick: PropTypes.func

@@ -7,7 +7,8 @@ interface bodySegment {
   genotypeChange?: string
   genotypeSource?: string;
   percentage?: number;
-  description?: string;
+  description_fi?: string;
+  description_en?: string;
   updatedAt?: Date;
   createdAt?: Date;
   bodyParts?: bodyPart[];
