@@ -10,6 +10,11 @@ interface metamorphosis {
   period?: number;
   metamorphosisChainId?: number;
   bodies?: body[];
+  name_en?: string
+  name_fi?: string
+  description_en?: string
+  description_fi?: string
 }
 
 export default metamorphosis
+

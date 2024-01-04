@@ -4,6 +4,8 @@
 
 <p align="center">Comprehensive <a href="http://taxomageia.pro" target="_blank">taxomageia</a> for creating believable, amazing, new creatures and monsters!</p>
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
 <p align="center">
 
 ## Taxomageia | FRONTEND
@@ -36,14 +38,6 @@ You can download creature data from following urls at <a href="http://taxomageia
 - /api/taxomageia/first/inherited
 - /api/taxomageia/first/inherited/\<identifier\>
 
-## Support
-
-Fork. Help build bigger, badded, greater taxomageia frontend ever.
-
-<p align="right" style="float:right">
-  <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia/blob/master/public/images/alien.png" width="200" alt="alien" /></a>
-</p>
-
 ## Use cases
 
 This information can be used in all kinds of games with creatures. Creatures have more complete bodies, attributes and behaviour. Creatures may be used to create more or less magical ecosystem.
@@ -65,11 +59,19 @@ This information can be used in all kinds of games with creatures. Creatures hav
   - [ ] Localization (en/fi ... support for more)
 
 - [ ] v1.0
-  - [ ] Frontend: basic. list ranks, view one
+  - [X] Frontend: basic. list ranks, view one
   - [ ] All species
 
 <p align="right">
   <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia/blob/master/public/images/monster.png" width="200" alt="monster" /></a>
+</p>
+
+## Support
+
+If you want to help to build better UI its most welcome! Thank you.
+
+<p align="right" style="float:right">
+  <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia/blob/master/public/images/alien.png" width="200" alt="alien" /></a>
 </p>
 
 ## Stay in touch

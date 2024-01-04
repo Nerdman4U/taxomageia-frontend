@@ -20,3 +20,12 @@
 [x-cloak=""] {
     display: none;
 }
+
+.bg-purple-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(93 93 255 / var(--tw-bg-opacity)) !important;
+}
+.bg-gray-700 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(37 40 44 / var(--tw-bg-opacity)) !important;
+}

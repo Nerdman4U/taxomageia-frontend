@@ -10,6 +10,12 @@ interface metamorphosisChain {
   updatedAt?: Date;
   createdAt?: Date;
   categoryId?: number;
+  name_en?: string
+  name_fi?: string
+  description_en?: string
+  description_fi?: string
 }
 
 export default metamorphosisChain
+
+

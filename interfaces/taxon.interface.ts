@@ -12,7 +12,7 @@ type taxon = {
   url?: string[];
   parentId?: number;
   categories?: taxon[];
-  ages?: metamorphosisChain[];
+  existences?: metamorphosisChain[];
   createdAt?: Date;
   updatedAt?: Date;
   properties?: string[]

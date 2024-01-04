@@ -13,17 +13,18 @@ import Zigzag from '@/components/zigzag'
 import Testimonials from '@/components/testimonials'
 import Taxon from '@/components/taxon'
 
-import taxon from '../../interfaces/taxon.interface'
+import taxon from '@/interfaces/taxon.interface'
 
   const Home = () => {
   const [ taxons, setTaxons] = useState<taxon[]>([])
   const [ selectedTaxon, setSelectedTaxon ] = useState<taxon | undefined>()
 
   useEffect(() => {
-    axios.get(ranksUrl).then((response) => {
+    axios.get(inheritedRanksUrl).then((response): void => {
       console.log('connected to server at {server}')
+      console.log(response.data)
       setTaxons(response.data)
-    })     
+    })
   }, [])
 
   const handleSelectRankClick = (e: React.MouseEvent) => {
@@ -35,7 +36,6 @@ import taxon from '../../interfaces/taxon.interface'
     const url = inheritedRanksUrl + '/' + taxon.identifier
 
     axios.get(url).then((response) => {
-      console.log(response.data)
       setSelectedTaxon(response.data as taxon)
     })
   }
@@ -46,12 +46,12 @@ import taxon from '../../interfaces/taxon.interface'
     setSelectedTaxon(undefined)
   }
 
-  console.log("selectedTaxon", selectedTaxon)
+  //console.log("selectedTaxon", selectedTaxon)
   if (selectedTaxon) {     
     return (
       <>
         <Hero />
-        <Taxon taxon={selectedTaxon} handleClearSelectRankClick={handleClearSelectRankClick} />
+        <Taxon taxon={selectedTaxon} handleSelectRankClick={handleSelectRankClick} handleClearSelectRankClick={handleClearSelectRankClick} />
         <Testimonials />
         <Newsletter />
       </>
@@ -62,7 +62,7 @@ import taxon from '../../interfaces/taxon.interface'
       <>
         <Hero />
         <Features ranks={taxons}/>
-        <Zigzag taxons={taxons} handleSelectRankClick={handleSelectRankClick} handleClearSelectRankClick={handleClearSelectRankClick}/>  
+        <Zigzag taxons={taxons} handleSelectRankClick={handleSelectRankClick} />  
         <Testimonials />
         <Newsletter />
       </>

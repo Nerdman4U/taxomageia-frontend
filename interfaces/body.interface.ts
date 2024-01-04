@@ -27,6 +27,12 @@ interface body {
   center?: string
   centerSides?: number
   centerSegments?: string[]
+  etype: string,
+  metamorphosis_interval: number
+  metamorphosis_period: number
+  existence_name: string
+  existence_type: string
+  metamorphosis_name: string
 }
 
 type powerlist = { properties: string[], abilities: any, inputs: string[], outputs: string[] }

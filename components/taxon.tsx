@@ -3,6 +3,8 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import PropTypes from 'prop-types';
 
+import TaxonPreviewListItem from '@/components/taxon-preview-list-item';
+
 import body from '@/interfaces/body.interface.js';
 import bodySegment from '@/interfaces/body_segment.interface.js';
 import bodyPart from '@/interfaces/body_part.interface.js';
@@ -100,21 +102,41 @@ const BodySegment = ({ bodySegment }: { bodySegment: bodySegment }) => {
   );
 }
 
+const Attribute = ({ attribute }: { attribute: attribute }) => {
+  return <tr key={attribute.identifier}><td>{attribute.key}</td><td>{attribute.value}</td></tr>
+ 
+}
+
 const Attributes = ({ attributes }: { attributes: [] | attribute[] }) => {
   return (
     <Table striped hover variant="dark">
       <tbody>
         {
-          attributes?.map((attribute) => (
-            <tr key={attribute.identifier}><td>{attribute.key}</td><td>{attribute.value}</td></tr>
-          ))
+          attributes?.map(attr => {
+            return <Attribute key={attr.identifier} attribute={attr} />
+          })
         }
       </tbody>
     </Table>
   )  
 }
 
-const Body = ({ body }: { body: body }) => {
+const Body = ({ 
+  body, 
+  existence_name,
+  existence_type,
+  metamorphosis_name,
+  metamorphosis_interval,
+  metamorphosis_period
+}: { 
+  body: body, 
+  existence_name: string,
+  existence_type: string,
+  metamorphosis_name: string,
+  metamorphosis_interval: number,
+  metamorphosis_period: number
+}) => {
+  const etype = body?.etype || "Unknown";
   const type = body?.type || "Unknown";
   const materia = body?.materia || "Unknown";
   const powers = body?.powers || "Unknown";
@@ -131,7 +153,8 @@ const Body = ({ body }: { body: body }) => {
     <Table striped bordered hover variant="dark">
       <caption>Body of this metamorphosis.</caption>
       <tbody>
-        <tr><td>Type</td><td>{type}</td></tr>
+        <tr><td>Type</td><td>{metamorphosis_name} ({existence_name})</td></tr>
+        <tr><td>Metamorphosis</td><td>Interval {metamorphosis_interval} hours - Period {metamorphosis_period} days (values are more or less abstract)</td></tr>
         <tr><td>Materia</td><td>{materia}</td></tr>
         <tr><td>Minimum attributes</td><td><Attributes attributes={mins} /></td></tr>
         <tr><td>Maximum attributes</td><td><Attributes attributes={maxes} /></td></tr>
@@ -151,46 +174,65 @@ const Body = ({ body }: { body: body }) => {
   );  
 }
 
-const Metamorphosis = ({ metamorphosis }: { metamorphosis:metamorphosis }) => {
-  console.log(metamorphosis)  
-  const interval = metamorphosis?.interval || "Unknown";
-  const period = metamorphosis?.period || "Unknown";
-  const bodies = metamorphosis?.bodies || []
-  const bodiesData = bodies.map((body) => <Body body={body} key={body.identifier}/>)
-  console.log(bodiesData)
-  return (
-    <>
-      <Table bordered hover size="sm" variant="dark">
-        <caption>Different metamorphoses of this form.</caption>
-        <tbody>
-          <tr><td>Interval</td><td>{interval}</td></tr>
-          <tr><td>Period</td><td>{period}</td></tr>
-          <tr><td>Bodies</td><td>{bodiesData}</td></tr>
-        </tbody>
-      </Table>
-    </>
-  );
-}
+// const Metamorphosis = ({ metamorphosis }: { metamorphosis:metamorphosis }) => {
+//   console.log(metamorphosis)  
+//   const interval = metamorphosis?.interval || "Unknown";
+//   const period = metamorphosis?.period || "Unknown";
+//   const bodies = metamorphosis?.bodies || []
+//   const bodiesData = bodies.map((body) => <Body body={body} key={body.identifier}/>)
+//   console.log(bodiesData)
+//   return (
+//     <>
+//       <Table bordered hover size="sm" variant="dark">
+//         <caption>Different metamorphoses of this form.</caption>
+//         <tbody>
+//           <tr><td>Interval</td><td>{interval}</td></tr>
+//           <tr><td>Period</td><td>{period}</td></tr>
+//           <tr><td>Bodies</td><td>{bodiesData}</td></tr>
+//         </tbody>
+//       </Table>
+//     </>
+//   );
+// }
 
 const Existence = ({ existence }: { existence: metamorphosisChain }) => {
   const identifier = existence?.identifier || "Unknown";
   const metamorphoses = existence?.metamorphoses || []
+  const existence_name = existence?.name_en || existence?.name_fi || identifier
+  const existence_type = existence?.type || "Unknown";
 
   return (
     <>
-      { metamorphoses.map((metamorphosis) => <Metamorphosis metamorphosis={metamorphosis} key={identifier}/>) }    
+      {
+        metamorphoses.map((metamorphosis) => {
+          const ename = existence_name
+          const metamorphosis_name = metamorphosis?.name_en || metamorphosis?.name_fi || metamorphosis.identifier
+          const metamorphosis_interval = metamorphosis?.interval || 0
+          const metamorphosis_period = metamorphosis?.period || 0
+          for (const body of metamorphosis.bodies || []) {
+            return <Body 
+                body={body} 
+                existence_name={ename} 
+                metamorphosis_name={metamorphosis_name} 
+                existence_type={existence_type}
+                metamorphosis_interval={metamorphosis_interval}
+                metamorphosis_period={metamorphosis_period}
+                key={body.identifier}/>
+
+          }
+        })
+      }
     </>
   );
 }
 
-const Taxon = ({ taxon, handleClearSelectRankClick }: {taxon: taxon | undefined, handleClearSelectRankClick: any}) => {
+const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick }: {taxon: taxon | undefined, handleClearSelectRankClick: any, handleSelectRankClick: any}) => {
   if (!taxon) return
   const identifier = taxon?.identifier || "Unknown";  
   const name = taxon?.name_en || taxon?.name_fi || identifier
   const taxonRank = taxon?.taxonRank || "Unknown";
   const taxonParent = taxon?.taxonParent || "Unknown";
-  const description = taxon?.description_en || taxon?.description_fi || "Unknown"
-  const existences = taxon?.ages || []; 
+  const existences = taxon?.existences || []; 
 
   const mmCount = existences.reduce((sum, i) => { 
     const count = i.metamorphoses?.length || 0
@@ -211,10 +253,7 @@ const Taxon = ({ taxon, handleClearSelectRankClick }: {taxon: taxon | undefined,
 
   return (
     <>
-      <div>
-        <a onClick={handleClearSelectRankClick}>Back</a>
-      </div>
-      <section id="creatures">
+      <section id="creature">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="py-12 md:py-20 border-t border-gray-800">
             <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
@@ -222,76 +261,53 @@ const Taxon = ({ taxon, handleClearSelectRankClick }: {taxon: taxon | undefined,
               <h1 className="h2 mb-4">{name}</h1>
               <p className="text-xl text-gray-400">It has {existences.length} {existences_word}, {mmCount} {metamorphoses_word} and {bodyCount} {body_word}</p>
             </div>
-
-              <Table bordered hover size="sm" variant="dark">
+            <div>
+              <a onClick={handleClearSelectRankClick}>Back</a>
+           </div>
+           <div>
+              <Table bordered striped hover size="sm" variant="dark">
                 <tbody>
                   <tr><td>Identifier</td><td>{identifier}</td></tr>
                   <tr><td>Taxon rank</td><td>{taxonRank}</td></tr>
                   <tr><td>Taxon parent</td><td>{taxonParent}</td></tr>
-                  <tr><td>Description</td><td>{description}</td></tr>
+                  <tr><td>Name (en)</td><td>{taxon?.name_en}</td></tr>
+                  <tr><td>Name (fi)</td><td>{taxon?.name_fi}</td></tr>
+                  <tr><td>Description (en)</td><td>{taxon?.description_en}</td></tr>
+                  <tr><td>Description (fi)</td><td>{taxon?.description_fi}</td></tr>
+                  <tr><td>Taxon parents</td>
+                    <td>
+                      {
+                        taxon.taxonRanks?.map((r) => { 
+                          return <TaxonPreviewListItem name={r} identifier={r.identifier} key={r.identifier} handleSelectRankClick={handleSelectRankClick}/>
+                        })
+                      }
+                  
+                    </td></tr>
                 </tbody>
               </Table>
-        
+           </div>        
+           <div>
               <Tabs>
                 { 
                   existences.map((existence) => {
                     if (!existence.identifier) return "<></>"
                     if (!existence.type) return "<></>"
-                    return <Tab eventKey={existence.identifier} title={existence.type} key={existence.identifier}><Existence existence={existence} key={existence.identifier}/></Tab>
+                    return (
+                      <Tab eventKey={existence.identifier} title={existence.type} key={existence.identifier}>
+                        <Existence existence={existence} key={existence.identifier}/>
+                      </Tab>
+                    )
                   }) 
                 }
               </Tabs>
+           </div>
           </div>
         </div>
-      </section>
-    
+      </section>   
     </>  
   );
 };
 
-Body.propTypes = {
-  body: PropTypes.shape({
-    type: PropTypes.string,
-    materia: PropTypes.string,
-    powers: PropTypes.array,
-    description: PropTypes.string,
-    bodySegments: PropTypes.array,
-  })
-}
-
-Metamorphosis.propTypes = {
-  metamorphosis: PropTypes.shape({
-    identifier: PropTypes.string.isRequired,
-    interval: PropTypes.number.isRequired,
-    period: PropTypes.number.isRequired,
-    bodies: PropTypes.array.isRequired,
-  })
-}
-
-Existence.propTypes = {
-  existence: PropTypes.shape({
-    type: PropTypes.string,
-    identifier: PropTypes.string.isRequired,
-    metamorphoses: PropTypes.array.isRequired,
-  })
-}
-
-Taxon.propTypes = {
-  taxon: PropTypes.shape({
-    identifier: PropTypes.string.isRequired,
-    name_fi: PropTypes.string,
-    name_en: PropTypes.string,
-    taxonRank: PropTypes.string.isRequired,
-    taxonParent: PropTypes.string,
-    description_fi: PropTypes.string,
-    description_en: PropTypes.string,
-    ages: PropTypes.array.isRequired,
-  }),
-  handleClearSelectRankClick: PropTypes.func
-};
-
-
-
-
 export default Taxon;
+
 

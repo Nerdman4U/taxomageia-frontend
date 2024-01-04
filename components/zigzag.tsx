@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import TaxonPreviewItem from './taxon-preview-item'
+import TaxonPreviewListItem from '@/components/taxon-preview-list-item'
 
 import FeatImage01 from '@/public/images/features-03-image-01.png'
 import FeatImage02 from '@/public/images/features-03-image-02.png'
@@ -7,8 +8,7 @@ import FeatImage03 from '@/public/images/features-03-image-03.png'
 
 import rank from '../interfaces/taxon.interface'
 
-const Zigzag = ({taxons, handleSelectRankClick, handleClearSelectRankClick}: {taxons: rank[], handleSelectRankClick: any, handleClearSelectRankClick: any}) => {
-  
+const Zigzag = ({ taxons, handleSelectRankClick }: { taxons: rank[], handleSelectRankClick: any }) => {
   return (
     <section id="creatures">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -22,10 +22,18 @@ const Zigzag = ({taxons, handleSelectRankClick, handleClearSelectRankClick}: {ta
           </div>
 
           {/* Items */}
-          <div className="grid gap-20">
-            { 
-              taxons.map(r => <TaxonPreviewItem key={r.identifier} rank={r} handleSelectRankClick={handleSelectRankClick} handleClearSelectRankClick={handleClearSelectRankClick} />)
+          <div className="max-w-3xl mx-auto md:pb-16">
+            {
+              taxons.map((r) => { 
+                const name = r.name_en || r.name_fi
+                return <TaxonPreviewListItem name={name} identifier={r.identifier} key={r.identifier} handleSelectRankClick={handleSelectRankClick}/>
+              })
             }
+            <div className="clearfix:both"></div>
+
+            {/* { 
+              taxons.map(r => <TaxonPreviewItem key={r.identifier} rank={r} handleSelectRankClick={handleSelectRankClick} handleClearSelectRankClick={handleClearSelectRankClick} />)
+            } */}
           </div>
         </div>
       </div>
