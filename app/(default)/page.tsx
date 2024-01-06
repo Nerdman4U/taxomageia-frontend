@@ -29,15 +29,18 @@ import taxon from '@/interfaces/taxon.interface'
   
     const handleSelectRankClick = (e: React.MouseEvent) => {
       e.preventDefault
-      const taxon = taxons.find(taxon => { 
-        return taxon.identifier === e.currentTarget.id
+      const taxon = taxons.find(t => { 
+        return t.identifier === e.currentTarget.id
       })
-      if (!taxon) return
-      const url = serverUrl + '/' + taxon.identifier
-  
-      axios.get(url).then((response) => {
-        setSelectedTaxon(response.data as taxon)
-      })
+      if (!taxon) {
+        const url = serverUrl + '/' + e.currentTarget.id
+        console.log('fetching url:', url)
+        axios.get(url).then((response) => {
+          setSelectedTaxon(response.data as taxon)
+        })  
+      } else {
+        setSelectedTaxon(taxon)
+      }
     }
   
     const handleClearSelectRankClick = (e: React.MouseEvent) => {

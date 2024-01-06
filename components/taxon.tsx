@@ -112,8 +112,8 @@ const Attributes = ({ attributes }: { attributes: [] | attribute[] }) => {
     <Table striped hover variant="dark">
       <tbody>
         {
-          attributes?.map(attr => {
-            return <Attribute key={attr.identifier} attribute={attr} />
+          attributes?.map((attr,i) => {
+            return <Attribute key={`${attr.identifier}-${i}`} attribute={attr} />
           })
         }
       </tbody>
@@ -200,7 +200,7 @@ const Existence = ({ existence }: { existence: metamorphosisChain }) => {
   const metamorphoses = existence?.metamorphoses || []
   const existence_name = existence?.name_en || existence?.name_fi || identifier
   const existence_type = existence?.type || "Unknown";
-
+ 
   return (
     <>
       {
