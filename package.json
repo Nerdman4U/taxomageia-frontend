@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build; cp -a out/* ../backend/out/",
+    "build": "next build; cp -a out/* ../backend/out/; rm -rf out",
     "start": "next",
     "lint": "next lint",
     "commit": "cz"

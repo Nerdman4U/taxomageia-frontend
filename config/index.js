@@ -1,4 +1,4 @@
-const serverUrl = "http://localhost:3030/api/taxomageia/first/taxons";
+const serverUrl = "/api/taxomageias/first/taxons";
 
 export {
   serverUrl

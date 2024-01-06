@@ -4,11 +4,11 @@ import body from './body.interface.js';
 interface metamorphosis {
   id?: number;
   identifier: string;
-  genotypeChange?: string
-  genotypeSource?: string;
+  genotype_change?: string
+  genotype_source?: string;
   interval?: number;
   period?: number;
-  metamorphosisChainId?: number;
+  metamorphosis_chain_id?: number;
   bodies?: body[];
   name_en?: string
   name_fi?: string

@@ -2,17 +2,17 @@ interface bodyPart {
   id?: number;
   identifier: string;
   type: string;
-  genotypeChange?: string;
-  genotypeSource?: string;
+  genotype_change?: string;
+  genotype_source?: string;
   description_fi?: string;
   description_en?: string;
   toughness?: number;
   location?: string
-  createdAt?: Date;
-  updatedAt?: Date;
+  created_at?: Date;
+  updated_at?: Date;
   organs?: bodyPart[];
-  parentId?: number;
-  bodySegmentId?: number;
+  parent_id?: number;
+  body_segment_id?: number;
   properties?: string[]
   abilities?: string[]
 }

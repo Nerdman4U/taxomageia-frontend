@@ -4,12 +4,12 @@ interface metamorphosisChain {
   id?: number;
   identifier: string;
   type: string
-  genotypeChange?: string
-  genotypeSource?: string;
+  genotype_change?: string
+  genotype_source?: string;
   metamorphoses?: metamorphosis[];
-  updatedAt?: Date;
-  createdAt?: Date;
-  categoryId?: number;
+  updated_at?: Date;
+  created_at?: Date;
+  category_id?: number;
   name_en?: string
   name_fi?: string
   description_en?: string

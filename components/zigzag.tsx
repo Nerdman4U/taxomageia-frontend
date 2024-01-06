@@ -26,7 +26,7 @@ const Zigzag = ({ taxons, handleSelectRankClick }: { taxons: rank[], handleSelec
             {
               taxons.map((r) => { 
                 const name = r.name_en || r.name_fi || r.identifier
-                return <TaxonPreviewListItem name={name} taxonRank={r.taxonRank} identifier={r.identifier} key={r.identifier} handleSelectRankClick={handleSelectRankClick}/>
+                return <TaxonPreviewListItem name={name} taxon_rank={r.taxon_rank} identifier={r.identifier} key={r.identifier} handleSelectRankClick={handleSelectRankClick}/>
               })
             }
             <div className="clearfix:both"></div>

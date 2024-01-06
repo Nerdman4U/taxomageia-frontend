@@ -5,19 +5,19 @@ type taxon = {
   identifier: string;
   name_fi: string;
   name_en: string;
-  taxonRank: string;
-  taxonParent?: string;
+  taxon_rank: string;
+  taxon_parent?: string;
   description_fi?: string;
   description_en?: string;
   url?: string[];
-  parentId?: number;
+  parent_id?: number;
   categories?: taxon[];
   existences?: metamorphosisChain[];
-  createdAt?: Date;
-  updatedAt?: Date;
+  created_at?: Date;
+  updated_at?: Date;
   properties?: string[]
   abilities?: string[]
-  taxonRanks?: any[]
+  taxon_ranks?: any[]
   powers?: powerlist
 }
 

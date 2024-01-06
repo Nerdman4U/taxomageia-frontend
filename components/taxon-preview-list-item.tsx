@@ -1,6 +1,6 @@
 import rank from '@/interfaces/taxon.interface'
-const TaxonPreviewListItem = ({name, taxonRank, identifier, handleSelectRankClick}: {name: string, taxonRank: string, identifier: string, handleSelectRankClick: any}) => {
-  return <div className="text-left inline md:pr-4"><a onClick={handleSelectRankClick} id={identifier}>{name}({taxonRank})</a> </div>
+const TaxonPreviewListItem = ({name, taxon_rank, identifier, handleSelectRankClick}: {name: string, taxon_rank: string, identifier: string, handleSelectRankClick: any}) => {
+  return <div className="text-left inline md:pr-4"><a role="button" onClick={handleSelectRankClick} id={identifier}>{name}({taxon_rank})</a> </div>
 }
 
 export default TaxonPreviewListItem

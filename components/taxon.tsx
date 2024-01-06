@@ -56,19 +56,19 @@ const BodyPowers = ({ powers }: { powers: powers }) => {
   )
 }
 
-const BodyPart = ({ bodyPart }: { bodyPart: bodyPart }) => {
-  const type = bodyPart?.type || "Unknown";
-  const desc = bodyPart?.description_en || bodyPart?.description_fi || "Unknown"
+const BodyPart = ({ body_part }: { body_part: bodyPart }) => {
+  const type = body_part?.type || "Unknown";
+  const desc = body_part?.description_en || body_part?.description_fi || "Unknown"
   return (
     <Table striped bordered hover variant="dark">
       <caption>Body of this metamorphosis.</caption>
       <tbody>
         <tr><td>Type</td><td>{type}</td></tr>
         <tr><td>Description</td><td>{desc}</td></tr>
-        <tr><td>Location</td><td>{bodyPart?.location}</td></tr>
+        <tr><td>Location</td><td>{body_part?.location}</td></tr>
         <tr><td>Organs</td><td>{
-          bodyPart?.organs?.map((organ) => (
-            <BodyPart key={organ.identifier} bodyPart={organ} />
+          body_part?.organs?.map((organ) => (
+            <BodyPart key={organ.identifier} body_part={organ} />
           ))}
         </td></tr>
       </tbody>
@@ -76,24 +76,24 @@ const BodyPart = ({ bodyPart }: { bodyPart: bodyPart }) => {
   );   
 }
 
-const BodySegment = ({ bodySegment }: { bodySegment: bodySegment }) => {
-  const type = bodySegment?.type || "Unknown";
-  const desc = bodySegment?.description_en || bodySegment?.description_fi || "Unknown"
+const BodySegment = ({ body_segment }: { body_segment: bodySegment }) => {
+  const type = body_segment?.type || "Unknown";
+  const desc = body_segment?.description_en || body_segment?.description_fi || "Unknown"
   return (
     <Table striped bordered hover variant="dark">
       <caption>Body of this metamorphosis.</caption>
       <tbody>
         <tr><td>Type</td><td>{type}</td></tr>
-        <tr><td>Percentage</td><td>{bodySegment?.percentage}</td></tr>
+        <tr><td>Percentage</td><td>{body_segment?.percentage}</td></tr>
         <tr><td>Description</td><td>{desc}</td></tr>
         <tr><td>BodyParts</td><td>{ 
-            bodySegment?.bodyParts?.map((bodyPart) => (
-             <BodyPart key={bodyPart.identifier} bodyPart={bodyPart} />
+            body_segment?.body_parts?.map((body_part) => (
+             <BodyPart key={body_part.identifier} body_part={body_part} />
            ))}
           </td></tr>
         <tr><td>Connected segments</td><td>{
-            bodySegment?.connections?.map((connection) => (
-              <BodySegment key={connection.identifier} bodySegment={connection} />
+            body_segment?.connections?.map((connection) => (
+              <BodySegment key={connection.identifier} body_segment={connection} />
             ))
           }
         </td></tr>
@@ -141,8 +141,8 @@ const Body = ({
   const materia = body?.materia || "Unknown";
   const powers = body?.powers || "Unknown";
   const description = body?.description_en || body?.description_fi || "No description available"
-  const segments = body?.bodySegments || []
-  const centerSides = body?.centerSides || 0
+  const segments = body?.body_segments || []
+  const centerSides = body?.center_sides || 0
   const symmetricSides = ( centerSides > 1 ) ? centerSides : "No" 
   const mins = body?.mins || []  
   const maxes = body?.maxes || []
@@ -166,7 +166,7 @@ const Body = ({
         <tr><td>Powers</td><td><BodyPowers powers={powers} /></td></tr>
         <tr><td>Segments</td><td>{
           segments.map((segment) => {
-            return <BodySegment bodySegment={segment} key={segment.identifier} />
+            return <BodySegment body_segment={segment} key={segment.identifier} />
           })}
         </td></tr>
       </tbody>
@@ -230,8 +230,8 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick }: {ta
   if (!taxon) return
   const identifier = taxon?.identifier || "Unknown";  
   const name = taxon?.name_en || taxon?.name_fi || identifier
-  const taxonRank = taxon?.taxonRank || "Unknown";
-  const taxonParent = taxon?.taxonParent || "Unknown";
+  const taxon_rank = taxon?.taxon_rank || "Unknown";
+  const taxon_parent = taxon?.taxon_parent || "Unknown";
   const existences = taxon?.existences || []; 
 
   const mmCount = existences.reduce((sum, i) => { 
@@ -262,14 +262,14 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick }: {ta
               <p className="text-xl text-gray-400">It has {existences.length} {existences_word}, {mmCount} {metamorphoses_word} and {bodyCount} {body_word}</p>
             </div>
             <div>
-              <a onClick={handleClearSelectRankClick}>Back</a>
+              <a role="button" onClick={handleClearSelectRankClick}>Back</a>
            </div>
            <div>
               <Table bordered striped hover size="sm" variant="dark">
                 <tbody>
                   <tr><td>Identifier</td><td>{identifier}</td></tr>
-                  <tr><td>Taxon rank</td><td>{taxonRank}</td></tr>
-                  <tr><td>Taxon parent</td><td>{taxonParent}</td></tr>
+                  <tr><td>Taxon rank</td><td>{taxon_rank}</td></tr>
+                  <tr><td>Taxon parent</td><td>{taxon_parent}</td></tr>
                   <tr><td>Name (en)</td><td>{taxon?.name_en}</td></tr>
                   <tr><td>Name (fi)</td><td>{taxon?.name_fi}</td></tr>
                   <tr><td>Description (en)</td><td>{taxon?.description_en}</td></tr>
@@ -277,9 +277,9 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick }: {ta
                   <tr><td>Taxon parents</td>
                     <td>
                       {
-                        taxon.taxonRanks?.map((r) => { 
+                        taxon.taxon_ranks?.map((r) => { 
                           const name = r.name_en || r.name_fi || r.identifier
-                          return <TaxonPreviewListItem name={name} taxonRank={r.taxonRank} identifier={r.identifier} key={r.identifier} handleSelectRankClick={handleSelectRankClick}/>
+                          return <TaxonPreviewListItem name={name} taxon_rank={r.taxon_rank} identifier={r.identifier} key={r.identifier} handleSelectRankClick={handleSelectRankClick}/>
                         })
                       }
                   

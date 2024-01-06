@@ -3,10 +3,10 @@ interface attribute {
   identifier?: string;
   key: string;
   value: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-  genotypeChange?: string
-  genotypeSource?: string;
+  created_at?: Date;
+  updated_at?: Date;
+  genotype_change?: string
+  genotype_source?: string;
 }
 
 export default attribute

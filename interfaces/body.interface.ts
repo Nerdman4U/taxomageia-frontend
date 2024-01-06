@@ -8,25 +8,25 @@ interface body {
   identifier: string;
   type: string
   materia: string
-  genotypeChange?: string
-  genotypeSource?: string;
+  genotype_change?: string
+  genotype_source?: string;
   description_fi?: string;
   description_en?: string;
-  updatedAt?: Date;
-  createdAt?: Date;
+  updated_at?: Date;
+  created_at?: Date;
   skills?: attribute[] | [];
   mins?: attribute[] | [];
   maxes?: attribute[] | [];
   growths?: attribute[] | [];
-  bodySegments?: bodySegment[];
+  body_segments?: bodySegment[];
   locomotion?: string
   diet?: string
   reproduction?: string
   size?: size;
   powers: powerlist;
   center?: string
-  centerSides?: number
-  centerSegments?: string[]
+  center_sides?: number
+  center_segments?: string[]
   etype: string,
   metamorphosis_interval: number
   metamorphosis_period: number
