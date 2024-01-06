@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { ranksUrl, inheritedRanksUrl } from '../../config'
+import { serverUrl } from '../../config'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -20,7 +20,7 @@ import taxon from '@/interfaces/taxon.interface'
     const [ selectedTaxon, setSelectedTaxon ] = useState<taxon | undefined>()
   
     useEffect(() => {
-      axios.get(inheritedRanksUrl).then((response): void => {
+      axios.get(serverUrl).then((response): void => {
         console.log('connected to server at {server}')
         console.log(response.data)
         setTaxons(response.data)
@@ -33,7 +33,7 @@ import taxon from '@/interfaces/taxon.interface'
         return taxon.identifier === e.currentTarget.id
       })
       if (!taxon) return
-      const url = inheritedRanksUrl + '/' + taxon.identifier
+      const url = serverUrl + '/' + taxon.identifier
   
       axios.get(url).then((response) => {
         setSelectedTaxon(response.data as taxon)

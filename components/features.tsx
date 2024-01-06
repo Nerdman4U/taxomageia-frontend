@@ -24,7 +24,7 @@ export default function Features({ranks}: {ranks: rank[]}) {
                 <path className="stroke-current text-purple-300" d="M43 42h-9M43 37h-9" strokeLinecap="square" strokeWidth="2" />
               </svg>
               <h4 className="h4 mb-2">Open API</h4>
-              <p className="text-lg text-gray-400 text-center">Download creature information in JSON format.</p>
+              <p className="text-lg text-gray-400 text-center">Download creature information in <a href="/api/taxomageia/first/taxons" target="_blank">JSON</a> format.</p>
             </div>
 
             {/* 2nd item */}
@@ -61,8 +61,11 @@ export default function Features({ranks}: {ranks: rank[]}) {
                   <circle className="stroke-current text-purple-300" cx="13" cy="9" r="3" />
                 </g>
               </svg>
-              <h4 className="h4 mb-2">Instant Features</h4>
-              <p className="text-lg text-gray-400 text-center">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.</p>
+              <h4 className="h4 mb-2">Partly open source</h4>
+              <p className="text-lg text-gray-400 text-center">
+                Taxomageia is an parly open source project.
+                UI ( this ) is available at <a href="http://github.com/Nerdman4U/taxomageia-frontend" target="_blank">Github</a>.
+              </p>
             </div>
 
             {/* 5th item */}
@@ -74,8 +77,10 @@ export default function Features({ranks}: {ranks: rank[]}) {
                   <path className="stroke-current text-purple-300" d="M22 30h4v12h-4z" />
                 </g>
               </svg>
-              <h4 className="h4 mb-2">Instant Features</h4>
-              <p className="text-lg text-gray-400 text-center">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.</p>
+              <h4 className="h4 mb-2">?</h4>
+              <p className="text-lg text-gray-400 text-center">
+
+              </p>
             </div>
 
             {/* 6th item */}
@@ -88,8 +93,10 @@ export default function Features({ranks}: {ranks: rank[]}) {
                   <path className="stroke-current text-purple-100" d="M8.86 1.18C3.8 1.988 0 5.6 0 10c0 5 4.9 9 11 9a10.55 10.55 0 003.1-.4L20 21l-.6-5.2a9.125 9.125 0 001.991-2.948" />
                 </g>
               </svg>
-              <h4 className="h4 mb-2">Instant Features</h4>
-              <p className="text-lg text-gray-400 text-center">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.</p>
+              <h4 className="h4 mb-2">Future ideas</h4>
+              <p className="text-lg text-gray-400 text-center">
+                See the plans for the future versions.
+                </p>
             </div>
 
           </div>

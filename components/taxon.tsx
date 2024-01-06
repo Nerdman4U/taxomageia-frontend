@@ -278,7 +278,8 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick }: {ta
                     <td>
                       {
                         taxon.taxonRanks?.map((r) => { 
-                          return <TaxonPreviewListItem name={r} identifier={r.identifier} key={r.identifier} handleSelectRankClick={handleSelectRankClick}/>
+                          const name = r.name_en || r.name_fi || r.identifier
+                          return <TaxonPreviewListItem name={name} taxonRank={r.taxonRank} identifier={r.identifier} key={r.identifier} handleSelectRankClick={handleSelectRankClick}/>
                         })
                       }
                   
