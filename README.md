@@ -87,7 +87,10 @@ Thank you!
 
 - Dragon, alien, monster slug: <a href="https://pixabay.com/users/openclipart-vectors-30363/" target="blank">openclipart-vectors-30363</a>
 - Dog and cat: <a href="https://pixabay.com/users/yuri_b-2216431/" target="blank">yuri_b-2216431</a>
-- orc: https://pixabay.com/users/juliush-3921568/.
+- Orc: <a href="https://pixabay.com/users/juliush-3921568/." target="blank">juliush-3921568</a>
+- Fire Elemental: <a href="https://pixabay.com/users/vika_glitter-6314823/" target="_blank">Vika Glitter</a>
+- Black Dragon: <a href="https://pixabay.com/users/pendleburyannette-1860575/" target="_blank">pendleburyannette</a>
+- Vampire: <a href="https://pixabay.com/users/openclipart-vectors-30363/" target="_blank">openclipart-vectors-30363</a>
 
 ### Frontend- template
 https://github.com/cruip/open-react-template.

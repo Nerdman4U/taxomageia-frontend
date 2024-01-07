@@ -9,7 +9,7 @@ type taxon = {
   taxon_parent?: string;
   description_fi?: string;
   description_en?: string;
-  url?: string[];
+  urls?: string[];
   parent_id?: number;
   categories?: taxon[];
   existences?: metamorphosisChain[];

@@ -293,8 +293,9 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick }: {ta
                   existences.map((existence) => {
                     if (!existence.identifier) return "<></>"
                     if (!existence.type) return "<></>"
+                    const ename = existence.name_en || existence.name_fi || existence.type
                     return (
-                      <Tab eventKey={existence.identifier} title={existence.type} key={existence.identifier}>
+                      <Tab eventKey={existence.identifier} title={ename} key={existence.identifier}>
                         <Existence existence={existence} key={existence.identifier}/>
                       </Tab>
                     )

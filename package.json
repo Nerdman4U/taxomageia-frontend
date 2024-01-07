@@ -23,6 +23,7 @@
     "react-bootstrap": "^2.9.2",
     "react-dom": "18.2.0",
     "sharp": "^0.33.1",
+    "string-sanitizer": "^2.0.2",
     "typescript": "^5.3.3"
   },
   "devDependencies": {

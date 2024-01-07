@@ -33,6 +33,7 @@ interface body {
   existence_name: string
   existence_type: string
   metamorphosis_name: string
+  images?: string[]
 }
 
 type powerlist = { properties: string[], abilities: any, inputs: string[], outputs: string[] }

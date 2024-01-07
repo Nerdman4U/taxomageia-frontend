@@ -17,13 +17,19 @@ import taxon from '@/interfaces/taxon.interface'
 
   const Home = () => {
     const [ taxons, setTaxons] = useState<taxon[]>([])
+    const [ featured, setFeatured ] = useState<taxon[]>([])
     const [ selectedTaxon, setSelectedTaxon ] = useState<taxon | undefined>()
   
     useEffect(() => {
       axios.get(serverUrl).then((response): void => {
         console.log('connected to server at {server}')
         console.log(response.data)
-        setTaxons(response.data)
+        const result = response.data || []
+        const featIds = ['fire_elemental', 'black_dragon', 'vampire']
+        const filteredFeatured = result.filter((r:taxon) => featIds.find(id => id === r.identifier))
+        const filteredTaxons = result.filter((r:taxon) => featIds.find(id => id !== r.identifier))
+        setFeatured(filteredFeatured)
+        setTaxons(filteredTaxons)
       })
     }, [])
   
@@ -54,7 +60,7 @@ import taxon from '@/interfaces/taxon.interface'
         <>
           <Hero />
           <Taxon taxon={selectedTaxon} handleSelectRankClick={handleSelectRankClick} handleClearSelectRankClick={handleClearSelectRankClick} />
-          <Testimonials />
+          <Testimonials featured={featured} handleSelectRankClick={handleSelectRankClick} />
           <Newsletter />
         </>
       )
@@ -65,7 +71,7 @@ import taxon from '@/interfaces/taxon.interface'
           <Hero />
           <Features ranks={taxons}/>
           <Zigzag taxons={taxons} handleSelectRankClick={handleSelectRankClick} />  
-          <Testimonials />
+          <Testimonials featured={featured} handleSelectRankClick={handleSelectRankClick} />
           <Newsletter />
         </>
       )
