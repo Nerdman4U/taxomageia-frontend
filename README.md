@@ -14,7 +14,7 @@ This Github repository contains code for the frontend of <a href="http://taxomag
 
 ## Description
 
-Biomagical classification adds magical, immortal, summoned, fantasy and undead creatures and monsters to biological classification. Each Taxonomic rank inherits properties from parent ranks. 
+Taxomageia or Biomagical classification extends biological classification and adds magical, immortal, summoned, fantasy, undead and other creatures and monsters. Each Taxonomic rank inherits properties from parent ranks. 
 
 Inherited values include:
 - Creature may have multiple ways to exists at different dimensions and planes. Creature may have for example physical and spirit form.
