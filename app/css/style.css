@@ -76,3 +76,5 @@
 .table-fixed { table-layout: fixed; }
 .w-30 { width: 30% }
 .w-20 { width: 20% }
+
+ul, ol { padding-left: 2rem; }

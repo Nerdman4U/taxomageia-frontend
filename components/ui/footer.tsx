@@ -21,7 +21,7 @@ export default function Footer() {
                 </Link>
               </div>
               <div className="text-gray-400">
-                The First Taxomageia ( creatures shown in this webpage ) is an example of features and possibilies of taxon inheritance and capabilies of current version of taxomageia application. 
+                The First Taxomageia ( creatures shown at this webpage ) is an example of features and possibilies of taxon inheritance and capabilies of current version of taxomageia application. 
                 Creatures and monsters represented here are examples and subject to change. In future versions anybody (You) can create new taxomageias, new creatures and modify existing ones.
               </div>
             </div>
@@ -29,22 +29,22 @@ export default function Footer() {
             {/* 2nd, 3rd and 4th blocks */}
             <div className="md:col-span-8 lg:col-span-7 grid sm:grid-cols-3 gap-8">
 
-              {/* <div className="text-sm">
-                <h6 className="text-gray-200 font-medium mb-1">Products</h6>
+              <div className="text-sm">
+                <h6 className="text-white font-medium mb-1">Links</h6>
                 <ul>
                   <li className="mb-1">
-                    <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Web Studio</Link>
+                    <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Main</Link>
                   </li>
                   <li className="mb-1">
-                    <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">DynamicBox Flex</Link>
+                    <Link href="/doc" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Documentation</Link>
                   </li>
                   <li className="mb-1">
-                    <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Programming Forms</Link>
+                    <Link href="/api/taxomageias/first/taxons" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">API</Link>
                   </li>
                 </ul>
               </div>
 
-              <div className="text-sm">
+              {/* <div className="text-sm">
                 <h6 className="text-gray-200 font-medium mb-1">Resources</h6>
                 <ul>
                   <li className="mb-1">
@@ -135,7 +135,7 @@ export default function Footer() {
             </ul>
 
             {/* Copyrights note */}
-            <div className="text-gray-400 text-sm mr-4">&copy; taxomageia.pro. All rights reserved.</div>
+            <div className="text-blue-400 text-sm mr-4"><a href="http://taxomageia.pro" target="_blank">&copy; taxomageia.pro. All rights reserved.</a></div>
 
           </div>
 

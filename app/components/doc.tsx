@@ -8,7 +8,7 @@ const Doc = () => {
   const version = "0.9.7"
   return ( 
     <section id="documentation">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 text-gray-400">
         <div className="py-12 md:py-20 border-t border-gray-800">
     
           {/* Section header */}
@@ -25,7 +25,7 @@ const Doc = () => {
             <h2 className="h2 mb-4">Table of Contents</h2>
             <div className="text-xl text-gray-400">
               <ul className="list-group text-left">
-                <li className="list-group-item list-group-item-dark">
+                <li className="list-group-item">
                   <a href="#what-is-taxomageia" role="pointer">
                     1. What is Taxomageia?</a></li>
                 <li className="list-group-item">
@@ -47,34 +47,51 @@ const Doc = () => {
     
           {/* Items */}
           <div id="what-is-taxomageia" className="max-w-3xl mx-auto md:pb-16">
-            <h3 className="h3 mb-3">1. What is Taxomageia?</h3>
+            <h3 className="h3 mb-3 text-gray-400">1. What is Taxomageia?</h3>
             <p>
               Taxomageia or Biomagical classification extends biological classification and adds magical, immortal, summoned, fantasy, undead and other creatures and monsters. Each Taxonomic rank inherits properties from parent ranks. 
             </p>
           </div>
           <div id="why" className="max-w-3xl mx-auto md:pb-16">
-            <h3 className="h3 mb-3">2. Why Taxomageia?</h3>
+            <h3 className="h3 mb-3 text-gray-400">2. Why Taxomageia?</h3>
             <p>
               Game developers may want to have believable living magical ecosystem. This is where Taxomageia comes in. Taxomageia can be used in any kinds of games including computer, fantasy roleplaying (Dungeons & Dragons, RuneQuest, Universal Game Engine, etc.), any kinds of (roleplaying) games with magical ecosystems, table-top games and live roleplaying as well! Or just enjoy it.
             </p>
           </div>
           <div id="current" className="max-w-3xl mx-auto md:pb-16 my-6">
-            <h3 className="h3 mt-6 mb-1">3. Concepts</h3>
+            <h3 className="h3 mt-6 mb-1 text-gray-400">3. Concepts</h3>
             <p>
               Some generic guidelines for the First taxomageia. Self made taxomageias may have different concepts. Future versions of the Taxomageia app may have different features.
             </p>
             <div>
-              <h4 className="h4 mt-6 mb-1">Inheritance</h4>
+              <h4 className="h4 mt-6 mb-1 text-gray-400">Inheritance</h4>
               <p>Taxons are created by inheriting properties from parent taxons. Properties may add, subtract, multiply, change local properties. Properties may also not be inherited - allowing local properties "mutate" to complitely new features.</p>
 
-              <h4 className="h4 mt-6 mb-1">Consciousness</h4>
+              <ul>
+              <li className="my-3">Creature may have multiple ways to exists at different dimensions and planes. Creature may have for example physical and spirit form.</li>
+              <li className="my-3">Each form may progress through set of stages and develop as time passes ( physical bodies grow when cells divide themselves at material dimension ). </li>
+              <li className="my-3">Each metamorphose stage has its own body, properties and abilities. For example, young fire elemental may be summoned from the plane of fire and has not yet reached full potential. It may (or may not) grow if summoned to physical plane. There can be creatures with multiple bodies.</li>
+              <li className="my-3">Bodies may have any number of attributes and skills.</li>
+              <li className="my-3">Bodies have multiple segments, connected to each other.</li>
+              <li className="my-3">Each segment may have any number of body parts which have a location i.e. ventral or dorsal.</li>
+              <li className="my-3">Notocord or vertebrae may be inherited from parents. Bilateral creatures have center with two symmertic sides. Trilateral has three.</li>
+              <li className="my-3">Attributes have minimum and maximum range as well as growth indicator. Attributes are calculated by inheriting parents, every rank may make attribute stronger or weaker.</li>
+              <li className="my-3">Propertylists contains tokens with + and - signs. With + inherited property gets stronger and with - weaker at inheriting rank.</li>
+              <li className="my-3">Propertylists have two different versions. Basic list is to show tokens which has positive value after all parents have been inherited. It declares that this species has or has not this ability. Weighted list calculates all + and - signs from properties. Output declares how strong or weak this species is at this property/ability/power.</li>
+              </ul>
+
+
+              <h4 className="h4 mt-6 mb-1 text-gray-400">Consciousness</h4>
               <p>
                 Many creatures and monsters on the First are conscious. It means their true self is not their existences. This allows creatures to exists in many different forms having each form to have its own developing process. Different forms may exists on different dimensions (happening same time as time passes) or on different planes (i.e. Elemental planes).
               </p>
-              <h4 className="h4 mt-6 mb-1">Meditation</h4>
+              <h4 className="h4 mt-6 mb-1 text-gray-400">Meditation</h4>
               <p>
                 Most of the creatures are surviving with their existences in the dimension and plane where their existences are. This leads them to be blind to the fact that they are also conscious beings. Meditation is an ability and a skill which, if exists, allows creature to recognize this. 
               </p>
+
+            
+
             </div>
           </div>
           <div id="taxons" className="max-w-3xl mx-auto md:pb-16">
@@ -117,7 +134,7 @@ const Doc = () => {
                 <tr>
                   <td className="w-20">Interval (hours?)</td><td className="pl-3">Numeric value to describe how ofter (in game time) this metamorphosis "activates". This is just a simple idea to make bodies grow different paces. Current values are abstact. I have however started to think that interval is a value in hours at game time.</td></tr>
                 <tr>
-                  <td className="w-20">Period</td><td className="pl-3">How long this metamorphosis lasts. After time has ran, next metamorphosis can be used. Value is numeric and abstract. I have started to think this as days in game time.</td></tr>
+                  <td className="w-20">Period</td><td className="pl-3">How long this metamorphosis lasts. After time has ran, next metamorphosis can be used. Value is numeric and abstract. I have started to think this as days in game time. When last metamorphosis is used the body of this metamorphosis dies of old age. It may have another existences or even another bodies on this existence. This allows to create beings without physical existence. They maybe ghosts or something else.</td></tr>
               </tbody>
               </table>
 
@@ -212,42 +229,43 @@ const Doc = () => {
             <div>
               <h4 className="h4 mt-6 mb-1">User interface</h4>
               <ul>
-                <li>
+                <li className="my-3">
                   Ability to add and share self made taxomageias ( needs sign up, sign in etc. ). 
                 </li>
-                <li>Templates. No need to create from scratch.</li>
-                <li>
+                <li className="my-3">Templates. No need to create from scratch.</li>
+                <li className="my-3">
                   Filter creatures and mosters.
                 </li>
-                <li>
+                <li className="my-3">
                   When more taxomageias present, ability to search with keywords.
                 </li>
               </ul>
+
               <h4 className="h4 mt-6 mb-1 mb-1">Server</h4>
               <ul>
-                <li>
+                <li className="my-3">
                   Information how creatures are created. By magic? How? Using what components or what kind tools? Environment?
                   What skills are needed from magic-user or summoner?
                 </li>
-                <li>
+                <li className="my-3">
                   Body segments or parts could hold "muscle mass" and similar information which would add up to 
                   the creature's strength.
                 </li>
-                <li>
+                <li className="my-3">
                   Strength of an segment or part could be calculated from amount of muscle cells and quality of muscle cells. 
                   Calculation could be enchanced by different magical factors. Also, bodies without living cells could have a method to measure strength more precisely.
                 </li>
-                <li>
+                <li className="my-3">
                   Inseminators and breeders. How fast and with what methods reproduction happens?
                 </li>
-                <li>
+                <li className="my-3">
                   Body Systems for material body. Skeletal, muscular, nervous, cardiovascular, respiratory, digestive, lymphatic, endocrine, urinary. Other systems may exists as well. Maybe some spirits have a system to grow stronger in spiritual strength and control energy better. This would guide them to the areas where they found what they seek for in their "life".
                 </li>
-                <li>
+                <li className="my-3">
                   Body segments without body. Then there could be cursed body segments and parts working together separately without connection to body or themselves.
                 </li>
-                <li>
-                  Bilateral creatures should have their generated body segments body parts to have locations (LEFT, RIGHT). Currently their identifier is only name differently i.e. leg_1, leg_2.
+                <li className="my-3">
+                  (Bi/tri/etc.)lateral creatures should have their generated body segments body parts to have locations (LEFT, RIGHT, X, ...). Currently their identifier is only name differently i.e. leg_1, leg_2.
                 </li>
               </ul>
             </div>          
