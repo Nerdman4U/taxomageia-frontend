@@ -36,7 +36,7 @@ export default function Footer() {
                     <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Main</Link>
                   </li>
                   <li className="mb-1">
-                    <Link href="/doc" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Documentation</Link>
+                    <Link href="/doc.html" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Documentation</Link>
                   </li>
                   <li className="mb-1">
                     <Link href="/api/taxomageias/first/taxons" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">API</Link>
