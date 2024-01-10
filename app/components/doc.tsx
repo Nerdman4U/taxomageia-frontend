@@ -51,14 +51,22 @@ const Doc = () => {
             <p>
               Taxomageia or Biomagical classification extends biological classification and adds magical, immortal, summoned, fantasy, undead and other creatures and monsters. Each Taxonomic rank inherits properties from parent ranks. 
             </p>
-          </div>
-          <div id="why" className="max-w-3xl mx-auto md:pb-16">
-            <h3 className="h3 mb-3 text-gray-400">2. Why Taxomageia?</h3>
             <p>
-              Game developers may want to have believable living magical ecosystem. This is where Taxomageia comes in. Taxomageia can be used in any kinds of games including computer, fantasy roleplaying (Dungeons & Dragons, RuneQuest, Universal Game Engine, etc.), any kinds of (roleplaying) games with magical ecosystems, table-top games and live roleplaying as well! Or just enjoy it.
+              Taxomageia is not a game. It is information to build a magical ecosystem. Not yet. It just started. 
             </p>
           </div>
-          <div id="current" className="max-w-3xl mx-auto md:pb-16 my-6">
+
+          <div id="why" className="max-w-3xl mx-auto md:pb-16">
+            <h3 className="h3 mb-3 text-gray-400">2. Why Taxomageia?</h3>
+            <p className="mb-3">
+              Game developers may want to have believable living magical ecosystem. This is where Taxomageia comes in. Taxomageia can be used in any kinds of games including computer, fantasy roleplaying (Dungeons & Dragons, RuneQuest, Universal Game Engine, etc.), any kinds of (roleplaying) games with magical ecosystems, table-top games and live roleplaying as well! Or just enjoy it.
+            </p>
+            <p>
+              This project was started when I was ordered to go programming course by finnish unemployment office in autumn 2023. <a className="text-white" role="button" href="https://fullstackopen.com/en/" target="_blank">Course</a> is amazing (i am still on it) and i started to use new skills to build computer roleplaying game. I started to do that but i recognized i need creatures and monsters and i wanted them to live. So i want to have magical artificial ecosystem. Thats why i started to build Taxomageia application in november 2023.
+            </p>
+          </div>
+
+          <div id="current" className="max-w-3xl mx-auto md:pb-16 mb-6">
             <h3 className="h3 mt-6 mb-1 text-gray-400">3. Concepts</h3>
             <p>
               Some generic guidelines for the First taxomageia. Self made taxomageias may have different concepts. Future versions of the Taxomageia app may have different features.
@@ -165,7 +173,15 @@ const Doc = () => {
               </table>
 
               <h4 className="h4 mt-6 mb-1">BodySegment</h4>
-              <p>Body segment may contain connected segments. Each segment may also contain body parts. See below.</p>
+              <p>
+                Body segment may contain connected segments. Each segment may also contain body parts. See below.
+              </p>
+              <p>
+                Segment may be a center segment (Body.centerSegments[]). In this case, it is not considered lateral. In other cases, it is lateral and it will be multiplied by the number of sides body has (Body.centerSides).
+              </p>
+              <p>
+                Note: if a segment is not a center segment, its connections are not either.
+              </p>
               <table className="my-3">
               <tbody>
                 <tr>
@@ -210,6 +226,7 @@ const Doc = () => {
 
               <h4 className="h4 mt-6 mb-1">Mins, Maxes, Growths, Skills</h4>
               <p>Numeric values for attributes with key and values.</p>
+              <p>Growths are numeric values to describe how much actual value changes when metamorphosis evolves (using interval and period).</p>
               <table className="my-3">
               <tbody>
                 <tr>
