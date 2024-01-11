@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia/blob/master/public/images/dragon.png" width="200" alt="dragon" /></a>
+  <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia-frontend/blob/master/public/images/dog.jpg" width="200" alt="dragon" /></a>
 </p>
 
 <p align="center">Comprehensive <a href="http://taxomageia.pro" target="_blank">taxomageia</a> for creating believable, amazing, new creatures and monsters!</p>
@@ -48,7 +48,7 @@ This information can be used in all kinds of games with creatures. Creatures hav
 - For fun
 
 <p align="left">
-  <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia/blob/master/public/images/dog.jpg" width="200" alt="dog and cat" /></a>
+  <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia-frontend/blob/master/public/images/dog.jpg" width="200" alt="dog and cat" /></a>
 </p>
 
 ## Roadmap ( Frontend ) 
@@ -63,7 +63,7 @@ This information can be used in all kinds of games with creatures. Creatures hav
   - [ ] All species
 
 <p align="right">
-  <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia/blob/master/public/images/monster.png" width="200" alt="monster" /></a>
+  <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia-frontend/blob/master/public/images/monster.png" width="200" alt="monster" /></a>
 </p>
 
 ## Support
@@ -71,7 +71,7 @@ This information can be used in all kinds of games with creatures. Creatures hav
 If you want to help to build better UI its most welcome! Thank you.
 
 <p align="right" style="float:right">
-  <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia/blob/master/public/images/alien.png" width="200" alt="alien" /></a>
+  <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia-frontend/blob/master/public/images/alien.png" width="200" alt="alien" /></a>
 </p>
 
 ## Stay in touch
