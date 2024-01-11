@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia-frontend/blob/master/public/images/dog.jpg" width="200" alt="dragon" /></a>
+  <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia-frontend/blob/master/public/images/dragon.png" width="200" alt="dragon" /></a>
 </p>
 
 <p align="center">Comprehensive <a href="http://taxomageia.pro" target="_blank">taxomageia</a> for creating believable, amazing, new creatures and monsters!</p>
