@@ -22,8 +22,7 @@ import taxon from '@/interfaces/taxon.interface'
   
     useEffect(() => {
       axios.get(serverUrl).then((response): void => {
-        console.log('connected to server at {server}')
-        console.log(response.data)
+        console.log('connected to server at {server}', response.data)
         const result = response.data || []
         const featIds = ['fire_elemental', 'black_dragon', 'vampire']
         const filteredFeatured = result.filter((r:taxon) => featIds.find(id => id === r.identifier))
@@ -34,19 +33,16 @@ import taxon from '@/interfaces/taxon.interface'
     }, [])
   
     const handleSelectRankClick = (e: React.MouseEvent) => {
+      console.log('seleect rank')
       e.preventDefault
-      const taxon = taxons.find(t => { 
-        return t.identifier === e.currentTarget.id
-      })
-      if (!taxon) {
-        const url = serverUrl + '/' + e.currentTarget.id
-        console.log('fetching url:', url)
-        axios.get(url).then((response) => {
-          setSelectedTaxon(response.data as taxon)
-        })  
-      } else {
-        setSelectedTaxon(taxon)
-      }
+      const url = serverUrl + '/' + e.currentTarget.id
+      console.log('fetching url:', url)
+      axios.get(url).then((response) => {
+        console.log('response.data', response.data)
+        if (!response.data) return
+        setSelectedTaxon(response.data as taxon)
+      })  
+
     }
   
     const handleClearSelectRankClick = (e: React.MouseEvent) => {

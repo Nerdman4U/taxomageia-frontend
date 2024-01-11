@@ -17,8 +17,7 @@ const findImages = (taxon: taxon) => {
   return taxon.existences[0].metamorphoses[0].bodies[0].images
 }
 
-export default function Testimonials({featured, handleSelectRankClick}: {featured: taxon[], handleSelectRankClick: any}) {
-  console.log(featured[0]) 
+export default function Testimonials({featured, handleSelectRankClick}: {featured: taxon[], handleSelectRankClick: any}) {  
   let fid1, fid2, fid3 
   if ( featured && featured.length > 0 ) {
     fid1 = featured.find(f => f.identifier === 'fire_elemental')?.identifier || ""

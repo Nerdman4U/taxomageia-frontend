@@ -5,7 +5,11 @@ import ModalVideo from '@/components/modal-video'
 import FeatImage01 from '@/public/images/features-03-image-01.png'
 import Orc01 from '@/public/images/orc-01.png'
 
+// import localFont from 'next/font/local'
+// const myFont = localFont({ src: '@/public/fonts/sunday/sunday.woff' })
+
 export default function Hero() {
+  // const font = ["max-w-3xl mx-auto text-center pb-12 md:pb-16", myFont.className].join(" ")
   return (
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative">
