@@ -3,7 +3,8 @@ import VideoThumb from '@/public/images/hero-image-01.jpg'
 import ModalVideo from '@/components/modal-video'
 
 import FeatImage01 from '@/public/images/features-03-image-01.png'
-import Orc01 from '@/public/images/orc-01.png'
+import FeatImage02 from '@/public/images/orc-01.png'
+import FeatImage03 from '@/public/images/dragon.png'
 
 // import localFont from 'next/font/local'
 // const myFont = localFont({ src: '@/public/fonts/sunday/sunday.woff' })
@@ -13,6 +14,7 @@ export default function Hero() {
   return (
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 relative">
+        <Image className="max-w-full mx-auto md:max-w-none h-auto absolute top-1 right-0" src={FeatImage03} width={130} height={130} priority={true} alt="Banner" />
 
         {/* Illustration behind hero content */}
         <div className="absolute left-0 bottom-0 -ml-20 hidden lg:block pointer-events-none" aria-hidden="true" data-aos="fade-up" data-aos-delay="400">
@@ -44,7 +46,8 @@ export default function Hero() {
             </div>
           </div>
 
-          <Image className="max-w-full mx-auto md:max-w-none h-auto" src={Orc01} width={430} height={576} priority={true} alt="Banner" />
+          <Image className="max-w-full mx-auto md:max-w-none h-auto" src={FeatImage02} width={430} height={576} priority={true} alt="Banner" />
+          {/* <Image className="max-w-full mx-auto md:max-w-none h-auto" src={FeatImage03} width={200} height={200} priority={true} alt="Banner" /> */}
 
           {/* <ModalVideo
             thumb={VideoThumb}
