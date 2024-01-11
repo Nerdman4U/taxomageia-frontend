@@ -1,8 +1,7 @@
 'use client'
-
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { serverUrl } from '../../config'
+import { taxonsUrl } from '../../config'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -21,8 +20,8 @@ import taxon from '@/interfaces/taxon.interface'
     const [ selectedTaxon, setSelectedTaxon ] = useState<taxon | undefined>()
   
     useEffect(() => {
-      axios.get(serverUrl).then((response): void => {
-        console.log('connected to server at {server}', response.data)
+      axios.get(taxonsUrl).then((response): void => {
+        console.log('connected to server at {taxonUrl}', response.data)
         const result = response.data || []
         const featIds = ['fire_elemental', 'black_dragon', 'vampire']
         const filteredFeatured = result.filter((r:taxon) => featIds.find(id => id === r.identifier))
@@ -33,9 +32,8 @@ import taxon from '@/interfaces/taxon.interface'
     }, [])
   
     const handleSelectRankClick = (e: React.MouseEvent) => {
-      console.log('seleect rank')
       e.preventDefault
-      const url = serverUrl + '/' + e.currentTarget.id
+      const url = taxonsUrl + '/' + e.currentTarget.id
       console.log('fetching url:', url)
       axios.get(url).then((response) => {
         console.log('response.data', response.data)

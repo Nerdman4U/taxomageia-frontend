@@ -1,5 +1,7 @@
-const serverUrl = "/api/taxomageias/first/taxons";
+const taxonsUrl = "/api/taxomageias/first/taxons";
+const appUrl = "/app"
 
 export {
-  serverUrl
+  taxonsUrl,
+  appUrl
 }
