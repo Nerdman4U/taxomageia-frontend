@@ -4,7 +4,7 @@ import sanitize from "string-sanitizer"
 
 import taxon from '../interfaces/taxon.interface'
 
-import TestimonialImage01 from '@/public/images/fire_elemental-feature.jpg'
+import TestimonialImage01 from '@/public/images/fire_elemental-feature.png'
 import TestimonialImage02 from '@/public/images/black_dragon-feature.png'
 import TestimonialImage03 from '@/public/images/vampire-feature.png'
 
