@@ -9,8 +9,8 @@ export default function Features({ranks}: {ranks: rank[]}) {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className="h2 mb-4">Taxomageia is an effort to classify groups of biomagical entities based on shared characteristics!</h2>
-            <p className="text-sm text-gray-400">Taxomageia ( or biomagical classification ) adds magical, immortal, summoned, fantasy and undead creatures and monsters to biological classification. Each Taxonomic rank inherits properties from parent ranks.</p>
+            <h2 className="h2 mb-4">Taxomageia classifies groups of biomagical entities based on shared characteristics!</h2>
+            <p className="text-sm text-gray-400">Taxomageia ( or biomagical classification ) adds magical, immortal, summoned, fantasy, undead and other creatures and monsters to biological classification. Each Taxonomic rank inherits properties from parent ranks.</p>
           </div>
 
           {/* Items */}
