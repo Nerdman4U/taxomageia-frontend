@@ -21,7 +21,7 @@ import taxon from '@/interfaces/taxon.interface'
   
     useEffect(() => {
       axios.get(taxonsUrl).then((response): void => {
-        console.log('connected to server at {taxonUrl}', response.data)
+        console.log(`connected to server at ${taxonsUrl}`, response.data)
         const result = response.data || []
         const featIds = ['fire_elemental', 'black_dragon', 'vampire']
         const filteredFeatured = result.filter((r:taxon) => featIds.find(id => id === r.identifier))

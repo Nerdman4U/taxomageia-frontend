@@ -66,9 +66,9 @@ This information can be used in all kinds of games with creatures. Creatures hav
   <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia-frontend/blob/master/public/images/monster.png" width="200" alt="monster" /></a>
 </p>
 
-## Support
+## Contributing
 
-If you want to help to build better UI its most welcome! Thank you.
+Pull requests are welcome. File an issue for ideas, conversation or feedback. 
 
 <p align="right" style="float:right">
   <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia-frontend/blob/master/public/images/alien.png" width="200" alt="alien" /></a>
