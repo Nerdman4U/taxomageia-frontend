@@ -42,7 +42,7 @@ export default function Footer() {
                     <Link href="/api/taxomageias/first/taxons" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">API</Link>
                   </li>
                   <li className="mb-1">
-                    <Link href="http://blog.taxomageia.com" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Blog</Link>
+                    <Link href="http://blog.taxomageia.pro" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Blog</Link>
                   </li>
                 </ul>
               </div>
