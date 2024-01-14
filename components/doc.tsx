@@ -59,9 +59,6 @@ const Doc = () => {
             <p className="mb-3">
               Game developers may want to have believable living magical ecosystem. This is where Taxomageia comes in. Taxomageia can be used in any kinds of games including computer, fantasy roleplaying (Dungeons & Dragons, RuneQuest, Universal Game Engine, etc.), any kinds of (roleplaying) games with magical ecosystems, table-top games and live roleplaying as well! Or just enjoy it.
             </p>
-            <p>
-              This project was started when I was ordered to go programming course by finnish unemployment office in autumn 2023. <a className="text-white" role="button" href="https://fullstackopen.com/en/" target="_blank">Course</a> is amazing (i am still on it) and i started to use new skills to build computer roleplaying game. I started to do that but i recognized i need creatures and monsters and i wanted them to live. So i want to have magical artificial ecosystem. Thats why i started to build Taxomageia application in november 2023.
-            </p>
           </div>
 
           <div id="current" className="max-w-3xl mx-auto md:pb-16 mb-6">
