@@ -18,6 +18,7 @@ import taxon from '@/interfaces/taxon.interface'
     const [ taxons, setTaxons] = useState<taxon[]>([])
     const [ featured, setFeatured ] = useState<taxon[]>([])
     const [ selectedTaxon, setSelectedTaxon ] = useState<taxon | undefined>()
+    const [ clicked, setClicked ] = useState(false)
   
     useEffect(() => {
       axios.get(taxonsUrl).then((response): void => {
@@ -39,20 +40,21 @@ import taxon from '@/interfaces/taxon.interface'
         //console.log('response.data', response.data)
         if (!response.data) return
         setSelectedTaxon(response.data as taxon)
+        setClicked(true)
       })  
-
     }
   
     const handleClearSelectRankClick = (e: React.MouseEvent) => {
       e.preventDefault
       setSelectedTaxon(undefined)
-  }
+      setClicked(true)
+    }
   
     if (selectedTaxon) {     
       return (
         <>
           <Hero />
-          <Taxon taxon={selectedTaxon} handleSelectRankClick={handleSelectRankClick} handleClearSelectRankClick={handleClearSelectRankClick} />
+          <Taxon clicked={clicked} taxon={selectedTaxon} handleSelectRankClick={handleSelectRankClick} handleClearSelectRankClick={handleClearSelectRankClick} />
           <Testimonials featured={featured} handleSelectRankClick={handleSelectRankClick} />
           {/* <Newsletter /> */}
         </>
@@ -63,7 +65,7 @@ import taxon from '@/interfaces/taxon.interface'
         <>
           <Hero />
           <Features ranks={taxons}/>
-          <Zigzag taxons={taxons} handleSelectRankClick={handleSelectRankClick} />  
+          <Zigzag clicked={clicked} taxons={taxons} handleSelectRankClick={handleSelectRankClick} />  
           <Testimonials featured={featured} handleSelectRankClick={handleSelectRankClick} />
           {/* <Newsletter /> */}
         </>

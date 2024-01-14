@@ -228,9 +228,9 @@ const Existence = ({ existence }: { existence: metamorphosisChain }) => {
   );
 }
 
-const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick }: {taxon: taxon | undefined, handleClearSelectRankClick: any, handleSelectRankClick: any}) => {
+const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick, clicked }: {taxon: taxon | undefined, handleClearSelectRankClick: any, handleSelectRankClick: any, clicked: boolean}) => {
   if (!taxon) return
-  const creature = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
 
   const identifier = taxon?.identifier || "Unknown";  
   const name = taxon?.name_en || taxon?.name_fi || identifier
@@ -239,10 +239,11 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick }: {ta
   const existences = taxon?.existences || []; 
 
   useEffect(() => {
-    if (!creature) return
-    if (!creature.current) return
-    if (location.hash) return
-    creature.current.scrollIntoView()
+    if (!ref) return
+    if (!ref.current) return
+    if (!clicked) return
+    const el = ref.current
+    if (el) el.scrollIntoView()
   }, [])
 
   const mmCount = existences.reduce((sum, i) => { 
@@ -264,7 +265,7 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick }: {ta
 
   return (
     <>
-      <section id="creature" ref={creature}>
+      <section id="ref" ref={ref}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="py-12 md:py-20 border-t border-gray-800">
             <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">

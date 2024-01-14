@@ -10,12 +10,15 @@ import rank from '../interfaces/taxon.interface'
 
 import { useRef, useEffect } from 'react'
 
-const Zigzag = ({ taxons, handleSelectRankClick }: { taxons: rank[], handleSelectRankClick: any }) => {
+const Zigzag = ({ taxons, handleSelectRankClick, clicked }: { taxons: rank[], handleSelectRankClick: any, clicked: boolean }) => {
   const ref = useRef<HTMLElement>(null)
 
   useEffect(() => {
+    if (!ref) return
+    if (!ref.current) return
+    if (!clicked) return // do not scroll at startup
     const el = ref.current
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+    if (el) el.scrollIntoView({ behavior: 'smooth'})
   })
 
   return (
