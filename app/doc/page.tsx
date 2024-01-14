@@ -1,4 +1,4 @@
-import Doc from '@/app/components/doc'
+import Doc from '@/components/doc'
 
 
 const DocMain = () => {

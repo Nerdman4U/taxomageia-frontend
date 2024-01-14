@@ -8,9 +8,18 @@ import FeatImage03 from '@/public/images/features-03-image-03.png'
 
 import rank from '../interfaces/taxon.interface'
 
+import { useRef, useEffect } from 'react'
+
 const Zigzag = ({ taxons, handleSelectRankClick }: { taxons: rank[], handleSelectRankClick: any }) => {
+  const ref = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+  })
+
   return (
-    <section id="creatures">
+    <section ref={ref} id="creatures">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="py-12 md:py-20 border-t border-gray-800">
 

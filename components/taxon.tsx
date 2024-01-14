@@ -13,6 +13,8 @@ import metamorphosis from '@/interfaces/metamorphosis.interface.js';
 import metamorphosisChain from '@/interfaces/metamorphosis_chain.interface.js';
 import taxon from '../interfaces/taxon.interface.js';
 
+import { useRef, useEffect } from 'react';
+
 type bodyPowersTableRowProps = {
   powerName: string
   value: number
@@ -67,8 +69,8 @@ const BodyPart = ({ body_part }: { body_part: bodyPart }) => {
         <tr><td>Description</td><td>{desc}</td></tr>
         <tr><td>Location</td><td>{body_part?.location}</td></tr>
         <tr><td>Organs</td><td>{
-          body_part?.organs?.map((organ) => (
-            <BodyPart key={organ.identifier} body_part={organ} />
+          body_part?.organs?.map((organ,i) => (
+            <BodyPart key={organ.identifier+"-"+i} body_part={organ} />
           ))}
         </td></tr>
       </tbody>
@@ -87,13 +89,13 @@ const BodySegment = ({ body_segment }: { body_segment: bodySegment }) => {
         <tr><td>Percentage</td><td>{body_segment?.percentage}</td></tr>
         <tr><td>Description</td><td>{desc}</td></tr>
         <tr><td>BodyParts</td><td>{ 
-            body_segment?.body_parts?.map((body_part) => (
-             <BodyPart key={body_part.identifier} body_part={body_part} />
+            body_segment?.body_parts?.map((body_part,i) => (
+             <BodyPart key={body_part.identifier+"-"+i} body_part={body_part} />
            ))}
           </td></tr>
         <tr><td>Connected segments</td><td>{
-            body_segment?.connections?.map((connection) => (
-              <BodySegment key={connection.identifier} body_segment={connection} />
+            body_segment?.connections?.map((connection,i) => (
+              <BodySegment key={connection.identifier+"-"+i} body_segment={connection} />
             ))
           }
         </td></tr>
@@ -165,8 +167,8 @@ const Body = ({
         <tr><td>Symmetric sides</td><td>{symmetricSides}</td></tr>
         <tr><td>Powers</td><td><BodyPowers powers={powers} /></td></tr>
         <tr><td>Segments</td><td>{
-          segments.map((segment) => {
-            return <BodySegment body_segment={segment} key={segment.identifier} />
+          segments.map((segment,i) => {
+            return <BodySegment body_segment={segment} key={segment.identifier+"-"+i} />
           })}
         </td></tr>
       </tbody>
@@ -209,7 +211,7 @@ const Existence = ({ existence }: { existence: metamorphosisChain }) => {
           const metamorphosis_name = metamorphosis?.name_en || metamorphosis?.name_fi || metamorphosis.identifier
           const metamorphosis_interval = metamorphosis?.interval || 0
           const metamorphosis_period = metamorphosis?.period || 0
-          for (const body of metamorphosis.bodies || []) {
+          return metamorphosis.bodies?.map((body,i) => {
             return <Body 
                 body={body} 
                 existence_name={ename} 
@@ -217,9 +219,9 @@ const Existence = ({ existence }: { existence: metamorphosisChain }) => {
                 existence_type={existence_type}
                 metamorphosis_interval={metamorphosis_interval}
                 metamorphosis_period={metamorphosis_period}
-                key={body.identifier}/>
+                key={body.identifier+"-"+i}/>
 
-          }
+          })
         })
       }
     </>
@@ -228,11 +230,20 @@ const Existence = ({ existence }: { existence: metamorphosisChain }) => {
 
 const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick }: {taxon: taxon | undefined, handleClearSelectRankClick: any, handleSelectRankClick: any}) => {
   if (!taxon) return
+  const creature = useRef<HTMLDivElement>(null)
+
   const identifier = taxon?.identifier || "Unknown";  
   const name = taxon?.name_en || taxon?.name_fi || identifier
   const taxon_rank = taxon?.taxon_rank || "Unknown";
   const taxon_parent = taxon?.taxon_parent || "Unknown";
   const existences = taxon?.existences || []; 
+
+  useEffect(() => {
+    if (!creature) return
+    if (!creature.current) return
+    if (location.hash) return
+    creature.current.scrollIntoView()
+  }, [])
 
   const mmCount = existences.reduce((sum, i) => { 
     const count = i.metamorphoses?.length || 0
@@ -253,7 +264,7 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick }: {ta
 
   return (
     <>
-      <section id="creature">
+      <section id="creature" ref={creature}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="py-12 md:py-20 border-t border-gray-800">
             <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
