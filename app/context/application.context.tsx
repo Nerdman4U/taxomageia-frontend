@@ -26,7 +26,7 @@ export type AppContextType = {
 
 const AppContext = React.createContext({} as AppContextType);
 
-export const ContextProvider = ({children}: {children: React.ReactNode}) => {
+export const ContextProvider = ({children}: {children: React.ReactNode[]}) => {
   const clientVersion = pkg.version
   const [serverVersion, setServerVersion] = useState("0.0.0")
   const [versionInfo, setVersionInfo] = useState([])

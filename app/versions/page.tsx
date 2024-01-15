@@ -15,7 +15,8 @@ const Version = ({info}: {info: VersionInfoType}) => {
 
 const Versions = () => {
   // TODO: use context and read version info.
-  // const value = useContext(AppContext)
+  const value = useContext(AppContext)
+  console.log('value:', value)
   // const clientVersion = value.clientVersion || "0.0.0"
   // const serverVersion = value.serverVersion || "0.0.0"
   // const clientVersionStr = value.clientVersionStr || "Client: v0.0.0"
