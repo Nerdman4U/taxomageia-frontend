@@ -32,7 +32,7 @@ const Versions = () => {
           </div>
    
           {/* Items */}
-          { versionInfo?.map((info) => <Version key={info.version} info={info} />) }
+          {/* { versionInfo?.map((info) => <Version key={info.version} info={info} />) } */}
 
         </div>
       </div>

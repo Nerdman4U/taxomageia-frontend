@@ -2,9 +2,9 @@ import Link from 'next/link'
 import MobileMenu from './mobile-menu'
 
 export default function Header({server, client}: {server?: string, client?: string}) {
-  let serverStr = ""
+  let serverVersionStr = ""
   let clientStr = ""
-  if (server) { serverStr = `Server: v${server}` } 
+  if (server) { serverVersionStr = `Server: v${server}` } 
   if (client) { clientStr = `Client: v${client}` }
   return (
     <header className="absolute w-full z-30">
@@ -20,7 +20,7 @@ export default function Header({server, client}: {server?: string, client?: stri
             </Link>
           </div>
           <div className="text-sm text-gray-600 ml-3">
-              <p className='my-0 py-0'>{serverStr}</p>
+             <Link href="versions" className='my-0 py-0 version-link'>{serverVersionStr}</Link>              
               <p className="my-0 py-0">{clientStr}</p>
             </div>
 

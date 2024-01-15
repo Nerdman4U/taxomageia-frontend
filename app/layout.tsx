@@ -38,13 +38,16 @@ export default function RootLayout({
 }) {
   const clientVersion = pkg.version
   const [serverVersion, setServerVersion] = useState("0.0.0")
+  const [versionInfo, setVersionInfo] = useState([])
 
   useEffect(() => {
     axios.get(appUrl, {params: {q: 'version'}}).then((response): void => {
       console.log(`connected to server at ${appUrl}`, response.data)
       if (!response.data) return
-      if (!response.data.version) return
-      setServerVersion(response.data.version)
+      if (!response.data.current) return
+      setServerVersion(response.data.current)
+      if (!response.data.info) return
+      setVersionInfo(response.data.info)
     })    
   }, [])
 
