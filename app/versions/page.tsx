@@ -1,4 +1,4 @@
-import React from "react"
+import { useContext} from "react"
 import AppContext from '@/app/context/application.context'
 import { AppContextType, VersionInfoType } from "@/app/context/application.context"
 
@@ -7,15 +7,21 @@ const Version = ({info}: {info: VersionInfoType}) => {
     <div id="what-is-taxomageia" className="max-w-3xl mx-auto md:pb-16">
       <h3 className="h3 mb-3 text-gray-400">Server: {info.version}</h3>
       <p>    
-      </p>
-      <p>
+        // version features, problems etc.
       </p>
     </div>  
   )
 }
 
 const Versions = () => {
-  // const { serverVersion, serverVersionStr, clientVersion, clientVersionStr, versionInfo } = React.useContext(AppContext)
+  // TODO: use context and read version info.
+  // const value = useContext(AppContext)
+  // const clientVersion = value.clientVersion || "0.0.0"
+  // const serverVersion = value.serverVersion || "0.0.0"
+  // const clientVersionStr = value.clientVersionStr || "Client: v0.0.0"
+  // const serverVersionStr = value.serverVersionStr || "Server: v0.0.0"
+  // const versionInfo = value.versionInfo || []
+  // console.log(versionInfo)
 
   return ( 
     <section id="versions">

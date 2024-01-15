@@ -61,7 +61,9 @@ export default function RootLayout({
           <ContextProvider>
             <Header client={clientVersion} server={serverVersion}/>
           </ContextProvider>
+          {/* How to use ContextProvider at child nodes?  */}
           {children}
+
           <Banner />
           <Footer />
        </div>
