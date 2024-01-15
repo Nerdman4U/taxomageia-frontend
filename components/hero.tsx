@@ -4,7 +4,7 @@ import ModalVideo from '@/components/modal-video'
 
 import FeatImage01 from '@/public/images/features-03-image-01.png'
 import FeatImage02 from '@/public/images/orc-01.png'
-import FeatImage03 from '@/public/images/dragon.png'
+import FeatImage03 from '@/public/images/dragon-130-130.png'
 
 // import localFont from 'next/font/local'
 // const myFont = localFont({ src: '@/public/fonts/sunday/sunday.woff' })
