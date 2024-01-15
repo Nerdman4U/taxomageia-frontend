@@ -4,12 +4,18 @@ import { useContext } from 'react'
 import AppContext from '@/app/context/application.context'
 
 export default function Header({server, client}: {server?: string, client?: string}) {
-  const [test1, test2] = useContext(AppContext)
+  const value = useContext(AppContext)
+  const clientVersion = value.clientVersion || "0.0.0"
+  const serverVersion = value.serverVersion || "0.0.0"
+  const clientVersionStr = value.clientVersionStr || "Client: v0.0.0"
+  const serverVersionStr = value.serverVersionStr || "Server: v0.0.0"
+  const versionInfo = value.versionInfo || []
 
-  let serverVersionStr = ""
-  let clientStr = ""
-  if (server) { serverVersionStr = `Server: v${server}` } 
-  if (client) { clientStr = `Client: v${client}` }
+  // console.log('value:', value)
+  // let serverVersionStr = ""
+  // let clientStr = ""
+  // if (server) { serverVersionStr = `Server: v${server}` } 
+  // if (client) { clientStr = `Client: v${client}` }
   return (
     <header className="absolute w-full z-30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -24,8 +30,8 @@ export default function Header({server, client}: {server?: string, client?: stri
             </Link>
           </div>
           <div className="text-sm text-gray-600 ml-3">
-             <Link href="versions" className='my-0 py-0 version-link'>{test1}</Link>              
-              <p className="my-0 py-0">{clientStr}</p>
+             <Link href="versions" className='my-0 py-0 version-link'>{serverVersionStr}</Link>
+              <p className="my-0 py-0">{clientVersionStr}</p>
             </div>
 
           {/* Desktop navigation */}
