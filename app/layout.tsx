@@ -13,6 +13,9 @@ import Footer from '@/components/ui/footer'
 
 import pkg from '../package.json' assert { type: "json" }
 
+import { ContextProvider } from './context/application.context'
+import App from 'next/app'
+
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -55,7 +58,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${architects_daughter.variable} font-inter antialiased bg-gray-900 text-gray-200 tracking-tight`}>
         <div className="flex flex-col min-h-screen overflow-hidden">
-          <Header client={clientVersion} server={serverVersion}/>
+          <ContextProvider>
+            <Header client={clientVersion} server={serverVersion}/>
+          </ContextProvider>
           {children}
           <Banner />
           <Footer />

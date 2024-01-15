@@ -1,7 +1,11 @@
 import Link from 'next/link'
 import MobileMenu from './mobile-menu'
+import { useContext } from 'react'
+import AppContext from '@/app/context/application.context'
 
 export default function Header({server, client}: {server?: string, client?: string}) {
+  const [test1, test2] = useContext(AppContext)
+
   let serverVersionStr = ""
   let clientStr = ""
   if (server) { serverVersionStr = `Server: v${server}` } 
@@ -20,7 +24,7 @@ export default function Header({server, client}: {server?: string, client?: stri
             </Link>
           </div>
           <div className="text-sm text-gray-600 ml-3">
-             <Link href="versions" className='my-0 py-0 version-link'>{serverVersionStr}</Link>              
+             <Link href="versions" className='my-0 py-0 version-link'>{test1}</Link>              
               <p className="my-0 py-0">{clientStr}</p>
             </div>
 
