@@ -29,11 +29,10 @@ For more info about underlying framework, see nextJS documentation.
 
 ## How to use API?
 
-You can download creature data from following urls at <a href="http://taxomageia.pro" target="_blank">taxomageia</a>.
+You can download creature data from following urls at <a href="http://taxomageia.pro/api/taxomageias/first/taxons_complete" target="_blank">taxomageia</a>.
 
-- /api/taxomageias/first/
-- /api/taxomageias/first/taxons_complete
-- /api/taxomageias/first/taxons_complete/\<identifier\>
+- all taxons: /api/taxomageias/first/taxons_complete
+- one taxon: /api/taxomageias/first/taxons_complete/\<identifier\>
 
 ## Use cases
 
