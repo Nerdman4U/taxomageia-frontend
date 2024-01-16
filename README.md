@@ -15,28 +15,25 @@ This Github repository contains code for the frontend of <a href="http://taxomag
 ## Description
 
 Taxomageia or Biomagical classification extends biological classification and adds magical, immortal, summoned, fantasy, undead and other creatures and monsters. Each Taxonomic rank inherits properties from parent ranks. 
+More information at <a href="http://taxomageia.pro/documentation.html" target="_blank">documentation</a>.
 
-Inherited values include:
-- Creature may have multiple ways to exists at different dimensions and planes. Creature may have for example physical and spirit form.
-- Each form may progress through set of stages and develop as time passes ( physical bodies grow when cells divide themselves at material dimension ). 
-- Each metamorphose stage has its own body, properties and abilities. For example, young fire elemental may be summoned from the plane of fire and has not yet reached full potential. It may (or may not) grow if summoned to physical plane. There can be creatures with multiple bodies.
-- Bodies may have any number of attributes and skills.
-- Bodies have multiple segments, connected to each other.
-- Each segment may have any number of body parts which have a location i.e. ventral or dorsal.
-- Notocord or vertebrae may be inherited from parents. Bilateral creatures have center with two symmertic sides. Trilateral has three.
-- Attributes have minimum and maximum range as well as growth indicator. Attributes are calculated by inheriting parents, every rank may make attribute stronger or weaker.
-- Propertylists contains tokens with + and - signs. With + inherited property gets stronger and with - weaker at inheriting rank.
-- Propertylists have two different versions. Basic list is to show tokens which has positive value after all parents have been inherited. It declares that this species has or has not this ability. Weighted list calculates all + and - signs from properties. Output declares how strong or weak this species is at this property/ability/power.
+## Install
+
+1) from github fork repository (optional)
+2) $ git clone <repository>
+3) $ npm install
+
+Note: Requests to backend will fail.
+
+For more info about underlying framework, see nextJS documentation.
 
 ## How to use API?
 
 You can download creature data from following urls at <a href="http://taxomageia.pro" target="_blank">taxomageia</a>.
 
-- /api/taxomageia/first/
-- /api/taxomageia/first/taxons
-- /api/taxomageia/first/taxons/\<identifier\>
-- /api/taxomageia/first/inherited
-- /api/taxomageia/first/inherited/\<identifier\>
+- /api/taxomageias/first/
+- /api/taxomageias/first/taxons_complete
+- /api/taxomageias/first/taxons_complete/\<identifier\>
 
 ## Use cases
 
@@ -66,7 +63,7 @@ This information can be used in all kinds of games with creatures. Creatures hav
   <a href="http://taxomageia.pro/" target="blank"><img src="https://github.com/Nerdman4U/taxomageia-frontend/blob/master/public/images/monster.png" width="200" alt="monster" /></a>
 </p>
 
-## Contributing
+## Feel free to contribute!
 
 Pull requests are welcome. File an issue for ideas, conversation or feedback. 
 
