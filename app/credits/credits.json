@@ -1,0 +1,50 @@
+{
+  "template": {
+    "url": "https://github.com/cruip/open-react-template",
+    "name": "Open react template",
+    "from": "Cruip"
+  },
+  "images": [
+    {
+      "name": "Dragon (Logo)",
+      "url": "https://pixabay.com/users/openclipart-vectors-30363/",
+      "from": "openclipart-vectors-30363"
+    },
+    {
+      "name": "Alien",
+      "url": "https://pixabay.com/users/openclipart-vectors-30363/",
+      "from": "openclipart-vectors-30363"
+    },
+    {
+      "name": "Monster Slug",
+      "url": "https://pixabay.com/users/openclipart-vectors-30363/",
+      "from": "openclipart-vectors-30363"
+    },
+    {
+      "name": "Dog Cat Evil Demon Silhouette",
+      "url": "https://pixabay.com/users/yuri_b-2216431/",
+      "from": "yuri_b-2216431"
+    },
+    {
+      "name": "Orc",
+      "url": "https://pixabay.com/users/juliush-3921568/",
+      "from": "juliush-3921568"
+    },
+    {
+      "name": "Fire Elemental",
+      "url": "https://pixabay.com/users/openclipart-vectors-30363/",
+      "from": "openclipart-vectors-30363"
+    },
+    {
+      "name": "Black Dragon",
+      "url": "https://pixabay.com/users/pendleburyannette-1860575/",
+      "from": "pendleburyannette-1860575"
+    },
+    {
+      "name": "Vampire",
+      "url": "https://pixabay.com/users/openclipart-vectors-30363/",
+      "from": "openclipart-vectors-30363"
+    }
+   ]
+}
+

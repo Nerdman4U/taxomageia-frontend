@@ -33,14 +33,20 @@ export default function Footer() {
                 <h6 className="text-white font-medium mb-1">Links</h6>
                 <ul>
                   <li className="mb-1">
-                    <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Main</Link>
-                  </li>
-                  <li className="mb-1">
-                    <Link href="/doc.html" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Documentation</Link>
-                  </li>
-                  <li className="mb-1">
                     <Link href="/api/taxomageias/first/taxons" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">API</Link>
                   </li>
+                  <li className="mb-1">
+                    <Link href="/documentation" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Documentation</Link>
+                  </li>
+                  <li className="mb-1">
+                    <Link href="/credits" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Credits</Link>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="text-sm">
+                <h6 className="text-gray-200 font-medium mb-1">Me</h6>
+                <ul>
                   <li className="mb-1">
                     <Link href="http://blog.taxomageia.pro" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Blog</Link>
                   </li>
@@ -48,31 +54,10 @@ export default function Footer() {
               </div>
 
               {/* <div className="text-sm">
-                <h6 className="text-gray-200 font-medium mb-1">Resources</h6>
+                <h6 className="text-gray-200 font-medium mb-1">Contribute</h6>
                 <ul>
                   <li className="mb-1">
-                    <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Nostrud exercitation</Link>
-                  </li>
-                  <li className="mb-1">
-                    <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Visual mockups</Link>
-                  </li>
-                  <li className="mb-1">
-                    <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Nostrud exercitation</Link>
-                  </li>
-                  <li className="mb-1">
-                    <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Visual mockups</Link>
-                  </li>
-                  <li className="mb-1">
-                    <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Nostrud exercitation</Link>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="text-sm">
-                <h6 className="text-gray-200 font-medium mb-1">Company</h6>
-                <ul>
-                  <li className="mb-1">
-                    <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Consectetur adipiscing</Link>
+                    <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out"></Link>
                   </li>
                   <li className="mb-1">
                     <Link href="/" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Labore et dolore</Link>
