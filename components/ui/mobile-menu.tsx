@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+import * as config from '@/config'
 
 export default function MobileMenu() {
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false)
@@ -61,6 +62,23 @@ export default function MobileMenu() {
       >
         <ul className="bg-gray-800 px-4 py-2">
           <li>
+            <Link href={config.api_complete} className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>
+              API
+            </Link>
+            <Link href={config.documentation} className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>
+              Documentation
+            </Link>
+            <Link href={config.contribute} className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>
+              Contribute
+            </Link>
+            <Link href={config.credits} className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>
+              Credits
+            </Link>
+            <Link href={config.blog} className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>
+              Blog
+            </Link>
+          </li>
+          {/* <li>
             <Link href="/signin" className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>
               Sign in
             </Link>
@@ -72,7 +90,7 @@ export default function MobileMenu() {
             >
               Sign up
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </div>

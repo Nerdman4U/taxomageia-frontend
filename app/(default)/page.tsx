@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { taxonsUrl } from '../../config'
+import * as config from '../../config'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -21,7 +21,7 @@ import taxon from '@/interfaces/taxon.interface'
     const [ clicked, setClicked ] = useState(false)
   
     useEffect(() => {
-      axios.get(taxonsUrl).then((response): void => {
+      axios.get(config.api).then((response): void => {
         //console.log(`connected to server at ${taxonsUrl}`, response.data)
         const result = response.data || []
         const featIds = ['fire_elemental', 'black_dragon', 'vampire']
@@ -34,7 +34,7 @@ import taxon from '@/interfaces/taxon.interface'
   
     const handleSelectRankClick = (e: React.MouseEvent) => {
       e.preventDefault
-      const url = taxonsUrl + '/' + e.currentTarget.id
+      const url = config.api + '/' + e.currentTarget.id
       //console.log('fetching url:', url)
       axios.get(url).then((response) => {
         //console.log('response.data', response.data)

@@ -77,9 +77,8 @@ export default function Features({ranks}: {ranks: rank[]}) {
                   <path className="stroke-current text-purple-300" d="M22 30h4v12h-4z" />
                 </g>
               </svg>
-              <h4 className="h4 mb-2">?</h4>
+              <h4 className="h4 mb-2"></h4>
               <p className="text-lg text-gray-400 text-center">
-
               </p>
             </div>
 
@@ -95,7 +94,7 @@ export default function Features({ranks}: {ranks: rank[]}) {
               </svg>
               <h4 className="h4 mb-2">Future ideas</h4>
               <p className="text-lg text-gray-400 text-center">
-                See the plans for the future versions.
+                See the plans for the future versions! (forums or somewhere else - <span className="text-red-400">not working yet</span>).
                 </p>
             </div>
 

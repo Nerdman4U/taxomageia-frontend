@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import * as config from '@/config'
 
 export default function Banner() {
   const [bannerOpen, setBannerOpen] = useState<boolean>(true)
@@ -13,7 +14,7 @@ export default function Banner() {
             <div className="text-slate-500 inline-flex">
               <a
                 className="font-medium hover:underline text-slate-50"
-                href="https://github.com/Nerdman4U/taxomageia-frontend"
+                href={config.github}
                 target="_blank"
                 rel="noreferrer"
               >

@@ -4,7 +4,7 @@ import React from 'react';
 import { createContext, useEffect, useState  } from 'react';
 import pkg from '../../package.json' assert { type: "json" }
 import axios from 'axios'
-import { appUrl } from '@/config'
+import * as config from '@/config'
 
 export type VersionInfoType = {
   version?: string
@@ -32,8 +32,8 @@ export const ContextProvider = ({children}: {children: React.ReactNode[]}) => {
   const [versionInfo, setVersionInfo] = useState([])
 
   useEffect(() => {
-    axios.get(appUrl, {params: {q: 'version'}}).then((response): void => {
-      console.log(`connected to server at ${appUrl}`, response.data)
+    axios.get(config.app, {params: {q: 'version'}}).then((response): void => {
+      console.log(`connected to server at ${config.app}`, response.data)
       if (!response.data) return
       if (!response.data.current) return
       console.log(response.data)
