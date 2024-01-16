@@ -30,7 +30,7 @@ export default function Header({server, client}: {server?: string, client?: stri
             </Link>
           </div>
           <div className="text-sm text-gray-600 ml-3">
-             <Link href="/versions" className='my-0 py-0 version-link'>{serverVersionStr}</Link>
+             <Link href="/versions.html" className='my-0 py-0 version-link'>{serverVersionStr}</Link>
               <p className="my-0 py-0">{clientVersionStr}</p>
             </div>
 
