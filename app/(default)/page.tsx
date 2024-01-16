@@ -56,7 +56,7 @@ import taxon from '@/interfaces/taxon.interface'
           <Hero />
           <Taxon clicked={clicked} taxon={selectedTaxon} handleSelectRankClick={handleSelectRankClick} handleClearSelectRankClick={handleClearSelectRankClick} />
           <Testimonials featured={featured} handleSelectRankClick={handleSelectRankClick} />
-          {/* <Newsletter /> */}
+          <Newsletter />
         </>
       )
     }
@@ -67,7 +67,7 @@ import taxon from '@/interfaces/taxon.interface'
           <Features ranks={taxons}/>
           <Zigzag clicked={clicked} taxons={taxons} handleSelectRankClick={handleSelectRankClick} />  
           <Testimonials featured={featured} handleSelectRankClick={handleSelectRankClick} />
-          {/* <Newsletter /> */}
+          <Newsletter />
         </>
       )
     }

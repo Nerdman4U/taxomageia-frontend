@@ -16,6 +16,10 @@
     }
 }
 
+a {
+  text-decoration: underline;
+}
+
 .nav-link { 
   color: inherit !important;
 }
