@@ -35,7 +35,7 @@ export default function Features({ranks}: {ranks: rank[]}) {
                 <path className="stroke-current text-purple-300" d="M26 28h12M26 32h12M26 36h5" strokeWidth="2" strokeLinecap="square" />
               </svg>
               <h4 className="h4 mb-2">Create</h4>
-              <p className="text-lg text-gray-400 text-center">Create, customize and share your own Taxomageia <span className='text-red-400'>(Not ready yet)</span>.</p>
+              <p className="text-lg text-gray-400 text-center">Create, customize and share your own Taxomageia <span className='text-red-400'>(Not yet available)</span>.</p>
             </div>
 
             {/* 3rd item */}
@@ -94,7 +94,7 @@ export default function Features({ranks}: {ranks: rank[]}) {
               </svg>
               <h4 className="h4 mb-2">Future ideas</h4>
               <p className="text-lg text-gray-400 text-center">
-                See the plans for the future versions! (forums or somewhere else - <span className="text-red-400">not working yet</span>).
+                See the plans for the future versions! (forums or somewhere else - <span className="text-red-400">Not yet available</span>).
                 </p>
             </div>
 

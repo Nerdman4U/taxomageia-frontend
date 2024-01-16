@@ -87,7 +87,7 @@ export default function Testimonials({featured, handleSelectRankClick}: {feature
                 Vampire 
               </blockquote>
               <div className="text-gray-700 font-medium mt-6 pt-5 border-t border-gray-700">
-              <cite className="text-gray-200 not-italic"><a role="button" id={fid3}>Full statistics</a> <span className='text-red-300 text-sm'>(Not yet available)</span></cite>             
+              <cite className="text-gray-200 not-italic"><a role="button" id={fid3}>Full statistics</a> <span className='text-red-400 text-sm'>(Not yet available)</span></cite>             
               {/* <cite className="text-gray-200 not-italic"><a role="button" onClick={handleSelectRankClick} id={fid3}>Full statistics</a><span className='text-red-500'>Not yet available</span></cite>    */}
               </div>
             </div>
