@@ -1,5 +1,13 @@
 [
   {
+    "version": "1.1.17",
+    "features_en": [
+      "Kheceous: Two headed bilateral herbavore serpent.",
+      "Shollabit: Two headed bilateral serpent which is born from blood of Medusa.",
+      "Inheritance fixes for deep nested segment and part structures. Important cache update. Other fixes as well."
+    ]
+  },
+  {
     "version": "1.1",
     "next_en": [
       "Version data. This.",
