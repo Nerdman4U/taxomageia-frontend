@@ -1,3 +1,4 @@
+import * as config from '@/config'
 const Contribute = () => {
 
   return (
@@ -14,13 +15,13 @@ const Contribute = () => {
   
         <div className="max-w-3xl mx-auto md:pb-16">
           <h3 className="h3 mb-3 text-gray-400">Patreon</h3>
-          <p>If you would like to support the project, please consider becoming a <a href="https://www.patreon.com/Taxomageia.pro">Patreon</a>.</p>          
+          <p>If you would like to support the project, please consider becoming a <a href={config.patreon}>Patreon</a>.</p>          
         </div>
 
         <div className="max-w-3xl mx-auto md:pb-16">
           <h3 className="h3 mb-3 text-gray-400">Github</h3>
           <p>
-            If you would like to help by fixing bugs, building features or writing tests thats warmly welcome! Fork and clone the <a href="http://github.com/nerdman4u/taxomageia-frontend">repository</a>. Questions and suggestions are welcome. 
+            If you would like to help by fixing bugs, building features or writing tests thats warmly welcome! Fork and clone the <a href={config.github}>repository</a>. Questions and suggestions are welcome. 
           </p>
         </div>
 

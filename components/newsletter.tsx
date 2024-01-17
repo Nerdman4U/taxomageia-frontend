@@ -1,3 +1,4 @@
+import * as config from '@/config'
 export default function Newsletter() {
   return (
     <section>
@@ -24,7 +25,7 @@ export default function Newsletter() {
             {/* CTA content */}
             <div className="mb-6 lg:mr-16 lg:mb-0 text-center lg:text-left lg:w-1/2">
               <h3 className="h3 text-white mb-2">Support Taxomageia</h3>
-              <p className="text-purple-200 text-lg">If you value this project, please consider become a <a href="https://www.patreon.com/Taxomageia.pro" className="text-purple-100 hover:underline" target="_blank">Patreon</a>. Thank you, most appreciated!</p>
+              <p className="text-purple-200 text-lg">If you value this project, please consider become a <a href={config.patreon} className="text-purple-100 hover:underline" target="_blank">Patreon</a>. Thank you, most appreciated!</p>
             </div>
 
             {/* CTA form */}
