@@ -14,6 +14,8 @@ export type VersionInfoType = {
   features_fi?: string[]
   problems_en?: string[]
   problems_fi?: string[]
+  notes_en?: string[]
+  notes_fi?: string[]
 }
 
 export type AppContextType = {
