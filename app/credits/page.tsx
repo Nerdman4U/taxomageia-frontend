@@ -56,9 +56,10 @@ const Credits = () => {
                 <li>React</li>                
                 <li>Prisma</li>
                 <li>Jest</li>
-                <li>HTTP, SSH, DNS</li>
+                <li>HTTP, SSH, DNS, REST</li>
                 <li>HTML, CSS</li>
                 <li>Visual Studio Code, Emacs</li>
+                <li>Gimp</li>
                 <li>Chrome, Firefox</li>
                 <li>Chromium</li>
                 <li>Asus, Intel, Samsung, ...</li>

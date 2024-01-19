@@ -1,5 +1,5 @@
-const api = "/api/taxomageias/first/taxons";
-const api_complete = "/api/taxomageias/first/taxons_complete";
+const api_complete = "/api/taxomageias/first/taxons";
+const api = "/api/taxomageias/first/taxons_preview";
 const app = "/app"
 const linkedin = "https://www.linkedin.com/in/jonitoyryla/"
 const github = "http://github.com/Nerdman4U/taxomageia-frontend"
