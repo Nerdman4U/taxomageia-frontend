@@ -1,5 +1,11 @@
 [
   {
+    "version": "1.2.1",
+    "features_en": [
+      "Data fetch issue and lateral issue when inherited without local segment type."
+    ]
+  },
+  {
     "version": "1.2",
     "features_en": [
       "A Big data update. Lots of attributes. Black Dragon has legs and wings. Two, Three, Four and Five winged bilateral arthropods have wings. Great stuff!"
