@@ -1,4 +1,5 @@
 import rank from '../interfaces/taxon.interface'
+import * as config from '../config'
 
 export default function Features({ranks}: {ranks: rank[]}) {
   const amount = ranks?.length || ""
@@ -24,7 +25,7 @@ export default function Features({ranks}: {ranks: rank[]}) {
                 <path className="stroke-current text-purple-300" d="M43 42h-9M43 37h-9" strokeLinecap="square" strokeWidth="2" />
               </svg>
               <h4 className="h4 mb-2">Open API</h4>
-              <p className="text-lg text-gray-400 text-center">Download creature information in <a href="/api/taxomageias/first/taxons_complete" target="_blank">JSON</a> format.</p>
+              <p className="text-lg text-gray-400 text-center">Download creature information in <a href={config.api_complete} target="_blank">JSON</a> format.</p>
             </div>
 
             {/* 2nd item */}
@@ -64,7 +65,7 @@ export default function Features({ranks}: {ranks: rank[]}) {
               <h4 className="h4 mb-2">Partly open source</h4>
               <p className="text-lg text-gray-400 text-center">
                 Taxomageia is an parly open source project.
-                UI ( this ) is available at <a href="http://github.com/Nerdman4U/taxomageia-frontend" target="_blank">Github</a>.
+                UI ( this ) is available at <a href={config.github} target="_blank">Github</a>.
               </p>
             </div>
 
