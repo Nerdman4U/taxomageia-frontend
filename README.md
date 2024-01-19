@@ -17,6 +17,18 @@ This Github repository contains code for the frontend of <a href="http://taxomag
 Taxomageia or Biomagical classification extends biological classification and adds magical, immortal, summoned, fantasy, undead and other creatures and monsters. Each Taxonomic rank inherits properties from parent ranks. 
 More information at <a href="http://taxomageia.pro/documentation.html" target="_blank">documentation</a>.
 
+## Contribute
+
+Would you like to help?
+
+Are you familiar with <a href="https://nextjs.org/">NextJS</a> framework? If not, install and learn to use it. 
+
+If you know NextJS well, install Taxomageia Frontend, study and give feedback at forums (not yet open though XD). 
+
+Some things to consider:
+- Open source template used at Taxomageia Frontend is using different folder structure than NextJS by default
+- I havent yet had time to learn NextJS deeply, im getting there...
+
 ## Install
 
 1) from github fork repository (optional)
