@@ -12,9 +12,9 @@ const VersionItems = ({items, topic}: {topic: string, items: string[]}) => {
   return (
     <>
       <h3>{topic}</h3>
-      <ul>
+      <ol>
         { items.map((item) => <li>{item}</li>) }
-      </ul>
+      </ol>
     </>
   )
 }

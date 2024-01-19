@@ -19,6 +19,9 @@
 a {
   text-decoration: underline;
 }
+ol {
+  list-style-type: decimal;
+}
 
 .nav-link { 
   color: inherit !important;
