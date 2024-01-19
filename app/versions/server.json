@@ -1,6 +1,6 @@
 [
   {
-    "version": "1.2.1",
+    "version": "1.2.2",
     "features_en": [
       "Data fetch issue and lateral issue when inherited without local segment type."
     ]
