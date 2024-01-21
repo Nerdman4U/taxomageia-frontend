@@ -69,7 +69,6 @@ const Credits = () => {
                 <li><a href="https://en.wikipedia.org/wiki/Turing_machine" target="_top">Turing machine</a></li>
                 <li><a href="https://en.wikipedia.org/wiki/Plankalk%C3%BCl" target="_blank">Plankalkül</a></li>                
                 <li>And lots of more ... ;)</li>
-                <li>And of course biologists, engineers, mathematicians, scientists, all people who strive to <span className="text-white">understand</span> and create instead of hate and fight. Love prevails!</li>
               </ul>
             </div>
           </div>
