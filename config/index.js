@@ -9,6 +9,8 @@ const credits = "/credits.html"
 const contribute = "/contribute.html"
 const blog = "http://blog.taxomageia.pro"
 const patreon = "https://www.patreon.com/Taxomageia"
+const forum = "http://forum.taxomageia.pro"
+const facebook = "https://www.facebook.com/profile.php?id=61555410616799"
 
 export {
   api,
@@ -21,5 +23,7 @@ export {
   credits,
   contribute,
   blog,
-  patreon
+  patreon,
+  forum,
+  facebook
 }
