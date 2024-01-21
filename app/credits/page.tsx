@@ -10,7 +10,7 @@ const Images = ({images}: {images: images[]}) => {
     <div className="max-w-3xl mx-auto md:pb-16">
       <h3 className="h3 mb-3 text-gray-400">Images</h3>
       <div>    
-        <ul>
+        <ul className="text-gray-200">
           { images.map((item) => <li key={item.name}><a href={item.url}>{item.name} from {item.from}</a></li>) }
         </ul>
       </div>
@@ -38,32 +38,38 @@ const Credits = () => {
 
           <div className="max-w-3xl mx-auto md:pb-16">
             <h3 className="h3 mb-3 text-gray-400">Template</h3>
-            <div>
+            <div className="text-gray-200">
               <a href={template.url}>{template.name} from {template.from}</a>
             </div>
           </div>
 
           <div className="max-w-3xl mx-auto md:pb-16">
             <h3 className="h3 mb-3 text-gray-400">Other</h3>
-            <p>A lots of applications, protocols and libraries (many open source) have been and are being used at this project. To list few:</p>
+            <p className="mb-6 text-gray-400">A lots of applications, protocols and libraries (many open source) have been and/or are being used at this project or has or have had huge importance on this field of expertice. Without their work this project would not be possible. Thank you. To list few:</p>
             <div>
-              <ul>
+              <ul className="text-gray-200">
                 <li>Linux (Ubuntu)</li>
-                <li>Apache, PostgreSQL, Redis</li>
                 <li>ECMAScript, Typescript</li>
                 <li>Node, TSNode</li>
                 <li>NextJS</li>
                 <li>React</li>                
                 <li>Prisma</li>
                 <li>Jest</li>
-                <li>HTTP, SSH, DNS, REST</li>
-                <li>HTML, CSS</li>
-                <li>Visual Studio Code, Emacs</li>
-                <li>Gimp</li>
-                <li>Chrome, Firefox</li>
                 <li>Chromium</li>
+                <li>HTML, CSS</li>
+                <li>HTTP, SSH, DNS</li>
+                <li>Apache, PostgreSQL, Redis</li>
+                <li>Visual Studio Code, Emacs</li>
+                <li>Rest, Design Patterns</li>
+                <li>Gimp</li>
+                <li>Google, Facebook, ...</li>
+                <li>Chrome, Firefox</li>
                 <li>Asus, Intel, Samsung, ...</li>
-                <li>And lots of more ...</li>
+                <li>Internet</li>
+                <li><a href="https://en.wikipedia.org/wiki/Turing_machine" target="_top">Turing machine</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Plankalk%C3%BCl" target="_blank">Plankalkül</a></li>                
+                <li>And lots of more ... ;)</li>
+                <li>And of course biologists, engineers, mathematicians, scientists, all people who strive to <span className="text-white">understand</span> and create instead of hate and fight. Love prevails!</li>
               </ul>
             </div>
           </div>

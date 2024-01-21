@@ -1,5 +1,12 @@
 [
   {
+    "version": "1.3",
+    "features_en": [
+      "Final fixes to make inheritance work.",
+      "Data update."
+    ]
+  },
+  {
     "version": "1.2.2",
     "features_en": [
       "Data fetch issue and lateral issue when inherited without local segment type."
