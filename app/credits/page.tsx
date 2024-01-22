@@ -11,7 +11,7 @@ const Images = ({images}: {images: images[]}) => {
       <h3 className="h3 mb-3 text-gray-400">Images</h3>
       <div>    
         <ul className="text-gray-200">
-          { images.map((item) => <li key={item.name}><a href={item.url}>{item.name} from {item.from}</a></li>) }
+          { images.map((item) => <li key={item.name}><a target="_blank" href={item.url}>{item.name} from {item.from}</a></li>) }
         </ul>
       </div>
     </div>  
