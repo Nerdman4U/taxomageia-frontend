@@ -25,7 +25,7 @@ export default function Features({ranks}: {ranks: rank[]}) {
                 <path className="stroke-current text-purple-300" d="M43 42h-9M43 37h-9" strokeLinecap="square" strokeWidth="2" />
               </svg>
               <h4 className="h4 mb-2">Open API</h4>
-              <p className="text-lg text-gray-400 text-center">Download creature information in <a href={config.api_complete} target="_blank">JSON</a> format.</p>
+              <p className="text-lg text-gray-400 text-center">Download your copy of monsters in <a href={config.api_complete} target="_blank">JSON</a>!</p>
             </div>
 
             {/* 2nd item */}
@@ -95,7 +95,7 @@ export default function Features({ranks}: {ranks: rank[]}) {
               </svg>
               <h4 className="h4 mb-2">Forum</h4>
               <p className="text-lg text-gray-400 text-center">
-                Share your ideas at <a href={config.forum} target="_blank">forum</a>.
+                Share your ideas at <a href={config.forum} target="_blank">Forum</a>.
               </p>
             </div>
           </div>
