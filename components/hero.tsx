@@ -2,9 +2,7 @@ import Image from 'next/image'
 import VideoThumb from '@/public/images/hero-image-01.jpg'
 import ModalVideo from '@/components/modal-video'
 
-import FeatImage01 from '@/public/images/features-03-image-01.png'
-import FeatImage02 from '@/public/images/orc-01.png'
-import FeatImage03 from '@/public/images/dragon-130-130.png'
+import logo from '@/public/images/dragon-130-130.png'
 
 import * as config from '@/config'
 // import localFont from 'next/font/local'
@@ -45,7 +43,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <Image className="max-w-full mx-auto md:max-w-none h-auto" src={FeatImage03} width={130} height={130} priority={true} alt="Banner" />
+          <Image className="max-w-full mx-auto md:max-w-none h-auto" src={logo} width={130} height={130} priority={true} alt="Banner" />
           {/* <Image className="max-w-full mx-auto md:max-w-none h-auto" src={FeatImage03} width={200} height={200} priority={true} alt="Banner" /> */}
 
           {/* <ModalVideo

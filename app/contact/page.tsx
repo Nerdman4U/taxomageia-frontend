@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import * as config from '@/config'
-import Joni01 from '@/public/images/joni-ja-taxomageia-1200-900.jpg'
+import Joni01 from '@/public/images/joni-taxomageia-sininen-paita-1200-900.jpg'
 
 const Contact = () => {
   return (
