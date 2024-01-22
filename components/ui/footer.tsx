@@ -49,6 +49,9 @@ export default function Footer() {
                   <li className="mb-1">
                     <Link href={config.contribute} className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Contribute</Link>
                   </li>
+                  <li className="mb-1">
+                    <Link href={config.partner} className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Partner</Link>
+                  </li>
                 </ul>
               </div>
 
