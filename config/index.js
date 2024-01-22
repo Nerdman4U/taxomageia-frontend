@@ -11,6 +11,8 @@ const blog = "http://blog.taxomageia.pro"
 const patreon = "https://www.patreon.com/Taxomageia"
 const forum = "http://forum.taxomageia.pro"
 const facebook = "https://www.facebook.com/profile.php?id=61555410616799"
+const email = "mailto:info@taxomageia.pro"
+const contact = "/contact.html"
 
 export {
   api,
@@ -25,5 +27,7 @@ export {
   blog,
   patreon,
   forum,
-  facebook
+  facebook,
+  email,
+  contact
 }

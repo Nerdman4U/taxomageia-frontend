@@ -61,6 +61,9 @@ export default function Footer() {
                   <li className="mb-1">
                     <Link href={config.linkedin} target="_blank" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Linkedin</Link>
                   </li>
+                  <li className="mb-1">
+                    <Link href={config.contact} target="_blank" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Contact</Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -112,7 +115,9 @@ export default function Footer() {
             </ul>
 
             {/* Copyrights note */}
-            <div className="text-blue-400 text-sm mr-4"><a href="/" target="_blank">&copy; taxomageia.pro. All rights reserved.</a></div>
+            <div className="text-blue-400 text-sm mr-4">
+              <a href="/" target="_blank">&copy; taxomageia.pro. All rights reserved.</a>
+            </div>
 
           </div>
 
