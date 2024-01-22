@@ -1,20 +1,22 @@
 [
   {
+    "version": "1.1.19",
+    "features_en": [
+      "Partner page."
+    ]
+  },{
     "version": "1.1.18",
     "features_en": [
       "Contact page.",
       "Modified some frontpage texts."
     ]
-  },
-
-  {
+  },{
     "version": "1.1.16",
     "features_en": [
       "Forum.",
       "Facebook."
     ]
-  },
-  { 
+  },{ 
     "version": "1.1.15",
     "features_en": [
       "New API url, use /api/taxomageias/<id>/taxons to load fully build fresh taxons.",
