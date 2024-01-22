@@ -1,9 +1,17 @@
 [
   {
+    "version": "1.1.18",
+    "features_en": [
+      "Contact page.",
+      "Modified some frontpage texts."
+    ]
+  },
+
+  {
     "version": "1.1.16",
     "features_en": [
-      "Forum",
-      "Facebook"
+      "Forum.",
+      "Facebook."
     ]
   },
   { 
