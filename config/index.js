@@ -14,6 +14,7 @@ const facebook = "https://www.facebook.com/profile.php?id=61555410616799"
 const email = "mailto:info@taxomageia.pro"
 const contact = "/contact.html"
 const partner = "/partner.html"
+const diary = "/diary.html"
 
 export {
   api,
@@ -31,5 +32,6 @@ export {
   facebook,
   email,
   contact,
-  partner
+  partner,
+  diary
 }

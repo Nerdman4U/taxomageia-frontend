@@ -62,6 +62,9 @@ export default function Footer() {
                     <Link href={config.blog} target="_blank" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Blog</Link>
                   </li>
                   <li className="mb-1">
+                    <Link href={config.diary} target="_blank" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Diary</Link>
+                  </li>
+                  <li className="mb-1">
                     <Link href={config.linkedin} target="_blank" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Linkedin</Link>
                   </li>
                   <li className="mb-1">

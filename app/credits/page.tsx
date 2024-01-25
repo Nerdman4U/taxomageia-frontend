@@ -28,7 +28,7 @@ const Credits = () => {
   const templates = credits.templates as items[]
   const images = credits.images as items[]
   return ( 
-    <section id="versions">
+    <section id="credits">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 text-gray-400">
         <div className="py-12 md:py-20 border-t border-gray-800">
     
