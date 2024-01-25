@@ -1,17 +1,23 @@
 import credits from "./credits.json" assert { type: "json" }
 
-type images = {
+type items = {
   name: string,
   url: string,
-  from: string
+  from: string,
+  for?: string
 }
-const Images = ({images}: {images: images[]}) => {
+const Items = ({items, topic}: {items: items[], topic:string}) => {
   return (
     <div className="max-w-3xl mx-auto md:pb-16">
-      <h3 className="h3 mb-3 text-gray-400">Images</h3>
+      <h3 className="h3 mb-3 text-gray-400">{topic}</h3>
       <div>    
         <ul className="text-gray-200">
-          { images.map((item) => <li key={item.name}><a target="_blank" href={item.url}>{item.name} from {item.from}</a></li>) }
+          { 
+            items.map((item) => {
+              const name = (!!item.for) ? `${item.name} (${item.for})` : item.name
+              return <li key={item.name}><a target="_blank" href={item.url}>{name} from {item.from}</a></li>
+            }) 
+          }
         </ul>
       </div>
     </div>  
@@ -19,8 +25,8 @@ const Images = ({images}: {images: images[]}) => {
 }
 
 const Credits = () => {
-  const template = credits.template
-  const images = credits.images as images[]
+  const templates = credits.templates as items[]
+  const images = credits.images as items[]
   return ( 
     <section id="versions">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 text-gray-400">
@@ -33,15 +39,11 @@ const Credits = () => {
             <p className="text-xl text-gray-400">Following items have been and are used at Taxomageia. Thank you!</p>
           </div>
    
-          {/* Items */}
-          { <Images images={images} /> }
+          {/* Images */}
+          { <Items items={images} topic="Images" /> }
 
-          <div className="max-w-3xl mx-auto md:pb-16">
-            <h3 className="h3 mb-3 text-gray-400">Template</h3>
-            <div className="text-gray-200">
-              <a href={template.url}>{template.name} from {template.from}</a>
-            </div>
-          </div>
+          {/* Templates */}
+          { <Items items={templates} topic="Templates" /> }
 
           <div className="max-w-3xl mx-auto md:pb-16">
             <h3 className="h3 mb-3 text-gray-400">Other</h3>
@@ -57,14 +59,17 @@ const Credits = () => {
                 <li>Jest</li>
                 <li>Chromium</li>
                 <li>HTML, CSS</li>
-                <li>HTTP, SSH, DNS</li>
-                <li>Apache, PostgreSQL, Redis</li>
+		<li>PostgreSQL, MySQL</li>
+                <li>Apache, Redis</li>
                 <li>Visual Studio Code, Emacs</li>
                 <li>Rest, Design Patterns</li>
                 <li>Gimp</li>
+		<li>Wordpress, MyBB</li>
                 <li>Google, Facebook, ...</li>
                 <li>Chrome, Firefox</li>
                 <li>Asus, Intel, Samsung, ...</li>
+                <li>HTTP, SSH, DNS</li>
+		<li>TCP, IP</li>
                 <li>Internet</li>
                 <li><a href="https://en.wikipedia.org/wiki/Turing_machine" target="_top">Turing machine</a></li>
                 <li><a href="https://en.wikipedia.org/wiki/Plankalk%C3%BCl" target="_blank">Plankalkül</a></li>                

@@ -1,9 +1,20 @@
 {
-  "template": {
+  "templates": [{
+    "for": "Taxomageia",
     "url": "https://github.com/cruip/open-react-template",
     "name": "Open react template",
     "from": "Cruip"
-  },
+  },{
+    "for": "Forum",
+    "url": "https://community.mybb.com/mods.php?action=view&pid=196",
+    "name": "Revolution Gaming",
+    "from": "iAndrew"
+  },{
+    "for": "Blog",
+    "url": "https://wordpress.org/themes/twentytwentyfour/",
+    "name": "Twenty Twenty-Four",
+    "from": "the Wordpress team"
+  }],
   "images": [
     {
       "name": "Alien",
