@@ -22,7 +22,7 @@ const Diary = () => {
               <p>
                 Also, i am already thinking to add feature for notocord and vertebrae - they will be inherited from chordata and vertebrata and are 
                 profundus body parts in all creatures and monsters having either of those taxons in parent taxons. To make all this work easier, i also
-                will do some refactoring on the server side. This is great because i feel much better now than when i started.
+                will do some refactoring on the server side. This is great because <span className="text-green-400">I feel</span> much better now than when i started.
               </p>
             </div>
    
