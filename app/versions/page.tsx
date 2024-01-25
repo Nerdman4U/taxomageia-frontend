@@ -19,8 +19,8 @@ const Versions = () => {
 
   const show = ({visible, topic, toggleVisibility, id, versions}: {visible: boolean, topic: string, toggleVisibility: () => void, id: string, versions: VersionInfoType[]}) => {
     return (
-      <Toggleable visible={visible} topic={topic} toggleVisibility={toggleVisibility}>
-        <VersionsList id={id} versions={versions} />
+      <Toggleable visible={visible} id={id} topic={topic} toggleVisibility={toggleVisibility}>
+        <VersionsList versions={versions} />
       </Toggleable>
     )    
   }
@@ -34,10 +34,10 @@ const Versions = () => {
   )
 }
 
-const VersionsList = ({versions, id}: {versions: VersionInfoType[], id: string}) => {
+const VersionsList = ({versions}: {versions: VersionInfoType[]}) => {
   return (
-    <section id={id}>
-      <div className="max-w-3xl mx-auto px-4 sm:pb-6 text-gray-400">
+    <section>
+      <div className="max-w-3xl px-4 sm:pb-6 text-gray-400">
         <div className="md:py-2">   
           {/* Items */}
           { versions?.map((info) => <Version key={info.version} info={info} />) }    
