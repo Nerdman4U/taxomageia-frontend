@@ -23,7 +23,7 @@ Would you like to help?
 
 Are you familiar with <a href="https://nextjs.org/">NextJS</a> framework? If not, install and learn to use it. 
 
-If you know NextJS well, install Taxomageia Frontend, study and give feedback at forums (not yet open though XD). 
+If you know NextJS well, install Taxomageia Frontend, send pull requests and give feedback at <a href="forum.taxomageia.pro" target="_blank">forums</a>. 
 
 Some things to consider:
 - Open source template used at Taxomageia Frontend is using different folder structure than NextJS by default
