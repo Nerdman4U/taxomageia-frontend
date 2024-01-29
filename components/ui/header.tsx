@@ -15,7 +15,7 @@ export default function Header({server, client}: {server?: string, client?: stri
   // console.log('value:', value)
   // let serverVersionStr = ""
   // let clientStr = ""
-  // if (server) { serverVersionStr = `Server: v${server}` } 
+  // if (server) { serverVersionStr = `Server: v${server}` }
   // if (client) { clientStr = `Client: v${client}` }
   return (
     <header className="absolute w-full z-30">
@@ -31,9 +31,9 @@ export default function Header({server, client}: {server?: string, client?: stri
             </Link>
           </div>
           <div className="text-sm text-gray-600 ml-3">
-            <p className="mb-0 pb-0"><Link href={config.versions + "#server"} scroll={false} className='my-0 py-0 version-link'>{serverVersionStr}</Link></p>
-            <p className="mb-0 pb-0"><Link href={config.versions + "#client"} scroll={false} className='my-0 py-0 version-link'>{clientVersionStr}</Link></p>            
-            <p className="mb-0 pb-0"><Link href={config.versions + "#data"} scroll={false} className='my-0 py-0 version-link'>the First</Link></p>            
+            <p className="mb-0 pb-0"><a href={config.versions + "#server"} className='my-0 py-0 version-link'>{serverVersionStr}</a></p>
+            <p className="mb-0 pb-0"><a href={config.versions + "#client"} className='my-0 py-0 version-link'>{clientVersionStr}</a></p>
+            <p className="mb-0 pb-0"><a href={config.versions + "#data"} className='my-0 py-0 version-link'>the First</a></p>
           </div>
 
           {/* Desktop navigation */}
