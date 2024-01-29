@@ -7,7 +7,8 @@
     "build": "next build; rm -rf ../backend/out; cp -r out ../backend/out; rm -rf out",
     "start": "next",
     "lint": "next lint",
-    "commit": "cz"
+    "commit": "cz",
+    "test": "vitest"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -28,11 +29,16 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
+    "@testing-library/react": "^14.1.2",
     "@types/aos": "^3.0.7",
+    "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.16",
     "cz-conventional-changelog": "^3.3.0",
+    "jsdom": "^24.0.0",
     "postcss": "^8.4.32",
-    "tailwindcss": "^3.3.6"
+    "tailwindcss": "^3.3.6",
+    "vite-tsconfig-paths": "^4.3.1",
+    "vitest": "^1.2.2"
   },
   "config": {
     "commitizen": {
