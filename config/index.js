@@ -16,6 +16,8 @@ const contact = "/contact.html"
 const partner = "/partner.html"
 const diary = "/diary.html"
 
+const inner_creatures = "#creatures"
+
 export {
   api,
   api_complete,
@@ -33,5 +35,6 @@ export {
   email,
   contact,
   partner,
-  diary
+  diary,
+  inner_creatures
 }
