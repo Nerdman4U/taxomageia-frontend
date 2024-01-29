@@ -27,8 +27,7 @@ const Contribute = () => {
 
         <div className="max-w-3xl mx-auto md:pb-16">
           <h3 className="h3 mb-3 text-gray-400">Forum</h3>
-          <p>Share your ideas and suggestions on the forum (not yet open).
-            {/* <a href="https://forum.taxomageia.com">forum</a>. */}
+          <p>Share your ideas and suggestions on the <a href={config.forum}>forum</a>. 
           </p>
         </div>
 
