@@ -11,7 +11,16 @@ const Diary = () => {
             <h1 className="h2 mb-4">Diary</h1>
             <p className="text-xl text-gray-400">I will add "daily" developer notes here. Just for to share with you.</p>
           </div>
-   
+
+          <div className="max-w-3xl mx-auto md:pb-16">
+            <h3 className="h3 mb-3 text-gray-400">29.1.2024</h3>
+            <div>    
+              <p>
+                Added first unit tests. This means, every time user interface is updated tests are also ran and they must pass before new version can be deployed. Having good test coverage means better working programs!  
+              </p>
+            </div>  
+          </div>
+
           <div className="max-w-3xl mx-auto md:pb-16">
             <h3 className="h3 mb-3 text-gray-400">25.1.2024</h3>
             <div>    
@@ -24,9 +33,9 @@ const Diary = () => {
                 profundus body parts in all creatures and monsters having either of those taxons in parent taxons. To make all this work easier, i also
                 will do some refactoring on the server side. This is great because <span className="text-green-400">I feel</span> much better now than when i started.
               </p>
-            </div>
-   
+            </div>  
           </div>
+
         </div>
       </div>
     </section>
