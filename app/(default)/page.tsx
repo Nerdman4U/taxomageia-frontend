@@ -34,10 +34,8 @@ import taxon from '@/interfaces/taxon.interface'
   
     const handleSelectRankClick = (e: React.MouseEvent) => {
       e.preventDefault
-      const url = config.api + '/' + e.currentTarget.id
-      //console.log('fetching url:', url)
+      const url = config.api_complete + '/' + e.currentTarget.id
       axios.get(url).then((response) => {
-        //console.log('response.data', response.data)
         if (!response.data) return
         setSelectedTaxon(response.data as taxon)
         setClicked(true)

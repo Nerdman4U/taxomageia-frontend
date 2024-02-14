@@ -50,26 +50,26 @@ const Credits = () => {
             <p className="mb-6 text-gray-400">A lots of applications, protocols and libraries (many open source) have been and/or are being used at this project or has or have had huge importance on this field of expertice. Without their work this project would not be possible. Thank you. To list few:</p>
             <div>
               <ul className="text-gray-200">
-                <li>Linux (Ubuntu)</li>
-                <li>ECMAScript, Typescript</li>
-                <li>Node, TSNode</li>
+                <li>Linux, Ubuntu</li>
+                <li><a href="https://tc39.es/ecma262/" target="_blank">ECMAScript</a>, <a href="https://www.typescriptlang.org/" target="_blank">Typescript</a></li>
+                <li>Node, ts-node</li>
                 <li>NextJS</li>
-                <li>React</li>                
+                <li>React</li>
                 <li>Prisma</li>
-                <li>Jest</li>
-                <li>Chromium</li>
+                <li>Vitest, Jest, Supertest, Cypress</li>
+                <li><a href="https://codeium.com/" target="_blank">Codeium</a></li>
                 <li>HTML, CSS</li>
-		<li>PostgreSQL, MySQL</li>
+            		<li>PostgreSQL, MySQL</li>
                 <li>Apache, Redis</li>
                 <li>Visual Studio Code, Emacs</li>
                 <li>Rest, Design Patterns</li>
                 <li>Gimp</li>
-		<li>Wordpress, MyBB</li>
+            		<li>Wordpress, MyBB</li>
                 <li>Google, Facebook, ...</li>
                 <li>Chrome, Firefox</li>
                 <li>Asus, Intel, Samsung, ...</li>
                 <li>HTTP, SSH, DNS</li>
-		<li>TCP, IP</li>
+		            <li>IP, TCP</li>
                 <li>Internet</li>
                 <li><a href="https://en.wikipedia.org/wiki/Turing_machine" target="_top">Turing machine</a></li>
                 <li><a href="https://en.wikipedia.org/wiki/Plankalk%C3%BCl" target="_blank">Plankalkül</a></li>                
