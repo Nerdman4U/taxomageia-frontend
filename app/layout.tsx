@@ -39,7 +39,6 @@ export default function RootLayout({
         <div className="flex flex-col min-h-screen overflow-hidden">
           <ContextProvider>
             <Header />
-            {/* How to use ContextProvider at child nodes?  */}
             {children}
             <Banner />
             <Footer />
