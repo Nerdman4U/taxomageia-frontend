@@ -15,7 +15,7 @@ import Taxon from '@/components/taxon'
 import taxon from '@/interfaces/taxon.interface'
 
   const Home = () => {
-    const [ taxons, setTaxons] = useState<taxon[]>([])
+    const [ taxons, setTaxons ] = useState<taxon[]>([])
     const [ featured, setFeatured ] = useState<taxon[]>([])
     const [ selectedTaxon, setSelectedTaxon ] = useState<taxon | undefined>()
     const [ clicked, setClicked ] = useState(false)

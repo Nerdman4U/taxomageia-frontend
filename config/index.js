@@ -2,7 +2,11 @@ const email = "mailto:info@taxomageia.pro"
 const api_complete = "/api/1/taxomageias/first/taxons";
 const api = "/api/1/taxomageias/first/taxons_preview";
 const app = "/api/1/application"
+const metadata = "/api/1/taxomageias/metadata";
 const documentation = "/documentation.html"
+const studio = "/studio"
+const signin = "/signin"
+const signup = "/signup"
 const versions = "versions.html"
 const credits = "/credits.html"
 const contribute = "/contribute.html"
@@ -36,5 +40,9 @@ export {
   contact,
   partner,
   diary,
-  inner_creatures
+  inner_creatures,
+  studio,
+  signin,
+  signup,
+
 }

@@ -35,8 +35,8 @@ export default function Features({ranks}: {ranks: rank[]}) {
                 <path className="stroke-current text-purple-100" strokeWidth="2" strokeLinecap="square" d="M21 23h22v18H21z" fill="none" fillRule="evenodd" />
                 <path className="stroke-current text-purple-300" d="M26 28h12M26 32h12M26 36h5" strokeWidth="2" strokeLinecap="square" />
               </svg>
-              <h4 className="h4 mb-2">Create</h4>
-              <p className="text-lg text-gray-400 text-center">Create, customize and share your own Taxomageia <span className='text-red-400'>(Not yet available)</span>.</p>
+              <h4 className="h4 mb-2"><a href={config.studio}>Create</a></h4>
+              <p className="text-lg text-gray-400 text-center">Create, customize and share your own Taxomageia. Free. <a href={config.studio}>Start</a> now if you like. </p>
             </div>
 
             {/* 3rd item */}
