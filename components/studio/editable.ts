@@ -4,33 +4,45 @@ export interface editable {
   data: any
   metadata: []
   meta_name: string
-  items: []
+  attribute_metadata: []
+  getMetadata(): any
+  setMetadata(): void
 }
 
-class CoreModel {
+  /**
+   * 
+   * metadata:
+   * {
+   *   taxomageia: { name_fi: '', description_fi: '', attribute_metadata: {} },
+   *   taxon: { name_fi: '', ... },
+   *   existence: { ... }
+   * }
+   * 
+   * data:
+   * {
+   *   name_fi, name_en, ...
+   *   taxons: [{
+   *     ...
+   *   }]  
+   * }
+   */
+  class TaxomageiaModel {
   #data: any
   #metadata: any
-  constructor(metadata: any, data: any) {
+  constructor(data: any) {
     this.#data = data
-    this.#metadata = metadata
+    this.#metadata = {}
   }
   get data() { return this.#data }
   set data(value: any) { this.#data = value }
-  get metadata() { return this.#metadata || [] }
-  get meta_name() { 
-    return this.#metadata.name
-  }
-}
+  get metadata() { return this.#metadata }
+  set metadata(value: any) { this.#metadata = value }
 
-class TaxomageiaModel extends CoreModel implements editable {
-  constructor(data: any, metadata: any) {
-    super(data, metadata)
-  }
-  get items() {
-    return this.metadata.attribute_metadata
-  }
+  get meta_name() { return this.#metadata.name }
+  get meta_description() { return this.#metadata.description }
 
-
+  getMetadata(key: string) { return this.#metadata[key] }
+  setMetadata(key: string, value: any) { this.#metadata[key] = value }
 }
 
 export {

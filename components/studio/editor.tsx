@@ -1,18 +1,18 @@
 import { EditorModelWidget, EditorNumberItem, EditorTextItem } from "./editor.components";
 import { TaxomageiaModel, editable } from "./editable";
 
-const MakeItem = ({item, value, onChangeHandler}: {item: any, value: any, onChangeHandler: any}) => {
+const MakeItem = ({item, value, handleInputChange, handleNewClick}: {item: any, value: any, handleInputChange: any, handleNewClick: any}) => {
   let result;
 
   switch (item.type) {
     case 'string': 
-      result = <EditorTextItem item={item} value={value} onChangeHandler={onChangeHandler} />
+      result = <EditorTextItem item={item} value={value} handleInputChange={handleInputChange} />
       break;
     case 'number': 
       result = <EditorNumberItem item={item} />
       break;
     case 'widget.model':
-      result = <EditorModelWidget item={item} />
+      result = <EditorModelWidget item={item} value={value} handleNewClick={handleNewClick}/>
       break;
     default:
       result = <></>
@@ -20,19 +20,21 @@ const MakeItem = ({item, value, onChangeHandler}: {item: any, value: any, onChan
   return result
 }
 
-const Editor = ({model, onChangeHandler}: {model: editable, onChangeHandler: any}) => {
-  if (!model) return
-  if (!model.metadata) return
-  if (model.metadata.length === 0) return
+const Editor = ({model_name, handleInputChange, handleNewClick}: {model_name: string, handleInputChange: any, handleNewClick: any}) => {
+  const taxomageia = global.taxomageia
+  if (!taxomageia) return <></>
+  if (!taxomageia.getMetadata) return <></>
+  const metadata = taxomageia.getMetadata(model_name)
+  if (!metadata) return <></>
 
   return (
-    <table>
-      <caption className="text-center text-xl font-bold">{model.meta_name}</caption>
+    <table className='m-auto'>
+      <caption className="text-center text-xl font-bold">{metadata.name}</caption>
       <tbody>
-      { 
-        model.items.map((item: any) => {
-          const value = model.data[item.identifier]
-          return <MakeItem key={item.identifier} item={item} value={value} onChangeHandler={onChangeHandler} />
+      {         
+        metadata.attribute_metadata.map((item: any) => {
+          const value = taxomageia.data[item.identifier]
+          return <MakeItem key={item.identifier} item={item} value={value} handleInputChange={handleInputChange} handleNewClick={handleNewClick} />
         })
       }
       {/* <tr>

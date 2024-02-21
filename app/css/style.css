@@ -16,30 +16,17 @@
     }
 }
 
-a {
-  text-decoration: underline;
-}
-ol {
-  list-style-type: decimal;
-}
+a { text-decoration: underline; }
+ol { list-style-type: decimal; }
 
-.nav-link { 
-  color: inherit !important;
-}
-.nav-link.active {
-  color: rgb(33 40 44 / var(--tw-bg-opacity)) !important;
-}
-.version-link {
-  text-decoration: none;
-}
-.version-link:visited {
-  color: inherit;
-}
+
+.nav-link { color: inherit !important; }
+.nav-link.active { color: rgb(33 40 44 / var(--tw-bg-opacity)) !important; }
+.version-link { text-decoration: none; }
+.version-link:visited { color: inherit; }
 
 /* See Alpine.js: https://github.com/alpinejs/alpine#x-cloak */
-[x-cloak=""] {
-    display: none;
-}
+[x-cloak=""] { display: none; }
 
 .bg-purple-600 {
     --tw-bg-opacity: 1;
