@@ -1,17 +1,20 @@
 import { EditorModelWidget, EditorNumberItem, EditorTextItem } from "./editor.components";
 import { TaxomageiaModel, editable } from "./editable";
+import { useState, useEffect } from 'react'
+import * as types from "./editor.types"
 
 const MakeItem = ({item, value, handleInputChange, handleNewClick}: {item: any, value: any, handleInputChange: any, handleNewClick: any}) => {
   let result;
 
-  switch (item.type) {
+  console.log('item:', item.widget)
+  switch (item.widget) {
     case 'string': 
       result = <EditorTextItem item={item} value={value} handleInputChange={handleInputChange} />
       break;
     case 'number': 
       result = <EditorNumberItem item={item} />
       break;
-    case 'widget.model':
+    case 'model':
       result = <EditorModelWidget item={item} value={value} handleNewClick={handleNewClick}/>
       break;
     default:
@@ -20,32 +23,77 @@ const MakeItem = ({item, value, handleInputChange, handleNewClick}: {item: any, 
   return result
 }
 
-const Editor = ({model_name, handleInputChange, handleNewClick}: {model_name: string, handleInputChange: any, handleNewClick: any}) => {
-  const taxomageia = global.taxomageia
-  if (!taxomageia) return <></>
-  if (!taxomageia.getMetadata) return <></>
-  const metadata = taxomageia.getMetadata(model_name)
-  if (!metadata) return <></>
+const MakeItems = ({metadata, object, handleInputChange, handleNewClick}: {metadata: types.model_metadata, object: any, handleInputChange: any, handleNewClick: any}) => {
+  if (metadata && metadata.attribute_metadata) {
+    return (
+      <table className='m-auto'>
+        <caption className="text-center text-xl font-bold">{metadata.name}</caption>
+        <tbody>
+        {         
+          metadata?.attribute_metadata.map((item: any) => {
+            const value = object?.data[item.identifier]
+            return <MakeItem key={item.identifier} item={item} value={value} handleInputChange={handleInputChange} handleNewClick={handleNewClick} />
+          })
+        }
+        {/* <tr>
+          <td className="text-left pt-12">
+            <button className="btn btn-blue bg-purple-600 hover:text-white hover:bg-purple-700">Save</button>
+          </td>
+        </tr> */}
+        </tbody>
+      </table>
+    )   
+  }
+  else {
+    return <> </>
+  }
+}
+
+const TaxomageiaEditor = ({object, handleInputChange, handleNewClick}: {object: any, handleInputChange: any, handleNewClick: any}) => {
+  const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
+
+  useEffect(() => {
+    fetch("/api/1/taxomageias/metadata")
+      .then(response => { return response.json() })      
+      .then(metadata => {
+        setMetadata(metadata)
+        console.log('20 TaxomageiaEditor() fetch, metadata', metadata)
+      })
+      .catch(e => {
+        console.error(e)
+      })
+  }, [])
 
   return (
-    <table className='m-auto'>
-      <caption className="text-center text-xl font-bold">{metadata.name}</caption>
-      <tbody>
-      {         
-        metadata.attribute_metadata.map((item: any) => {
-          const value = taxomageia.data[item.identifier]
-          return <MakeItem key={item.identifier} item={item} value={value} handleInputChange={handleInputChange} handleNewClick={handleNewClick} />
-        })
-      }
-      {/* <tr>
-        <td className="text-left pt-12">
-          <button className="btn btn-blue bg-purple-600 hover:text-white hover:bg-purple-700">Save</button>
-        </td>
-      </tr> */}
-      </tbody>
-    </table>
+    <MakeItems metadata={metadata} object={object} handleInputChange={handleInputChange} handleNewClick={handleNewClick}/>
   )
 }
 
-export default Editor
+const TaxonEditor = ({object, handleInputChange, handleNewClick}: {object: any, handleInputChange: any, handleNewClick: any}) => {
+  const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
+
+  useEffect(() => {
+    fetch("/api/1/taxons/metadata")
+      .then(response => { return response.json() })      
+      .then(metadata => {
+        setMetadata(metadata)
+        console.log('20 TaxonEditor() fetch, metadata', metadata)
+      })
+      .catch(e => {
+        console.error(e)
+      })
+  }, [])
+
+  return (
+    <MakeItems metadata={metadata} object={object} handleInputChange={handleInputChange} handleNewClick={handleNewClick}/>
+  )
+}
+
+
+export {
+  TaxomageiaEditor,
+  TaxonEditor
+}
+
+
 

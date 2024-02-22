@@ -1,15 +1,22 @@
+import { isNullishCoalesce } from 'typescript'
 import * as types from './editor.types'
+import * as taxon from '@/interfaces/taxon.interface'
+import * as taxomageia from '@/interfaces/taxomageia.interface'
+import { random_number, random_identifier } from '@/utils/functions'
 
 export interface editable {
   data: any
-  metadata: []
-  meta_name: string
-  attribute_metadata: []
-  getMetadata(): any
-  setMetadata(): void
+  addAssociated(association:string, data:any): void
+  updateAssociations(): void
 }
 
   /**
+   * TaxomageiaModel
+   * 
+   * Has full data as json. Associated models are intantiated from this data.
+   * 
+   * Every model has its own metadata.
+   * 
    * 
    * metadata:
    * {
@@ -26,26 +33,103 @@ export interface editable {
    *   }]  
    * }
    */
-  class TaxomageiaModel {
+abstract class CoreModel implements editable {
   #data: any
-  #metadata: any
+  static _metadata: any = {}
   constructor(data: any) {
-    this.#data = data
-    this.#metadata = {}
+    this.#data = data    
   }
+  abstract updateAssociations(): void
+  get identifier() { 
+    if (this.data.identifier) return this.data.identifier
+    this.data.identifier = random_identifier(this.className)
+    return this.data.identifier
+  }
+  get created_at() { return this.data.created_at }
+  get updated_at() { return this.data.updated_at }
   get data() { return this.#data }
   set data(value: any) { this.#data = value }
-  get metadata() { return this.#metadata }
-  set metadata(value: any) { this.#metadata = value }
+  get name_fi() { return this.data.name_fi }
+  get name_en() { return this.data.name_en }
+  get className() { return this.constructor.name }
+  get model(): any { return this.constructor } 
+  get model_metadata() { return this.model.metadata }
+  get attribute_metadata() { return this.model_metadata.attribute_metadata }
+  addAssociated(association: string, data: any) {
+    if (!this.verifyAssociation(association)) throw new Error(`association ${association} not defined`)
+    if (!this.data[association]) this.data[association] = []
+    this.data[association].push(data)
+    this.updateAssociations()
+  }
+  verifyAssociation(association: string) {
+    return this.attribute_metadata.find((a: any) => { 
+      return a.type === 'association' && a.identifier === association
+    })
+  }
 
-  get meta_name() { return this.#metadata.name }
-  get meta_description() { return this.#metadata.description }
+  static get className() { return this.name }
+  static get metadata() { return this._metadata }
+  static set metadata(value: any) { this._metadata = value }
 
-  getMetadata(key: string) { return this.#metadata[key] }
-  setMetadata(key: string, value: any) { this.#metadata[key] = value }
+  static new (data: any) { 
+    const constructor: any = this.prototype.constructor
+    const obj = new constructor(data)
+    obj.identifier
+    obj.updateAssociations()
+    return obj
+  }
+
+    /**
+     * const obj = taxomageia.find([
+     *   {association:'taxons', id:'TaxonModel_123123123'},
+     *   {association:'existences', id:'ExistenceModel_123123123'},
+     * ])
+     *  */ 
+  find(path: any[] = []) {
+    if (!path) return null
+    const path_item = path.shift()
+    if (!path_item) return null
+    if (!path_item.association) return null
+    const objs = this[path_item.association as keyof this] as any[]
+    if (!objs) return null
+    const obj = objs.find((o: any) => o.id === path_item.id)
+    if (!obj) return null
+    if (path.length === 0) return obj
+    return obj.find(path)
+  }
+}
+
+class TaxomageiaModel extends CoreModel {
+  #taxons: TaxonModel[]
+  constructor(data: taxomageia.building_up) {
+    super(data)
+    this.#taxons = []
+  }
+  get taxons() { return this.#taxons }
+  set taxons(value: TaxonModel[]) { this.#taxons = value }
+  get taxons_json() { return this.data.taxons || [] }
+  updateAssociations() {
+    if (!this.taxons_json) return
+    if (this.taxons_json.length === 0) return
+    const taxons = this.taxons_json.map((t:any) => {
+      const exists = this.taxons.find(ex => ex.identifier === t.identifier)
+      if (exists) return exists
+      return TaxonModel.new(t)
+    })
+    this.taxons = taxons
+  }
+}
+class TaxonModel extends CoreModel {
+  constructor(data: taxon.building_up) {
+    super(data)
+  }
+  updateAssociations() {
+
+  }
 }
 
 export {
-  TaxomageiaModel
+  TaxomageiaModel,
+  TaxonModel
 }
 

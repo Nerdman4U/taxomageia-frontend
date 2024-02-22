@@ -1,17 +1,26 @@
 import metamorphosisChain from './metamorphosis_chain.interface.js';
 
-type taxon = {
-  id?: number;
+interface saved extends about_to_save {
+  id: number;
+  identifier: string;
+}
+interface about_to_save extends building_up {
   identifier: string;
   name_fi: string;
   name_en: string;
   taxon_rank: string;
+}
+type building_up = {
+  id?: number;
+  identifier?: string;
+  name_fi?: string;
+  name_en?: string;
+  taxon_rank?: string;
   taxon_parent?: string;
   description_fi?: string;
   description_en?: string;
   urls?: string[];
   parent_id?: number;
-  categories?: taxon[];
   existences?: metamorphosisChain[];
   created_at?: Date;
   updated_at?: Date;
@@ -23,5 +32,9 @@ type taxon = {
 
 type powerlist = { properties: string[], abilities: any }
 
-export default taxon
-
+export type {
+  saved,
+  about_to_save,
+  building_up,
+  powerlist
+}

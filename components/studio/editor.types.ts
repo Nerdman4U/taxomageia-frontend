@@ -1,11 +1,22 @@
+import * as taxomageia from '@/interfaces/taxomageia.interface.js'
+import * as taxon from '@/interfaces/taxon.interface.js'
 
-type taxomageia = {
+type breadcrumb = {
   name: string
-  description: string
+  model: any
+  object_id?: string
+  association?: string
+}
+
+type model_metadata = {
+  identifier: string
+  name: string
   attribute_metadata: any
 }
 
-
 export type {
-  taxomageia
+  breadcrumb,
+  model_metadata
 }
+
+
