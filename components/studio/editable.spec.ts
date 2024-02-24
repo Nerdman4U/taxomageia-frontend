@@ -129,7 +129,7 @@ describe('Editable', () => {
   it('finds objects', () => {
     expect(obj.taxons.length).toBe(1)
     const id = obj.taxons[0].identifier
-    expect(obj.find()).toBeNull()
+    expect(obj.find()).toEqual(obj)
     expect(obj.find([{association:'taxons', identifier:id}])).toBeDefined()
     obj.addAssociated('taxons', { identifier: 'TaxonModel_123456' })
     expect(obj.find([{association:'taxons', identifier:id}])).toBeDefined()

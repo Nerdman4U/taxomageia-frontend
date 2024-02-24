@@ -6,7 +6,6 @@ import * as types from "./editor.types"
 const MakeItem = ({item, value, handleInputChange, handleNewClick}: {item: any, value: any, handleInputChange: any, handleNewClick: any}) => {
   let result;
 
-  console.log('item:', item.widget)
   switch (item.widget) {
     case 'string': 
       result = <EditorTextItem item={item} value={value} handleInputChange={handleInputChange} />

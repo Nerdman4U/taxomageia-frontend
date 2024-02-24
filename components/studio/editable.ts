@@ -55,12 +55,14 @@ abstract class CoreModel implements editable {
   get model(): any { return this.constructor } 
   get model_metadata() { return this.model.metadata }
   get attribute_metadata() { return this.model_metadata.attribute_metadata }
+ 
   addAssociated(association: string, data: any) {
     if (!this.verifyAssociation(association)) throw new Error(`association ${association} not defined`)
     if (!this.data[association]) this.data[association] = []
     this.data[association].push(data)
     this.updateAssociations()
   }
+ 
   verifyAssociation(association: string) {
     return this.attribute_metadata.find((a: any) => { 
       return a.type === 'association' && a.identifier === association
@@ -86,9 +88,9 @@ abstract class CoreModel implements editable {
      * ])
      *  */ 
   find(path: any[] = []) {
-    if (!path) return null
+    if (!path) return this
     const path_item = path.shift()
-    if (!path_item) return null
+    if (!path_item) return this
     if (!path_item.association) return null
     const objs = this[path_item.association as keyof this] as any[]
     if (!objs) return null

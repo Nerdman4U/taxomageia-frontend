@@ -28,11 +28,12 @@ function Studio() {
     const from_storage = JSON.parse(localStorage.getItem(studio_config.LOCALSTORAGE_KEY) || '{}');
     console.log('Studio() from_storage:', from_storage)
     const ta: TaxomageiaModel = TaxomageiaModel.new(from_storage);
+    setTaxomageia(ta);
     (global as any).taxomageia = ta
   }, [])
 
   const handleNewClick = (e: React.MouseEvent) => {
-    e.preventDefault
+    e.preventDefault()
     console.log('addNewHandler()', e.target, 'taxomageia:', taxomageia)
     /**
      * - add new model to current data
@@ -40,7 +41,10 @@ function Studio() {
      *   - it will be edited next
      * 
      */
-    setBreadcrumbs([...breadcrumbs, {name: "Taxon", model: TaxonModel}])
+    console.log('Studio.addNewHandler() breadcrumbs:', breadcrumbs.length)
+    const temp = breadcrumbs.concat({name: "Taxon", model: TaxonModel})
+    console.log('Studio.addNewHandler() temp:', temp[0])
+    setBreadcrumbs(temp)
   }
 
   const handleBreadcrumbClick = (e: React.MouseEvent) => {
@@ -48,7 +52,7 @@ function Studio() {
     console.log('handleBreadcrumbClick()', e.target)
   }
 
-  console.log('breadcrumbs:', breadcrumbs)
+  console.log('Studio() breadcrumbs:', breadcrumbs.length)
 
   return (
     <section id="features">
@@ -57,7 +61,7 @@ function Studio() {
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h2 className="h2 mb-4">Create</h2>
-            <p>Welcome to create your own Taxomageia! Data is saved to your account when you log in.</p>
+            <p>Welcome to create your own Taxomageia! <i>You are now anonymous. Remember to login to save your work!</i></p>
             <Breadcrumbs breadcrumbs={breadcrumbs} handleClick={handleBreadcrumbClick}/>
             <div className="text-sm text-gray-400 shadow-md p-10">
               <EditorContainer breadcrumbs={breadcrumbs} taxomageia={taxomageia} handleNewClick={handleNewClick} handleBreadcrumbClick={handleBreadcrumbClick} />

@@ -31,9 +31,10 @@ const EditorContainer = ({
   handleBreadcrumbClick: any
 }) => {
   const [fetchDone, setFetchDone] = useState(false)
+
   let model = TaxomageiaModel
   if (breadcrumbs && breadcrumbs.length > 0) model = breadcrumbs[breadcrumbs.length - 1].model
-  console.log('10 EditorContainer() model:', model)
+  console.log('10 EditorContainer()')
   console.log('12 EditorContainer() breadcrumbs:', breadcrumbs)
   console.log('14 EditorContainer() taxomageia:', taxomageia)
   let url_name = "taxomageias"
@@ -43,12 +44,15 @@ const EditorContainer = ({
       break
   }
 
+  
   const handleChange = (e: React.ChangeEvent) => {
     e.preventDefault
     const targetElement = e.target as HTMLInputElement
     let obj = taxomageia.find(breadcrumbs)
+    console.log('40 EditorContainer.handleChange() obj:', obj, 'e.target:', e.target, 'breadcrumbs:', breadcrumbs, 'taxomageia:', taxomageia)
     if (!obj) obj = taxomageia
     obj.data[targetElement.name] = targetElement.value
+    console.log('42 EditorContainer.handleChange() obj.data:', obj.data)
 
     const elem = e.target.parentElement
     if (elem) elem.className = 'text-sm text-black'
