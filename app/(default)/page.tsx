@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import * as config from '../../config'
+import * as config from '../../lib/config'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,12 +12,12 @@ import Zigzag from '@/components/zigzag'
 import Testimonials from '@/components/testimonials'
 import Taxon from '@/components/taxon'
 
-import taxon from '@/interfaces/taxon.interface'
+import * as taxon from '@/lib/interfaces/taxon.interface'
 
   const Home = () => {
-    const [ taxons, setTaxons ] = useState<taxon[]>([])
-    const [ featured, setFeatured ] = useState<taxon[]>([])
-    const [ selectedTaxon, setSelectedTaxon ] = useState<taxon | undefined>()
+    const [ taxons, setTaxons ] = useState<taxon.saved[]>([])
+    const [ featured, setFeatured ] = useState<taxon.saved[]>([])
+    const [ selectedTaxon, setSelectedTaxon ] = useState<taxon.saved | undefined>()
     const [ clicked, setClicked ] = useState(false)
   
     useEffect(() => {
@@ -25,8 +25,8 @@ import taxon from '@/interfaces/taxon.interface'
         //console.log(`connected to server at ${taxonsUrl}`, response.data)
         const result = response.data || []
         const featIds = ['fire_elemental', 'black_dragon', 'vampire']
-        const filteredFeatured = result.filter((r:taxon) => featIds.find(id => id === r.identifier))
-        const filteredTaxons = result.filter((r:taxon) => featIds.find(id => id !== r.identifier))
+        const filteredFeatured = result.filter((r:taxon.saved) => featIds.find(id => id === r.identifier))
+        const filteredTaxons = result.filter((r:taxon.saved) => featIds.find(id => id !== r.identifier))
         setFeatured(filteredFeatured)
         setTaxons(filteredTaxons)
       })
@@ -37,7 +37,7 @@ import taxon from '@/interfaces/taxon.interface'
       const url = config.api_complete + '/' + e.currentTarget.id
       axios.get(url).then((response) => {
         if (!response.data) return
-        setSelectedTaxon(response.data as taxon)
+        setSelectedTaxon(response.data as taxon.saved)
         setClicked(true)
       })  
     }

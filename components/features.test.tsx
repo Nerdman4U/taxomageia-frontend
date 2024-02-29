@@ -1,9 +1,9 @@
 import { describe } from "node:test";
 import { expect, test } from "vitest";
 import { render, screen } from '@testing-library/react'
-import * as config from '@/config'
+import * as config from '@/lib/config'
 import Features from "./features";
-import rank from '@/interfaces/taxon.interface'
+import rank from '@/lib/interfaces/taxon.interface'
 
 describe("Features", () => {
   

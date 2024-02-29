@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 
 import TaxonPreviewListItem from '@/components/taxon-preview-list-item';
 
-import body from '@/interfaces/body.interface.js';
-import bodySegment from '@/interfaces/body_segment.interface.js';
-import bodyPart from '@/interfaces/body_part.interface.js';
-import attribute from '@/interfaces/attribute.interface.js';
-import metamorphosis from '@/interfaces/metamorphosis.interface.js';
-import metamorphosisChain from '@/interfaces/metamorphosis_chain.interface.js';
-import taxon from '../interfaces/taxon.interface.js';
+import body from '@/lib/interfaces/body.interface.js';
+import bodySegment from '@/lib/interfaces/body_segment.interface.js';
+import bodyPart from '@/lib/interfaces/body_part.interface.js';
+import attribute from '@/lib/interfaces/attribute.interface.js';
+import metamorphosis from '@/lib/interfaces/metamorphosis.interface.js';
+import metamorphosisChain from '@/lib/interfaces/metamorphosis_chain.interface.js';
+import taxon from '../lib/interfaces/taxon.interface.js';
 
 import { useRef, useEffect } from 'react';
 

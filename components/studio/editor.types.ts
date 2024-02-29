@@ -1,5 +1,5 @@
-import * as taxomageia from '@/interfaces/taxomageia.interface.js'
-import * as taxon from '@/interfaces/taxon.interface.js'
+import * as taxomageia from '@/lib/interfaces/taxomageia.interface.js'
+import * as taxon from '@/lib/interfaces/taxon.interface.js'
 
 type breadcrumb = {
   name: string

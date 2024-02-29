@@ -1,8 +1,8 @@
 import { isNullishCoalesce } from 'typescript'
 import * as types from './editor.types'
-import * as taxon from '@/interfaces/taxon.interface'
-import * as taxomageia from '@/interfaces/taxomageia.interface'
-import { random_number, random_identifier } from '@/utils/functions'
+import * as taxon from '@/lib/interfaces/taxon.interface'
+import * as taxomageia from '@/lib/interfaces/taxomageia.interface'
+import { random_number, random_identifier } from '@/lib/utils/functions'
 
 export interface editable {
   data: any

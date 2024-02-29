@@ -2,6 +2,7 @@ import { EditorModelWidget, EditorNumberItem, EditorTextItem } from "./editor.co
 import { TaxomageiaModel, editable } from "./editable";
 import { useState, useEffect } from 'react'
 import * as types from "./editor.types"
+import * as metadata from '@/lib/config/metadata'
 
 const MakeItem = ({item, value, handleInputChange, handleNewClick}: {item: any, value: any, handleInputChange: any, handleNewClick: any}) => {
   let result;
@@ -49,45 +50,42 @@ const MakeItems = ({metadata, object, handleInputChange, handleNewClick}: {metad
 }
 
 const TaxomageiaEditor = ({object, handleInputChange, handleNewClick}: {object: any, handleInputChange: any, handleNewClick: any}) => {
-  const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
-
-  useEffect(() => {
-    fetch("/api/1/taxomageias/metadata")
-      .then(response => { return response.json() })      
-      .then(metadata => {
-        setMetadata(metadata)
-        console.log('20 TaxomageiaEditor() fetch, metadata', metadata)
-      })
-      .catch(e => {
-        console.error(e)
-      })
-  }, [])
+  // const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
+  // useEffect(() => {
+  //   fetch("/api/1/taxomageias/metadata")
+  //     .then(response => { return response.json() })      
+  //     .then(metadata => {
+  //       setMetadata(metadata)
+  //       console.log('20 TaxomageiaEditor() fetch, metadata', metadata)
+  //     })
+  //     .catch(e => {
+  //       console.error(e)
+  //     })
+  // }, [])
 
   return (
-    <MakeItems metadata={metadata} object={object} handleInputChange={handleInputChange} handleNewClick={handleNewClick}/>
+    <MakeItems metadata={metadata.taxomageia} object={object} handleInputChange={handleInputChange} handleNewClick={handleNewClick}/>
   )
 }
 
 const TaxonEditor = ({object, handleInputChange, handleNewClick}: {object: any, handleInputChange: any, handleNewClick: any}) => {
-  const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
-
-  useEffect(() => {
-    fetch("/api/1/taxons/metadata")
-      .then(response => { return response.json() })      
-      .then(metadata => {
-        setMetadata(metadata)
-        console.log('20 TaxonEditor() fetch, metadata', metadata)
-      })
-      .catch(e => {
-        console.error(e)
-      })
-  }, [])
+  // const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
+  // useEffect(() => {
+  //   fetch("/api/1/taxons/metadata")
+  //     .then(response => { return response.json() })      
+  //     .then(metadata => {
+  //       setMetadata(metadata)
+  //       console.log('20 TaxonEditor() fetch, metadata', metadata)
+  //     })
+  //     .catch(e => {
+  //       console.error(e)
+  //     })
+  // }, [])
 
   return (
-    <MakeItems metadata={metadata} object={object} handleInputChange={handleInputChange} handleNewClick={handleNewClick}/>
+    <MakeItems metadata={metadata.taxon} object={object} handleInputChange={handleInputChange} handleNewClick={handleNewClick}/>
   )
 }
-
 
 export {
   TaxomageiaEditor,

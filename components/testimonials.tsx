@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import sanitize from "string-sanitizer"
 
-import taxon from '../interfaces/taxon.interface'
+import taxon from '../lib/interfaces/taxon.interface'
 
 import fire_elemental from '@/public/images/fire_elemental-feature.png'
 import black_dragon from '@/public/images/black_dragon-feature.png'

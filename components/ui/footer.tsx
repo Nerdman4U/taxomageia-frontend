@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import * as config from '@/config'
+import * as config from '@/lib/config'
 
 export default function Footer() {
   return (

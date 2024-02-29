@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import * as config from '@/config'
+import * as config from '@/lib/config'
 
 const Partner = () => {
   return (

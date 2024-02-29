@@ -2,7 +2,7 @@ import Link from 'next/link'
 import MobileMenu from './mobile-menu'
 import { useContext } from 'react'
 import AppContext from '@/app/context/application.context'
-import * as config from '@/config'
+import * as config from '@/lib/config'
 
 export default function Header({server, client}: {server?: string, client?: string}) {
   const value = useContext(AppContext)

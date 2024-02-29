@@ -4,7 +4,7 @@ import React from 'react';
 import { createContext, useEffect, useState  } from 'react';
 import pkg from '../../package.json' assert { type: "json" }
 import axios from 'axios'
-import * as config from '@/config'
+import * as config from '@/lib/config'
 
 export type VersionInfoType = {
   version?: string

@@ -1,5 +1,5 @@
-import rank from '../interfaces/taxon.interface'
-import * as config from '../config'
+import rank from '../lib/interfaces/taxon.interface'
+import * as config from '../lib/config'
 
 export default function Features({ranks}: {ranks: rank[]}) {
   const amount = ranks?.length || ""

@@ -1,6 +1,6 @@
 import { beforeEach, expect, describe, it } from 'vitest'
 import { TaxomageiaModel, TaxonModel } from './editable.js'
-import { building_up } from '@/interfaces/taxomageia.interface.js'
+import { building_up } from '@/lib/interfaces/taxomageia.interface.js'
 
 describe('Editable', () => {
 

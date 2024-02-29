@@ -5,7 +5,7 @@ import TaxonPreviewListItem from '@/components/taxon-preview-list-item'
 import penguin from '@/public/images/penguin-388-576.png'
 import orc from '@/public/images/orc-01.png'
 
-import rank from '../interfaces/taxon.interface'
+import rank from '../lib/interfaces/taxon.interface'
 
 import { useRef, useEffect } from 'react'
 

@@ -1,7 +1,7 @@
 import { describe } from "node:test";
 import { expect, test } from "vitest";
 import { render, screen } from '@testing-library/react'
-import * as config from '@/config'
+import * as config from '@/lib/config'
 import Newsletter from "./newsletter";
 
 

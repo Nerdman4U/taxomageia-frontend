@@ -1,4 +1,4 @@
-import * as config from '@/config'
+import * as config from '@/lib/config'
 export default function Newsletter() {
   return (
     <section>

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import * as config from '@/config'
+import * as config from '@/lib/config'
 import Joni01 from '@/public/images/joni-taxomageia-sininen-paita-1200-900.jpg'
 
 const Contact = () => {

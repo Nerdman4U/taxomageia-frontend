@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import TaxonParentItem from './taxon-parent-item'
 
-import rank from '../interfaces/taxon.interface'
-import metamorphosis from '@/interfaces/metamorphosis.interface'
+import rank from '../lib/interfaces/taxon.interface'
+import metamorphosis from '@/lib/interfaces/metamorphosis.interface'
 
 import FeatImage01 from '@/public/images/features-03-image-01.png'
 

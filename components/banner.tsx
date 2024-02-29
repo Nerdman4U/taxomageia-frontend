@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import * as config from '@/config'
+import * as config from '@/lib/config'
 
 export default function Banner() {
   const [bannerOpen, setBannerOpen] = useState<boolean>(true)

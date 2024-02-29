@@ -4,7 +4,7 @@ import ModalVideo from '@/components/modal-video'
 
 import logo from '@/public/images/dragon-130-130.png'
 
-import * as config from '@/config'
+import * as config from '@/lib/config'
 // import localFont from 'next/font/local'
 // const myFont = localFont({ src: '@/public/fonts/sunday/sunday.woff' })
 
