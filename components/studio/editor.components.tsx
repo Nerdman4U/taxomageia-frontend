@@ -13,19 +13,28 @@ const EditorNumberItem = ({item}: {item: any}) => {
     <td className='text-left pr-3'>{item.name}</td><td><input type="text" defaultValue={item?.name} /></td>
   </tr>)
 }
-const EditorModelWidget = ({item, value, handleNewClick}: {item: any, value: any, handleNewClick: any}) => {
+
+/**
+ * 
+ * @param item metadata
+ * @param value object
+ * @returns 
+ */
+const EditorHasManyWidget = ({item, value, handleNewClick}: {item: any, value: any, handleNewClick: any}) => {
+  console.log('EditorModelWidget() value:', value, 'item:', item)
   const dispatch = useDispatch()
   const taxomageia_data = useSelector((state: TState) => state.taxomageia)
   const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
 
   // TODO: find correct object using breadcrumbs
 
-  if (!item.editable) return
-  console.log('EditorModelWidget()', value)
+  if (!item.editable) return <></>
   return (<tr>
     <td className='text-left pr-3 align-top'>{item.name}</td>
     <td>
-      <table className="w-full">
+      {(value) ? value.map((v: any) => <div key={v.identifier}>{v.identifier}</div>) : <></>}
+
+      {/* <table className="w-full">
         <tbody>
           <tr>
             <td className="text-left">Name</td>
@@ -34,7 +43,7 @@ const EditorModelWidget = ({item, value, handleNewClick}: {item: any, value: any
             <td className="text-left">Taxon 1</td>
           </tr>
         </tbody>
-      </table>
+      </table> */}
       <div><a role="button" onClick={handleNewClick}>Add new</a></div>
     </td>
   </tr>)
@@ -43,5 +52,5 @@ const EditorModelWidget = ({item, value, handleNewClick}: {item: any, value: any
 export {
   EditorTextItem,
   EditorNumberItem,
-  EditorModelWidget
+  EditorHasManyWidget
 }

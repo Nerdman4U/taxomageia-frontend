@@ -5,7 +5,7 @@ import { setTaxomageia } from '@/lib/features/studio/editor/taxomageiaReducer'
 import taxomageiaReducer from '@/lib/features/studio/editor/taxomageiaReducer'
 import { random_number, random_identifier } from '@/lib/utils/functions'
 
-import { EditorModelWidget, EditorNumberItem, EditorTextItem } from "./editor.components";
+import { EditorHasManyWidget, EditorNumberItem, EditorTextItem } from "./editor.components";
 import { TaxomageiaModel, editable } from "./editable";
 import { useState, useEffect } from 'react'
 import * as types from "./editor.types"
@@ -23,7 +23,7 @@ const MakeItem = ({item, value, handleInputChange, handleNewClick}: {item: any, 
       result = <EditorNumberItem item={item} />
       break;
     case 'model':
-      result = <EditorModelWidget item={item} value={value} handleNewClick={handleNewClick}/>
+      result = <EditorHasManyWidget item={item} value={value} handleNewClick={handleNewClick}/>
       break;
     default:
       result = <></>
