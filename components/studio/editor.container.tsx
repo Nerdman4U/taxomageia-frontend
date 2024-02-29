@@ -25,7 +25,7 @@ import * as studio_config from "@/components/studio/studio.config"
  */
 const EditorContainer = () => {
   const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
-  const taxomageia = useSelector((state: TState) => state.taxomageia)
+  const taxomageia_data = useSelector((state: TState) => state.taxomageia)
 
   let model = TaxomageiaModel as any
   if (breadcrumbs && breadcrumbs.length > 0) {
@@ -41,7 +41,7 @@ const EditorContainer = () => {
   }
   console.log('10 EditorContainer()')
   console.log('12 EditorContainer() breadcrumbs:', breadcrumbs)
-  console.log('14 EditorContainer() taxomageia:', taxomageia)
+  console.log('14 EditorContainer() taxomageia_data:', taxomageia_data)
   let url_name = "taxomageias"
   switch (model) {
     case TaxonModel:
@@ -51,13 +51,17 @@ const EditorContainer = () => {
   
   const handleChange = (e: React.ChangeEvent) => {
     e.preventDefault
-    // const targetElement = e.target as HTMLInputElement
+    const targetElement = e.target as HTMLInputElement
+    console.log('handleChange() targetElement:', targetElement, taxomageia_data)
+    // next: find correct model from taxomageia object using breadcrumbs.
+
+    // old:
+    // const taxomageia = TaxomageiaModel.new(taxomageia_data)
     // let obj = taxomageia.find(breadcrumbs)
     // console.log('40 EditorContainer.handleChange() obj:', obj, 'e.target:', e.target, 'breadcrumbs:', breadcrumbs, 'taxomageia:', taxomageia)
     // if (!obj) obj = taxomageia
     // obj.data[targetElement.name] = targetElement.value
     // console.log('42 EditorContainer.handleChange() obj.data:', obj.data)
-
     // const elem = e.target.parentElement
     // if (elem) elem.className = 'text-sm text-black'
     // window.localStorage.setItem(studio_config.LOCALSTORAGE_KEY, JSON.stringify(taxomageia.data))

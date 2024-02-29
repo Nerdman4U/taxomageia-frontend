@@ -1,5 +1,6 @@
 import { isNullishCoalesce } from 'typescript'
 import * as types from './editor.types'
+import { breadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumb.type'
 import * as taxon from '@/lib/interfaces/taxon.interface'
 import * as taxomageia from '@/lib/interfaces/taxomageia.interface'
 import { random_number, random_identifier } from '@/lib/utils/functions'
@@ -41,8 +42,8 @@ abstract class CoreModel implements editable {
   }
   abstract updateAssociations(): void
   get identifier() { 
-    if (this.data.identifier) return this.data.identifier
-    this.data.identifier = random_identifier(this.className)
+    // if (this.data.identifier) return this.data.identifier
+    // this.data.identifier = random_identifier(this.className)
     return this.data.identifier
   }
   get created_at() { return this.data.created_at }
@@ -87,14 +88,14 @@ abstract class CoreModel implements editable {
      *   {association:'existences', id:'ExistenceModel_123123123'},
      * ])
      *  */ 
-  find(path: any[] = []) {
+  find(path: breadcrumb[] = []) {
     if (!path) return this
-    const path_item = path.shift()
+    const path_item = path.splice(path.length - 1, 1)[0]
     if (!path_item) return this
     if (!path_item.association) return null
     const objs = this[path_item.association as keyof this] as any[]
     if (!objs) return null
-    const obj = objs.find((o: any) => o.id === path_item.id)
+    const obj = objs.find((o: any) => o.identifier === path_item.identifier)
     if (!obj) return null
     if (path.length === 0) return obj
     return obj.find(path)

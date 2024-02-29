@@ -1,21 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { TState } from '@/lib/store'
 import * as taxomageia from '@/lib/interfaces/taxomageia.interface'
+import { random_number, random_identifier } from '@/lib/utils/functions'
 
 const initialState = {
-  taxomageia: {}
-}
+  identifier: random_identifier("Taxomageia")  
+} as taxomageia.building_up
 
-const editorSlice = createSlice({
+const taxomageiaSlice = createSlice({
   name: "taxomageia",
   initialState,
   reducers: {
-    set(state, action) {
-      state.taxomageia = action.payload
+    setTaxomageia(state, action) {
+      state = { ...state, ...action.payload }
+      console.log('taxomageiaReducer.set() state:', state)
+      return state
     }
   }
 })
 
-export default editorSlice.reducer
-export const { set } = editorSlice.actions
+export default taxomageiaSlice.reducer
+export const { setTaxomageia } = taxomageiaSlice.actions
 

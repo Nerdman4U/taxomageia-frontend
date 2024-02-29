@@ -1,11 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { breadcrumb } from "./breadcrumb.type"
 
-const initialState = [{
-  name: "Taxomageia",
-  object_id: null,
-  association: null
-}] as breadcrumb[]
+const initialState = [] as breadcrumb[]
 
 const breadcrumbSlice = createSlice({
   name: "breadcrumbs",

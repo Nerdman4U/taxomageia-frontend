@@ -1,5 +1,5 @@
 export type breadcrumb = {
   name: string
-  object_id?: string | null
+  identifier?: string | null
   association?: string | null
 }

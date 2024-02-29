@@ -35,8 +35,18 @@ function Studio() {
   //   setTaxomageia(ta);
   //   (global as any).taxomageia = ta
   // }, [])
+  const taxomageia_data = useSelector((state: TState) => state.taxomageia)
   const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
   console.log('Studio() breadcrumbs:', breadcrumbs)
+
+  // Double taxomageia breadcrumb when refreshing whole page.
+  let allow = true
+  useEffect(() => {    
+    if (allow && breadcrumbs.length === 0) {
+      allow = false
+      dispatch(createBreadcrumb({name: "Taxomageia", identifier: taxomageia_data.identifier}))
+    }
+  }, [breadcrumbs])
 
   return (
     <section id="features">
@@ -45,7 +55,7 @@ function Studio() {
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h2 className="h2 mb-4">Create</h2>
-            <p>Welcome to create your own Taxomageia! <i>You are now anonymous. Remember to login to save your work!</i></p>
+            <p>Welcome to create your own Taxomageia! <i>Remember to login to save your work!</i></p>
             <Breadcrumbs/>
             <div className="text-sm text-gray-400 shadow-md p-10">
               <EditorContainer/>

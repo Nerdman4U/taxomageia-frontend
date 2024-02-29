@@ -9,11 +9,7 @@ interface saved {
   taxons: taxon.saved[];
 }
 
-interface about_to_save {
-  id?: number;
-  identifier: string;
-  created_at: Date;
-  updated_at: Date;
+interface about_to_save extends building_up {
   taxons?: taxon.about_to_save[];
 }
 

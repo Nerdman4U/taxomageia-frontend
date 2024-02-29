@@ -1,3 +1,6 @@
+import { useSelector, useDispatch } from 'react-redux'
+import { TState } from '@/lib/store'
+
 const EditorTextItem = ({item, value, handleInputChange}: {item: any, value: any, handleInputChange: any}) => {
   if (!item.editable) return
   return (<tr>
@@ -11,6 +14,12 @@ const EditorNumberItem = ({item}: {item: any}) => {
   </tr>)
 }
 const EditorModelWidget = ({item, value, handleNewClick}: {item: any, value: any, handleNewClick: any}) => {
+  const dispatch = useDispatch()
+  const taxomageia_data = useSelector((state: TState) => state.taxomageia)
+  const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
+
+  // TODO: find correct object using breadcrumbs
+
   if (!item.editable) return
   console.log('EditorModelWidget()', value)
   return (<tr>

@@ -1,10 +1,16 @@
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumbReducer'
+import { TState } from '@/lib/store'
+import { setTaxomageia } from '@/lib/features/studio/editor/taxomageiaReducer'
+import taxomageiaReducer from '@/lib/features/studio/editor/taxomageiaReducer'
+import { random_number, random_identifier } from '@/lib/utils/functions'
+
 import { EditorModelWidget, EditorNumberItem, EditorTextItem } from "./editor.components";
 import { TaxomageiaModel, editable } from "./editable";
 import { useState, useEffect } from 'react'
 import * as types from "./editor.types"
 import * as metadata from '@/lib/config/metadata'
+import Breadcrumbs from './breadcrumbs'
 
 const MakeItem = ({item, value, handleInputChange, handleNewClick}: {item: any, value: any, handleInputChange: any, handleNewClick: any}) => {
   let result;
@@ -32,8 +38,11 @@ const MakeItems = ({metadata, object, handleInputChange, handleNewClick}: {metad
         <caption className="text-center text-xl font-bold">{metadata.name}</caption>
         <tbody>
         {         
-          metadata?.attribute_metadata.map((item: any) => {
-            const value = object?.data[item.identifier]
+          metadata?.attribute_metadata.map((item: any) => {           
+            let value
+            if (object) {
+              value = object[item.identifier]              
+            }
             return <MakeItem key={item.identifier} item={item} value={value} handleInputChange={handleInputChange} handleNewClick={handleNewClick} />
           })
         }
@@ -53,10 +62,23 @@ const MakeItems = ({metadata, object, handleInputChange, handleNewClick}: {metad
 
 const TaxomageiaEditor = ({object, handleInputChange }: {object: any, handleInputChange: any }) => {
   const dispatch = useDispatch()
+  const taxomageia_data = useSelector((state: TState) => state.taxomageia)
+
   const handleNewClick = (e: React.MouseEvent) => {
     e.preventDefault()
     console.log('TaxomageiaEditor.addNewHandler()', e.target)
-    dispatch(createBreadcrumb({name: "Taxon"}))
+    const identifier = random_identifier('Taxon')
+    dispatch(setTaxomageia({...taxomageia_data, ...{taxons:[{identifier}]}}))
+    dispatch(createBreadcrumb({name: "Taxon", identifier}))
+  }
+
+  const handleChange = (e: React.ChangeEvent) => {
+    e.preventDefault
+    const targetElement = e.target as HTMLInputElement
+    const result = {...taxomageia_data} as any
+    result[targetElement.name] = targetElement.value
+    // console.log('handleChange() targetElement:', targetElement, 'result:', result)
+    dispatch(setTaxomageia(result))
   }
 
   // const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
@@ -73,18 +95,62 @@ const TaxomageiaEditor = ({object, handleInputChange }: {object: any, handleInpu
   // }, [])
 
   return (
-    <MakeItems metadata={metadata.taxomageia} object={object} handleInputChange={handleInputChange} handleNewClick={handleNewClick}/>
+    <MakeItems metadata={metadata.taxomageia} object={taxomageia_data} handleInputChange={handleChange} handleNewClick={handleNewClick}/>
   )
 }
 
 const TaxonEditor = ({object, handleInputChange}: {object: any, handleInputChange: any }) => {
   const dispatch = useDispatch()
+  const taxomageia_data = useSelector((state: TState) => state.taxomageia)
+  const currentBeadcrumb = useSelector((state: TState) => state.breadcrumbs[state.breadcrumbs.length - 1])
+  console.log('TaxonEditor() currentBeadcrumb:', currentBeadcrumb)
+  
   const handleNewClick = (e: React.MouseEvent) => {
     e.preventDefault()
     console.log('TaxonEditor.addNewHandler()', e.target)
     dispatch(createBreadcrumb({name: "Existence"}))
   }
   
+  const handleChange = (e: React.ChangeEvent) => {
+    e.preventDefault
+    const targetElement = e.target as HTMLInputElement
+    let taxons = taxomageia_data.taxons || []
+    console.log('10 TaxonEditor.handleChange() targetElement:', targetElement, 'taxons:', taxons, 'currentBeadcrumb:', currentBeadcrumb)
+    if (taxomageia_data.taxons && taxomageia_data.taxons.length > 0) {
+      // find correct Taxon from taxomageia_data.
+      console.log('20 TaxonEditor.handleChange() taxons:', taxons, currentBeadcrumb)
+      const modifiedTaxon = taxons.find((taxon: any) => taxon.identifier === currentBeadcrumb.identifier) as any
+      if (!modifiedTaxon) return
+      console.log('30 TaxonEditor.handleChange() modifiedTaxon:', modifiedTaxon)
+      const result = { ...modifiedTaxon, ...{ [targetElement.name]: targetElement.value } } as any
+      console.log('40 TaxonEditor.handleChange() result:', result)
+      taxons = taxons.map((taxon: any) => {
+        if (taxon.identifier === modifiedTaxon.identifier) {
+          return result
+        } else {
+          return taxon
+        }
+      })
+      console.log('45 TaxonEditor.handleChange() taxons:', taxons)
+    } else {
+      const taxon = {
+        idenfifier: random_identifier('Taxon'),
+      } as any
+      taxon[targetElement.name] = targetElement.value
+      taxons = [...taxons, taxon]
+    }
+
+    const final = {...taxomageia_data, ...{taxons: taxons}} as any
+    // result[targetElement.name] = targetElement.value
+    console.log('50 TaxonEditor.handleChange() final:', final)
+    dispatch(setTaxomageia(final))
+    // TODO:
+    // dispatch(setTaxons(taxomageia_id, taxons))
+    // TAI:
+    // dispatch(updateTaxon(taxomageia_id, taxon_id, taxon))
+    // dispatch(addTaxon(taxomageia_id, taxon))
+  }
+
   // const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
   // useEffect(() => {
   //   fetch("/api/1/taxons/metadata")
@@ -99,7 +165,7 @@ const TaxonEditor = ({object, handleInputChange}: {object: any, handleInputChang
   // }, [])
 
   return (
-    <MakeItems metadata={metadata.taxon} object={object} handleInputChange={handleInputChange} handleNewClick={handleNewClick}/>
+    <MakeItems metadata={metadata.taxon} object={object} handleInputChange={handleChange} handleNewClick={handleNewClick}/>
   )
 }
 
