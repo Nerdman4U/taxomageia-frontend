@@ -1,7 +1,7 @@
 'use client'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/reducer'
+import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumbReducer'
 import { TState } from '@/lib/store'
 
 import EditorContainer from "@/components/studio/editor.container"
@@ -38,24 +38,6 @@ function Studio() {
   const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
   console.log('Studio() breadcrumbs:', breadcrumbs)
 
-  const handleNewClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    console.log('addNewHandler()', e.target, 'taxomageia:', taxomageia)
-    dispatch(createBreadcrumb({name: "Taxon", model: TaxonModel}))
-
-    /**
-     * - add new model to current data
-     * - set path to new model
-     *   - it will be edited next
-     * 
-     */
-    // console.log('Studio.addNewHandler() breadcrumbs:', breadcrumbs.length)
-    // const temp = breadcrumbs.concat({name: "Taxon", model: TaxonModel})
-    // console.log('Studio.addNewHandler() temp:', temp[0])
-    // setBreadcrumbs(temp)
-
-  }
-
   return (
     <section id="features">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -66,7 +48,7 @@ function Studio() {
             <p>Welcome to create your own Taxomageia! <i>You are now anonymous. Remember to login to save your work!</i></p>
             <Breadcrumbs/>
             <div className="text-sm text-gray-400 shadow-md p-10">
-              <EditorContainer handleNewClick={handleNewClick} />
+              <EditorContainer/>
             </div>
           </div>
         </div>

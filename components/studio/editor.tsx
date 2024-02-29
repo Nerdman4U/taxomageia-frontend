@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux'
+import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumbReducer'
 import { EditorModelWidget, EditorNumberItem, EditorTextItem } from "./editor.components";
 import { TaxomageiaModel, editable } from "./editable";
 import { useState, useEffect } from 'react'
@@ -49,7 +51,14 @@ const MakeItems = ({metadata, object, handleInputChange, handleNewClick}: {metad
   }
 }
 
-const TaxomageiaEditor = ({object, handleInputChange, handleNewClick}: {object: any, handleInputChange: any, handleNewClick: any}) => {
+const TaxomageiaEditor = ({object, handleInputChange }: {object: any, handleInputChange: any }) => {
+  const dispatch = useDispatch()
+  const handleNewClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    console.log('TaxomageiaEditor.addNewHandler()', e.target)
+    dispatch(createBreadcrumb({name: "Taxon"}))
+  }
+
   // const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
   // useEffect(() => {
   //   fetch("/api/1/taxomageias/metadata")
@@ -68,7 +77,14 @@ const TaxomageiaEditor = ({object, handleInputChange, handleNewClick}: {object: 
   )
 }
 
-const TaxonEditor = ({object, handleInputChange, handleNewClick}: {object: any, handleInputChange: any, handleNewClick: any}) => {
+const TaxonEditor = ({object, handleInputChange}: {object: any, handleInputChange: any }) => {
+  const dispatch = useDispatch()
+  const handleNewClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    console.log('TaxonEditor.addNewHandler()', e.target)
+    dispatch(createBreadcrumb({name: "Existence"}))
+  }
+  
   // const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
   // useEffect(() => {
   //   fetch("/api/1/taxons/metadata")

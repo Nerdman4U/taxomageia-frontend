@@ -23,12 +23,10 @@ import * as studio_config from "@/components/studio/studio.config"
  *
  * @returns 
  */
-const EditorContainer = ({
-  handleNewClick, 
-}: {
-  handleNewClick: any
-}) => {
+const EditorContainer = () => {
   const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
+  const taxomageia = useSelector((state: TState) => state.taxomageia)
+
   let model = TaxomageiaModel as any
   if (breadcrumbs && breadcrumbs.length > 0) {
     const result  = breadcrumbs[breadcrumbs.length - 1].name
@@ -71,9 +69,9 @@ const EditorContainer = ({
 
   switch (model) {
     case TaxomageiaModel:
-      return <editor.TaxomageiaEditor object={object} handleInputChange={handleChange} handleNewClick={handleNewClick} />
+      return <editor.TaxomageiaEditor object={object} handleInputChange={handleChange} />
     case TaxonModel:
-      return <editor.TaxonEditor object={object} handleInputChange={handleChange} handleNewClick={handleNewClick} />
+      return <editor.TaxonEditor object={object} handleInputChange={handleChange} />
   }
 }
     

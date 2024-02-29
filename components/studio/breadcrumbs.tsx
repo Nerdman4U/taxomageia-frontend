@@ -1,7 +1,7 @@
 import { breadcrumb } from "@/lib/features/studio/breadcrumbs/breadcrumb.type"
 import { useSelector, useDispatch } from 'react-redux'
 import { TState } from "@/lib/store"
-import { pop } from "@/lib/features/studio/breadcrumbs/reducer"
+import { pop } from "@/lib/features/studio/breadcrumbs/breadcrumbReducer"
 
 const Breadcrumbs = () => {
   const dispatch = useDispatch()
