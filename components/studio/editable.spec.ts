@@ -1,10 +1,13 @@
 import { beforeEach, expect, describe, it } from 'vitest'
 import { TaxomageiaModel, TaxonModel } from './editable.js'
 import { building_up } from '@/lib/interfaces/taxomageia.interface.js'
+import deepfreeze from 'deep-freeze'
+import * as util from 'util'
 
 describe('Editable', () => {
 
   let obj: TaxomageiaModel
+  let values: any
   beforeEach(async () => {
     TaxomageiaModel.metadata = {
       identifier: 'taxomageia',
@@ -16,12 +19,21 @@ describe('Editable', () => {
         identifier: "identifier",
         type: 'string',
       }, {
+        identifier: "name_fi",
+        type: 'string',
+      }, {
+        identifier: "name_en",
+        type: 'string',
+      }, {
         identifier: "created_at",
+        type: "date"
+      }, {
+        identifier: "updated_at",
         type: "date"
       },{
         identifier: "taxons",
         model: "TaxonModel",
-        type: "association"
+        type: "has_many"
       }]
     }
 
@@ -35,13 +47,25 @@ describe('Editable', () => {
         identifier: "identifier",
         type: 'string',
       }, {
+        identifier: "name_fi",
+        type: 'string',
+      }, {
+        identifier: "name_en",
+        type: 'string',
+      }, {
+        identifier: "taxon_rank",
+        type: 'string',
+      }, {
+        identifier: "taxon_parent",
+        type: 'string',
+      }, {
         identifier: "existences",
         model: "ExistenceModel",
-        type: "association"
+        type: "has_many"
       }]
     }
 
-    const values = {
+    values = {
       created_at: new Date,
       updated_at: new Date,
       name_fi: "testi",
@@ -53,6 +77,7 @@ describe('Editable', () => {
         taxon_parent: "test2"
       }]
     } as building_up
+    deepfreeze(values)
     obj = TaxomageiaModel.new(values)
   })
 
@@ -65,6 +90,13 @@ describe('Editable', () => {
     expect(obj.taxons_json.length).toBe(1)
     expect(obj.className).toBe('TaxomageiaModel')
     expect(TaxomageiaModel.className).toBe('TaxomageiaModel')
+  })
+
+  it('has cloned data', () => {
+    expect(obj.data === values).toBe(false)
+    expect(obj.data['taxons']).toBeDefined()
+    expect(obj.data.taxons[0] === values.taxons[0]).toBe(false)
+    console.log(util.inspect(obj.data, false, null, true))
   })
 
   it('has a random identifier', () => {
@@ -105,10 +137,10 @@ describe('Editable', () => {
     expect(obj.model_metadata).toBeDefined()
     expect(obj.model_metadata.identifier).toBe('taxomageia')
     expect(obj.model_metadata.name).toBe('Taxomageia')
-    expect(obj.attribute_metadata.length).toBe(4)
+    expect(obj.attribute_metadata.length).toBe(7)
     expect(obj.attribute_metadata[0].identifier).toBe('id')
     expect(obj.attribute_metadata[1].identifier).toBe('identifier')
-    expect(obj.attribute_metadata[2].identifier).toBe('created_at')
+    expect(obj.attribute_metadata[2].identifier).toBe('name_fi')
   })
 
   it('verifies that association exists', () => {
@@ -130,11 +162,27 @@ describe('Editable', () => {
     expect(obj.taxons.length).toBe(1)
     const id = obj.taxons[0].identifier
     expect(obj.find()).toEqual(obj)
-    expect(obj.find([{association:'taxons', identifier:id}])).toBeDefined()
+    expect(obj.find([{name: "Taxons", association:'taxons', identifier:id}])).toBeDefined()
     obj.addAssociated('taxons', { identifier: 'TaxonModel_123456' })
-    expect(obj.find([{association:'taxons', identifier:id}])).toBeDefined()
-    expect(obj.find([{association:'taxons', identifier:'TaxonModel_123456'}])).toBeDefined()
+    expect(obj.find([{name: "Taxons", association:'taxons', identifier:id}])).toBeDefined()
+    expect(obj.find([{name: "Taxons", association:'taxons', identifier:'TaxonModel_123456'}])).toBeDefined()
+  })
 
+  it.only('exports', () => {
+    let e
+    e = obj.export()
+    expect(values).toBeDefined()
+    expect(e.name_fi).toBe(values.name_fi)
+    expect(e.taxons).toBeDefined()
+    expect(e.taxons.length).toBe(1)
+    expect(e.taxons[0].name_fi).toBe(values.taxons[0].name_fi)
+
+    const tax = obj.taxons[0]
+    tax.setValue('name_fi', 'testi123')
+    expect(obj.taxons[0].name_fi).toBe('testi123')
+    e = obj.export()
+    expect(e.taxons[0].name_fi).toBe('testi123')
+    
   })
 })
 

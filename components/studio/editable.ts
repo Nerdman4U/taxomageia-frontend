@@ -38,12 +38,13 @@ abstract class CoreModel implements editable {
   #data: any
   static _metadata: any = {}
   constructor(data: any) {
-    this.#data = data    
+    this.#data = structuredClone(data)
   }
   abstract updateAssociations(): void
+
   get identifier() { 
-    // if (this.data.identifier) return this.data.identifier
-    // this.data.identifier = random_identifier(this.className)
+    if (this.data.identifier) return this.data.identifier
+    this.data.identifier = random_identifier(this.className)
     return this.data.identifier
   }
   get created_at() { return this.data.created_at }
@@ -56,6 +57,7 @@ abstract class CoreModel implements editable {
   get model(): any { return this.constructor } 
   get model_metadata() { return this.model.metadata }
   get attribute_metadata() { return this.model_metadata.attribute_metadata }
+  setValue(key:string, value:string) { this.data[key] = value }
  
   addAssociated(association: string, data: any) {
     if (!this.verifyAssociation(association)) throw new Error(`association ${association} not defined`)
@@ -66,14 +68,13 @@ abstract class CoreModel implements editable {
  
   verifyAssociation(association: string) {
     return this.attribute_metadata.find((a: any) => { 
-      return a.type === 'association' && a.identifier === association
+      return a.type === 'has_many' && a.identifier === association
     })
   }
 
   static get className() { return this.name }
   static get metadata() { return this._metadata }
-  static set metadata(value: any) { this._metadata = value }
-
+  static set metadata(value: any) { this._metadata = value } 
   static new (data: any) { 
     const constructor: any = this.prototype.constructor
     const obj = new constructor(data)
@@ -84,21 +85,44 @@ abstract class CoreModel implements editable {
 
     /**
      * const obj = taxomageia.find([
-     *   {association:'taxons', id:'TaxonModel_123123123'},
-     *   {association:'existences', id:'ExistenceModel_123123123'},
+     *   {name:'Taxomageia', id:'TaxomageiaModel_123123123'},
+     *   {name:'Taxon', association:'taxons', id:'TaxonModel_123123123'},
+     *   {name:'Existence', association:'existences', id:'ExistenceModel_123123123'},
      * ])
      *  */ 
-  find(path: breadcrumb[] = []) {
+  find(p: breadcrumb[] = []) {
+    const path = structuredClone(p)
+    console.log('editable.find() path:', path)
     if (!path) return this
     const path_item = path.splice(path.length - 1, 1)[0]
+    console.log('editable.find() path_item:', path_item)
     if (!path_item) return this
     if (!path_item.association) return null
-    const objs = this[path_item.association as keyof this] as any[]
+    let objs = this[path_item.association as keyof this] as any[]
+    console.log('editable.find() objs:', objs)
     if (!objs) return null
+    // has_one
+    if (objs instanceof Array === false) objs = [objs]
     const obj = objs.find((o: any) => o.identifier === path_item.identifier)
+    console.log('editable.find() obj:', obj)
     if (!obj) return null
-    if (path.length === 0) return obj
+    if (path.length === 1) return obj
     return obj.find(path)
+  }
+
+  export() {
+    const exported = {} as any
+    if (!this.attribute_metadata) throw new Error ('attribute_metadata not defined')
+    this.attribute_metadata.forEach((a:any) => {
+      if (a.type === 'has_many') {
+        console.log('editable.export() a.identifier:', a.identifier)
+        if (!this[a.identifier]) return
+        exported[a.identifier] = this[a.identifier].map((o:any) => o.export())
+      } else {
+        exported[a.identifier] = this.data[a.identifier]
+      }
+    })
+    return exported
   }
 }
 

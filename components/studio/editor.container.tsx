@@ -48,13 +48,13 @@ const EditorContainer = () => {
       url_name = "taxons"
       break
   }
-  
+
+  // DEPRECATED
   const handleChange = (e: React.ChangeEvent) => {
     e.preventDefault
     const targetElement = e.target as HTMLInputElement
     console.log('handleChange() targetElement:', targetElement, taxomageia_data)
     // next: find correct model from taxomageia object using breadcrumbs.
-
     // old:
     // const taxomageia = TaxomageiaModel.new(taxomageia_data)
     // let obj = taxomageia.find(breadcrumbs)
@@ -73,9 +73,9 @@ const EditorContainer = () => {
 
   switch (model) {
     case TaxomageiaModel:
-      return <editor.TaxomageiaEditor object={object} handleInputChange={handleChange} />
+      return <editor.TaxomageiaEditor object={object} />
     case TaxonModel:
-      return <editor.TaxonEditor object={object} handleInputChange={handleChange} />
+      return <editor.TaxonEditor object={object} />
   }
 }
     
