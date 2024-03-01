@@ -90,7 +90,10 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
     e.preventDefault()
     console.log('TaxomageiaEditor.addNewHandler()', e.target)
     const identifier = random_identifier('Taxon')
-    dispatch(setTaxomageia({...taxomageia_data, ...{taxons:[{identifier}]}}))
+
+    let taxons = taxomageia_data.taxons || []
+    taxons = taxons.concat([{identifier}])
+    dispatch(setTaxomageia({...taxomageia_data, ...{ taxons }}))
     dispatch(createBreadcrumb({name: "Taxon", 'association': 'taxons', identifier}))
   }
 

@@ -49,33 +49,59 @@ const AssociatedObject = ({editable_item}: {editable_item: editable_item}) => {
   if (!model_metadata_of_item.attribute_metadata) return <></>
   const attribute_metadata_of_item = model_metadata_of_item.attribute_metadata
   return (
-    attribute_metadata_of_item.map((am:any) => {
-      if (!am.showAtWidgetList) return
-      console.log('AssociatedObject() am:', am.identifier, 'value:', value)
-      return <div role="button" onClick={handleClick} className="flex" key={am.identifier}>{value[am.identifier]}</div>
-    })
+    <tr>
+      {
+        attribute_metadata_of_item.map((am:any) => {
+          if (!am.showAtWidgetList) return
+          console.log('AssociatedObject() am:', am.identifier, 'value:', value)
+          return <td role="button" onClick={handleClick} className="flex-1 pr-5" key={am.identifier}>{value[am.identifier]}</td>
+        })
+      }
+    </tr>
   )
 }
+
 const EditorHasManyWidget = ({editable_items, handleNewClick}: {editable_items: editable_items, handleNewClick: any}) => {
   //console.log('EditorModelWidget() editable_item:', util.inspect(editable_items, false, 20))
   if (!editable_items) return <></>
   if (!editable_items.association_metadata) return <></>
   if (!editable_items.association_metadata.editable) return <></>
   const data = editable_items.data || []
+
+  const am = editable_items.item_metadata.attribute_metadata || []
+  const headers = am.map((am:any) => {
+    if (!am.showAtWidgetList) return
+    return am.name
+  })
+
   return (
     <tr>
       <td className='text-left pr-3 align-top'>{editable_items.association_metadata.name}</td>
       <td>
-        {
-          data.map((value:any) => {
-            const item = {
-              association_metadata: editable_items.association_metadata,
-              item_metadata: editable_items.item_metadata,
-              data: value
+        <table className="table-auto text-left">
+          <thead>
+            <tr>
+              {
+                headers.map((header:any) => {
+                  if (!header) return
+                  return <th key={header}>{header}</th>
+                })
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              data.map((value:any) => {
+                const item = {
+                  association_metadata: editable_items.association_metadata,
+                  item_metadata: editable_items.item_metadata,
+                  data: value
+                }
+                return <AssociatedObject editable_item={item}/>
+              })
             }
-            return <AssociatedObject editable_item={item}/>            
-          })
-        }
+          </tbody>
+        </table>
         <div><a role="button" onClick={handleNewClick}>Add new</a></div>
       </td>
     </tr>
