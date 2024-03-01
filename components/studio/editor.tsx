@@ -11,18 +11,22 @@ import { useState, useEffect } from 'react'
 import * as types from "./editor.types"
 import * as metadata from '@/lib/config/metadata'
 import Breadcrumbs from './breadcrumbs'
+import { editable_item } from './editor.types'
 
-const MakeItem = ({item, value, handleInputChange, handleNewClick}: {item: any, value: any, handleInputChange: any, handleNewClick: any}) => {
+const MakeItem = ({item, handleInputChange, handleNewClick}: {item: any, handleInputChange: any, handleNewClick: any}) => {
+  if (!item) return <></>
+  if (!item.association_metadata) return <></>
+
   let result;
-  switch (item.widget) {
+  switch (item.association_metadata.widget) {
     case 'string': 
-      result = <EditorTextItem item={item} value={value} handleInputChange={handleInputChange} />
+      result = <EditorTextItem editable_item={item} handleInputChange={handleInputChange} />
       break;
     case 'number': 
-      result = <EditorNumberItem item={item} />
+      result = <EditorNumberItem editable_item={item}/>
       break;
     case 'model':
-      result = <EditorHasManyWidget item={item} value={value} handleNewClick={handleNewClick}/>
+      result = <EditorHasManyWidget editable_items={item} handleNewClick={handleNewClick}/>
       break;
     default:
       result = <></>
@@ -30,7 +34,15 @@ const MakeItem = ({item, value, handleInputChange, handleNewClick}: {item: any, 
   return result
 }
 
+/**
+ * 
+ * @param metadata {object} model_metadata of model which is edited 
+ * @param object {Model} data of model (i.e. TaxonModel)
+ * @returns 
+ */
 const MakeItems = ({metadata, object, handleInputChange, handleNewClick}: {metadata: types.model_metadata, object: any, handleInputChange: any, handleNewClick: any}) => {
+  object = object || {}
+  console.log('makeItems() object:', object)
   if (metadata && metadata.attribute_metadata) {
     return (
       <table className='m-auto'>
@@ -39,10 +51,21 @@ const MakeItems = ({metadata, object, handleInputChange, handleNewClick}: {metad
         {         
           metadata?.attribute_metadata.map((item: any) => {           
             let value
-            if (object) {
-              value = object[item.identifier]              
+            value = object.data[item.identifier]
+            console.log('makeItems() value:', value, item.identifier)
+
+            // TODO: refactor
+            let item_metadata = {}
+            if (item.identifier === 'taxons') {
+              item_metadata = TaxonModel.metadata
             }
-            return <MakeItem key={item.identifier} item={item} value={value} handleInputChange={handleInputChange} handleNewClick={handleNewClick} />
+
+            const editable_item = {
+              association_metadata: item,
+              item_metadata: item_metadata,
+              data: value
+            } as editable_item
+            return <MakeItem key={item.identifier} item={editable_item} handleInputChange={handleInputChange} handleNewClick={handleNewClick} />
           })
         }
         {/* <tr>
@@ -74,9 +97,6 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
   const handleChange = (e: React.ChangeEvent) => {
     e.preventDefault
     const targetElement = e.target as HTMLInputElement
-
-    TaxomageiaModel.metadata = metadata.taxomageia
-    TaxonModel.metadata = metadata.taxon
     const taxomageia = TaxomageiaModel.new(taxomageia_data)
 
     // TODO: Find correct taxomageia ( if multiple )
@@ -99,7 +119,7 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
   // }, [])
 
   return (
-    <MakeItems metadata={metadata.taxomageia} object={taxomageia_data} handleInputChange={handleChange} handleNewClick={handleNewClick}/>
+    <MakeItems metadata={metadata.taxomageia} object={object} handleInputChange={handleChange} handleNewClick={handleNewClick}/>
   )
 }
 

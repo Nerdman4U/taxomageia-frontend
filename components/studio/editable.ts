@@ -92,19 +92,19 @@ abstract class CoreModel implements editable {
      *  */ 
   find(p: breadcrumb[] = []) {
     const path = structuredClone(p)
-    console.log('editable.find() path:', path)
+    //console.log('editable.find() path:', path)
     if (!path) return this
     const path_item = path.splice(path.length - 1, 1)[0]
-    console.log('editable.find() path_item:', path_item)
+    //console.log('editable.find() path_item:', path_item)
     if (!path_item) return this
-    if (!path_item.association) return null
+    if (!path_item.association) return this
     let objs = this[path_item.association as keyof this] as any[]
-    console.log('editable.find() objs:', objs)
+    //console.log('editable.find() objs:', objs)
     if (!objs) return null
     // has_one
     if (objs instanceof Array === false) objs = [objs]
     const obj = objs.find((o: any) => o.identifier === path_item.identifier)
-    console.log('editable.find() obj:', obj)
+    //console.log('editable.find() obj:', obj)
     if (!obj) return null
     if (path.length === 1) return obj
     return obj.find(path)
@@ -115,7 +115,7 @@ abstract class CoreModel implements editable {
     if (!this.attribute_metadata) throw new Error ('attribute_metadata not defined')
     this.attribute_metadata.forEach((a:any) => {
       if (a.type === 'has_many') {
-        console.log('editable.export() a.identifier:', a.identifier)
+        //console.log('editable.export() a.identifier:', a.identifier)
         if (!this[a.identifier]) return
         exported[a.identifier] = this[a.identifier].map((o:any) => o.export())
       } else {

@@ -96,7 +96,7 @@ describe('Editable', () => {
     expect(obj.data === values).toBe(false)
     expect(obj.data['taxons']).toBeDefined()
     expect(obj.data.taxons[0] === values.taxons[0]).toBe(false)
-    console.log(util.inspect(obj.data, false, null, true))
+    //console.log(util.inspect(obj.data, false, null, true))
   })
 
   it('has a random identifier', () => {
@@ -162,13 +162,14 @@ describe('Editable', () => {
     expect(obj.taxons.length).toBe(1)
     const id = obj.taxons[0].identifier
     expect(obj.find()).toEqual(obj)
+    expect(obj.find([{name: "Taxomageia", identifier: obj.identifier}])).toEqual(obj)
     expect(obj.find([{name: "Taxons", association:'taxons', identifier:id}])).toBeDefined()
     obj.addAssociated('taxons', { identifier: 'TaxonModel_123456' })
     expect(obj.find([{name: "Taxons", association:'taxons', identifier:id}])).toBeDefined()
     expect(obj.find([{name: "Taxons", association:'taxons', identifier:'TaxonModel_123456'}])).toBeDefined()
   })
 
-  it.only('exports', () => {
+  it('exports', () => {
     let e
     e = obj.export()
     expect(values).toBeDefined()

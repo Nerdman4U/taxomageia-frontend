@@ -5,6 +5,8 @@ import { TState } from '@/lib/store'
 
 import * as editor from "./editor"
 import { TaxomageiaModel, TaxonModel } from "./editable"
+import * as metadata from '@/lib/config/metadata'
+
 import { useState, useEffect } from 'react'
 import * as config from '@/lib/config'
 import * as types from "./editor.types"
@@ -26,6 +28,10 @@ import * as studio_config from "@/components/studio/studio.config"
 const EditorContainer = () => {
   const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
   const taxomageia_data = useSelector((state: TState) => state.taxomageia)
+
+  TaxomageiaModel.metadata = metadata.taxomageia
+  TaxonModel.metadata = metadata.taxon
+  const taxomageia = TaxomageiaModel.new(taxomageia_data)
 
   let model = TaxomageiaModel as any
   if (breadcrumbs && breadcrumbs.length > 0) {
@@ -67,8 +73,7 @@ const EditorContainer = () => {
     // window.localStorage.setItem(studio_config.LOCALSTORAGE_KEY, JSON.stringify(taxomageia.data))
   }
 
-  let object
-  if (taxomageia && taxomageia instanceof TaxomageiaModel) object = taxomageia.find(breadcrumbs) 
+  const object = taxomageia.find(breadcrumbs) 
   console.log('50 EditorContainer() object:', object)
 
   switch (model) {
