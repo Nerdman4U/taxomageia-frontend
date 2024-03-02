@@ -29,7 +29,7 @@ const EditorContainer = () => {
   const taxomageia = CoreModel.new(taxomageia_data, 'taxomageia')
   const current = breadcrumbs[breadcrumbs.length - 1]
   const object = taxomageia.find(breadcrumbs) 
-  //console.log('50 EditorContainer() object:', object, 'breadcrumbs.current:', current)
+  console.log('50 EditorContainer() object:', object, 'breadcrumbs.current:', current)
   if (!current) {
     console.error('No breadcrumbs')
     return <></>
@@ -37,9 +37,9 @@ const EditorContainer = () => {
   // console.log('51 EditorContainer() current.name:', current.name)
   // TODO: Generic
   switch (current.name) {
-    case 'Taxomageia':
+    case 'taxomageia':
       return <editor.TaxomageiaEditor object={object} />
-    case 'Taxon':
+    case 'taxon':
       return <editor.TaxonEditor object={object} />
   }
 }

@@ -28,7 +28,7 @@ function Studio() {
   useEffect(() => {    
     if (allow && breadcrumbs.length === 0) {
       allow = false
-      dispatch(createBreadcrumb({name: "Taxomageia", identifier: taxomageia_data.identifier}))
+      dispatch(createBreadcrumb({name: "taxomageia", identifier: taxomageia_data.identifier}))
     }
   }, [breadcrumbs])
 

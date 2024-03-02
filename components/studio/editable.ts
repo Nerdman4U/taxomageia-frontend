@@ -49,6 +49,9 @@ class CoreModel implements editable {
     this.#data = structuredClone(data)
     this.#model_metadata = structuredClone(metadata)
   }
+  addAssociated(association: string, data: any): void {
+    throw new Error('Method not implemented.')
+  }
 
   get identifier() { 
     if (this.data.identifier) return this.data.identifier
@@ -67,10 +70,16 @@ class CoreModel implements editable {
   get className() { return this.model_metadata.name }
   get attribute_metadata() { return this.#model_metadata.attribute_metadata }
  
-  addAssociated(association: string, data: any) {
+  addHasMany(association: string, data: any) {
     if (!this.verifyAssociation(association)) throw new Error(`association ${association} not defined`)
     if (!this.data[association]) this.data[association] = []
     this.data[association].push(data)
+    this.updateAssociations()
+  }
+  
+  addHasOne(association: string, data: any) {
+    if (!this.verifyAssociation(association)) throw new Error(`association ${association} not defined`)
+    this.data[association] = data
     this.updateAssociations()
   }
  

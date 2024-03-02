@@ -34,7 +34,7 @@ const AssociatedObject = ({editable_item}: {editable_item: editable_item}) => {
     e.preventDefault()
     console.log('10 AssociatedObject() editable_item:', editable_item)
     const breadcrumb = {
-      name: editable_item.item_metadata.name,
+      name: editable_item.item_metadata.identifier,
       association: editable_item.association_metadata.identifier,
       identifier: editable_item.data.identifier
     }
@@ -116,7 +116,7 @@ const EditorHasManyWidget = ({editable_items, handleNewClick}: {editable_items: 
       <td className='text-left pr-3 align-top'>{editable_items.association_metadata.name}</td>
       <td>
         <div><AssociatedObjects headers={headers} editable_items={editable_items}/></div>
-        <div><a role="button" onClick={handleNewClick}>Add new</a></div>
+        <div><a role="button" onClick={(e: any) => handleNewClick(e, editable_items.association_metadata) }>Add new</a></div>
       </td>
     </tr>
   )

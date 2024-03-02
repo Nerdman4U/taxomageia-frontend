@@ -87,19 +87,34 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
   console.log('TaxomageiaEditor() object:', object)
   const dispatch = useDispatch()
   const taxomageia_data = useSelector((state: TState) => state.taxomageia)
+  const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
+  const taxomageia = CoreModel.new(taxomageia_data, 'taxomageia')
+  const current = breadcrumbs[breadcrumbs.length - 1]
 
-  const handleNewClick = (e: React.MouseEvent) => {
+  const handleNewClick = (e: React.MouseEvent, am: any) => {
     e.preventDefault()
-    console.log('TaxomageiaEditor.addNewHandler()', e.target)
-    const identifier = random_identifier('Taxon')
+    console.log('TaxomageiaEditor.addNewHandler()', e.target, 'current', current, 'am:', am)
+    const identifier = random_identifier(am.name)
+    const object = taxomageia.find(breadcrumbs)
+    console.log('TaxomageiaEditor.addNewHandler() object:', object.data)
 
-    // TODO: refactor
-    // const taxomageia = TaxomageiaModel.new(taxomageia_data)
-    // taxomageia.add(name: model_metadata.name, association: attribute_metadata.identifier, identifier: identifier)
-    let taxons = taxomageia_data.taxons || []
-    taxons = taxons.concat([{identifier}])
-    dispatch(setTaxomageia({...taxomageia_data, ...{ taxons }}))
-    dispatch(createBreadcrumb({name: "Taxon", 'association': 'taxons', identifier}))
+    if (am.type === 'has_many') {
+      object.addHasMany(am.identifier, {identifier})
+    } else if (am.type === 'has_one') {
+      object.addHasOne(am.identifier, {identifier})
+    } else {
+      console.error('TaxomageiaEditor.addNewHandler() unknown type:', am.type)
+      return
+    }
+
+    console.log('TaxomageiaEditor.addNewHandler() object:', object.data)
+    dispatch(setTaxomageia({...taxomageia.data}))
+    dispatch(createBreadcrumb({name: am.model, 'association': am.identifier, identifier}))
+
+    //let taxons = taxomageia_data.taxons || []
+    //taxons = taxons.concat([{identifier}])
+    //dispatch(setTaxomageia({...taxomageia_data, ...{ taxons }}))
+    //dispatch(createBreadcrumb({name: "Taxon", 'association': 'taxons', identifier}))
   }
 
   const handleChange = (e: React.ChangeEvent) => {
