@@ -1,4 +1,4 @@
-const taxomageia = {
+[{
   "id": 8,
   "identifier": "taxomageia",
   "name": "Taxomageia",
@@ -74,6 +74,7 @@ const taxomageia = {
       "id": 145,
       "identifier": "taxons",
       "name": "Taxons",
+      "model": "taxon",
       "type": "has_many",
       "widget": "model",
       "description": null,
@@ -82,9 +83,8 @@ const taxomageia = {
       "showAtWidgetList": false
     }
   ]
-}
-
-const taxon = {
+}, 
+{
   "id": 9,
   "identifier": "taxon",
   "name": "Taxon",
@@ -162,7 +162,7 @@ const taxon = {
       "name": "Name (en)",
       "type": "string",
       "widget": "string",
-      "description": null,
+      "description": "This is the name of the taxon in English. Better multilingual support would be nice to have, but it is not yet implemented.",
       "editable": true,
       "model_metadatum_id": 9,
       "showAtWidgetList": true
@@ -204,6 +204,7 @@ const taxon = {
       "id": 156,
       "identifier": "existences",
       "name": "Existences",
+      "model": "existence",
       "type": "has_many",
       "widget": "model",
       "description": null,
@@ -212,9 +213,34 @@ const taxon = {
       "showAtWidgetList": false
     }
   ]
+},{
+  "id": 10,
+  "identifier": "existence",
+  "name": "Existence",
+  "description": "Existence is the core model of Taxomageia. Every creature belongs to an existence and existences are inherited from parent existences.",
+  "attribute_metadata": [
+    {
+      "id": 157,
+      "identifier": "id",
+      "name": "Id",
+      "type": "number",
+      "widget": "string",
+      "description": null
+    },
+    {
+      "id": 158,
+      "identifier": "identifier",
+      "name": "Identifier",
+      "type": "string"
+    },
+    {
+      "id": 159,
+      "identifier": "name_en",
+      "name": "Name (en)",
+      "type": "string",
+      "editable": true
+    }
+  ]
 }
 
-export {
-  taxomageia,
-  taxon
-}
+]

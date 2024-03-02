@@ -2,16 +2,17 @@ import { useSelector, useDispatch } from 'react-redux'
 import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumbReducer'
 import { TState } from '@/lib/store'
 import { setTaxomageia } from '@/lib/features/studio/editor/taxomageiaReducer'
-import taxomageiaReducer from '@/lib/features/studio/editor/taxomageiaReducer'
-import { random_number, random_identifier } from '@/lib/utils/functions'
+import { random_identifier } from '@/lib/utils/functions'
 
 import { EditorHasManyWidget, EditorNumberItem, EditorTextItem } from "./editor.components";
-import { TaxomageiaModel, TaxonModel, editable } from "./editable";
-import { useState, useEffect } from 'react'
-import * as types from "./editor.types"
-import * as metadata from '@/lib/config/metadata'
-import Breadcrumbs from './breadcrumbs'
+import CoreModel from "./editable";
 import { editable_item } from './editor.types'
+import * as metadata from '@/lib/config/metadata'
+import * as types from "./editor.types"
+
+import taxomageiaReducer from '@/lib/features/studio/editor/taxomageiaReducer'
+import { useState, useEffect } from 'react'
+import Breadcrumbs from './breadcrumbs'
 
 const MakeItem = ({item, handleInputChange, handleNewClick}: {item: any, handleInputChange: any, handleNewClick: any}) => {
   if (!item) return <></>
@@ -35,54 +36,55 @@ const MakeItem = ({item, handleInputChange, handleNewClick}: {item: any, handleI
 }
 
 /**
+ * TODO: Rename
+ * 
+ * Build editable form for any model.
  * 
  * @param metadata {object} model_metadata of model which is edited 
- * @param object {Model} data of model (i.e. TaxonModel)
+ * @param object {CoreModel} data of model
  * @returns 
  */
-const MakeItems = ({metadata, object, handleInputChange, handleNewClick}: {metadata: types.model_metadata, object: any, handleInputChange: any, handleNewClick: any}) => {
+const MakeItems = ({model_metadata, object, handleInputChange, handleNewClick}: {model_metadata: types.model_metadata, object: any, handleInputChange: any, handleNewClick: any}) => {
   object = object || {}
-  console.log('makeItems() object:', object)
-  if (metadata && metadata.attribute_metadata) {
-    return (
-      <table className='m-auto'>
-        <caption className="text-center text-xl font-bold">{metadata.name}</caption>
-        <tbody>
-        {         
-          metadata?.attribute_metadata.map((item: any) => {           
-            let value
-            value = object.data[item.identifier]
-            console.log('makeItems() value:', value, item.identifier)
+  if (!model_metadata) { return <></> }
+  const ams = model_metadata.attribute_metadata
+  if (!ams) return <></>
 
-            // TODO: refactor
-            let item_metadata = {}
-            if (item.identifier === 'taxons') {
-              item_metadata = TaxonModel.metadata
-            }
+  console.log('10 makeItems() object:', object, 'model_metadata:', model_metadata)
+  return (
+    <table className='table-auto w-full'>
+      <caption className="text-center text-xl font-bold">{model_metadata.name}</caption>
+      <tbody>
+      {         
+        ams.map((am: any) => {           
+          let value
+          value = object.data[am.identifier]
+          let item_metadata = model_metadata
+          if (am.type === 'has_many' || am.type === 'has_one') item_metadata = metadata.find(am.model) as types.model_metadata
+          console.log(am.identifier)
+          if (!item_metadata) throw new Error(`no metadata found for ${am.identifier}`)
+          const editable_item = {
+            association_metadata: am,
+            item_metadata: item_metadata,
+            data: value
+          } as editable_item
+          console.log('20 makeItems() editable_item:', editable_item)
+          return <MakeItem key={am.identifier} item={editable_item} handleInputChange={handleInputChange} handleNewClick={handleNewClick} />
+        })
+      }
+      {/* <tr>
+        <td className="text-left pt-12">
+          <button className="btn btn-blue bg-purple-600 hover:text-white hover:bg-purple-700">Save</button>
+        </td>
+      </tr> */}
+      </tbody>
+    </table>
+  )   
 
-            const editable_item = {
-              association_metadata: item,
-              item_metadata: item_metadata,
-              data: value
-            } as editable_item
-            return <MakeItem key={item.identifier} item={editable_item} handleInputChange={handleInputChange} handleNewClick={handleNewClick} />
-          })
-        }
-        {/* <tr>
-          <td className="text-left pt-12">
-            <button className="btn btn-blue bg-purple-600 hover:text-white hover:bg-purple-700">Save</button>
-          </td>
-        </tr> */}
-        </tbody>
-      </table>
-    )   
-  }
-  else {
-    return <> </>
-  }
 }
 
 const TaxomageiaEditor = ({object}: {object: any}) => {
+  console.log('TaxomageiaEditor() object:', object)
   const dispatch = useDispatch()
   const taxomageia_data = useSelector((state: TState) => state.taxomageia)
 
@@ -91,6 +93,9 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
     console.log('TaxomageiaEditor.addNewHandler()', e.target)
     const identifier = random_identifier('Taxon')
 
+    // TODO: refactor
+    // const taxomageia = TaxomageiaModel.new(taxomageia_data)
+    // taxomageia.add(name: model_metadata.name, association: attribute_metadata.identifier, identifier: identifier)
     let taxons = taxomageia_data.taxons || []
     taxons = taxons.concat([{identifier}])
     dispatch(setTaxomageia({...taxomageia_data, ...{ taxons }}))
@@ -100,7 +105,7 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
   const handleChange = (e: React.ChangeEvent) => {
     e.preventDefault
     const targetElement = e.target as HTMLInputElement
-    const taxomageia = TaxomageiaModel.new(taxomageia_data)
+    const taxomageia = CoreModel.new(taxomageia_data, 'taxomageia')
 
     // TODO: Find correct taxomageia ( if multiple )
     taxomageia.setValue(targetElement.name, targetElement.value)
@@ -108,21 +113,9 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
     console.log('handleChange() targetElement:', targetElement, 'result:', taxomageia.data)
   }
 
-  // const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
-  // useEffect(() => {
-  //   fetch("/api/1/taxomageias/metadata")
-  //     .then(response => { return response.json() })      
-  //     .then(metadata => {
-  //       setMetadata(metadata)
-  //       console.log('20 TaxomageiaEditor() fetch, metadata', metadata)
-  //     })
-  //     .catch(e => {
-  //       console.error(e)
-  //     })
-  // }, [])
-
+  const meta = metadata.find('taxomageia') as types.model_metadata
   return (
-    <MakeItems metadata={metadata.taxomageia} object={object} handleInputChange={handleChange} handleNewClick={handleNewClick}/>
+    <MakeItems model_metadata={meta} object={object} handleInputChange={handleChange} handleNewClick={handleNewClick}/>
   )
 }
 
@@ -142,11 +135,7 @@ const TaxonEditor = ({object}: {object: any}) => {
   const handleChange = (e: React.ChangeEvent) => {
     e.preventDefault
     const targetElement = e.target as HTMLInputElement
-
-    TaxomageiaModel.metadata = metadata.taxomageia
-    TaxonModel.metadata = metadata.taxon
-    const taxomageia = TaxomageiaModel.new(taxomageia_data)
-
+    const taxomageia = CoreModel.new(taxomageia_data, 'taxomageia')
     const modifiedTaxon = taxomageia.find(breadcrumbs)
     console.log('modifiedTaxon:', modifiedTaxon)
     if (!modifiedTaxon) return    
@@ -158,61 +147,11 @@ const TaxonEditor = ({object}: {object: any}) => {
 
     dispatch(setTaxomageia(final))
     console.log('handleChange() targetElement:', targetElement, 'result:', taxomageia.data)
-    // const taxomageia = TaxomageiaModel.new(taxomageia_data
-
-    // let taxons = taxomageia_data.taxons || []
-    // console.log('10 TaxonEditor.handleChange() targetElement:', targetElement, 'taxons:', taxons, 'currentBeadcrumb:', currentBeadcrumb)
-    // if (taxomageia_data.taxons && taxomageia_data.taxons.length > 0) {
-    //   // find correct Taxon from taxomageia_data.
-    //   console.log('20 TaxonEditor.handleChange() taxons:', taxons, currentBeadcrumb)
-    //   const modifiedTaxon = taxons.find((taxon: any) => taxon.identifier === currentBeadcrumb.identifier) as any
-    //   if (!modifiedTaxon) return
-    //   console.log('30 TaxonEditor.handleChange() modifiedTaxon:', modifiedTaxon)
-    //   const result = { ...modifiedTaxon, ...{ [targetElement.name]: targetElement.value } } as any
-    //   console.log('40 TaxonEditor.handleChange() result:', result)
-    //   taxons = taxons.map((taxon: any) => {
-    //     if (taxon.identifier === modifiedTaxon.identifier) {
-    //       return result
-    //     } else {
-    //       return taxon
-    //     }
-    //   })
-    //   console.log('45 TaxonEditor.handleChange() taxons:', taxons)
-    // } else {
-    //   const taxon = {
-    //     idenfifier: random_identifier('Taxon'),
-    //   } as any
-    //   taxon[targetElement.name] = targetElement.value
-    //   taxons = [...taxons, taxon]
-    // }
-
-    // const final = {...taxomageia_data, ...{taxons: taxons}} as any
-    // // result[targetElement.name] = targetElement.value
-    // console.log('50 TaxonEditor.handleChange() final:', final)
-    // dispatch(setTaxomageia(final))
-
-    // TODO:
-    // dispatch(setTaxons(taxomageia_id, taxons))
-    // TAI:
-    // dispatch(updateTaxon(taxomageia_id, taxon_id, taxon))
-    // dispatch(addTaxon(taxomageia_id, taxon))
   }
 
-  // const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
-  // useEffect(() => {
-  //   fetch("/api/1/taxons/metadata")
-  //     .then(response => { return response.json() })      
-  //     .then(metadata => {
-  //       setMetadata(metadata)
-  //       console.log('20 TaxonEditor() fetch, metadata', metadata)
-  //     })
-  //     .catch(e => {
-  //       console.error(e)
-  //     })
-  // }, [])
-
+  const meta = metadata.find('taxon') as types.model_metadata
   return (
-    <MakeItems metadata={metadata.taxon} object={object} handleInputChange={handleChange} handleNewClick={handleNewClick}/>
+    <MakeItems model_metadata={meta} object={object} handleInputChange={handleChange} handleNewClick={handleNewClick}/>
   )
 }
 
@@ -222,4 +161,18 @@ export {
 }
 
 
+
+
+  // const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
+  // useEffect(() => {
+  //   fetch("/api/1/taxomageias/metadata")
+  //     .then(response => { return response.json() })      
+  //     .then(metadata => {
+  //       setMetadata(metadata)
+  //       console.log('20 TaxomageiaEditor() fetch, metadata', metadata)
+  //     })
+  //     .catch(e => {
+  //       console.error(e)
+  //     })
+  // }, [])
 

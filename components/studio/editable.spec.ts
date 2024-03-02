@@ -1,70 +1,18 @@
-import { beforeEach, expect, describe, it } from 'vitest'
-import { TaxomageiaModel, TaxonModel } from './editable.js'
+import { beforeEach, expect, describe, it, vi } from 'vitest'
+import CoreModel from './editable.js'
 import { building_up } from '@/lib/interfaces/taxomageia.interface.js'
 import deepfreeze from 'deep-freeze'
 import * as util from 'util'
+import * as metadata from '@/lib/config/metadata'
+import * as types from './editor.types.js'
+
+vi.mock('@/lib/config/metadata')
 
 describe('Editable', () => {
 
-  let obj: TaxomageiaModel
+  let obj: CoreModel
   let values: any
   beforeEach(async () => {
-    TaxomageiaModel.metadata = {
-      identifier: 'taxomageia',
-      name: 'Taxomageia',
-      attribute_metadata: [{
-        identifier: "id", 
-        type: 'number'
-      }, {
-        identifier: "identifier",
-        type: 'string',
-      }, {
-        identifier: "name_fi",
-        type: 'string',
-      }, {
-        identifier: "name_en",
-        type: 'string',
-      }, {
-        identifier: "created_at",
-        type: "date"
-      }, {
-        identifier: "updated_at",
-        type: "date"
-      },{
-        identifier: "taxons",
-        model: "TaxonModel",
-        type: "has_many"
-      }]
-    }
-
-    TaxonModel.metadata = {
-      identifier: 'taxon',
-      name: 'Taxon',
-      attribute_metadata: [{
-        identifier: "id", 
-        type: 'number'
-      }, {
-        identifier: "identifier",
-        type: 'string',
-      }, {
-        identifier: "name_fi",
-        type: 'string',
-      }, {
-        identifier: "name_en",
-        type: 'string',
-      }, {
-        identifier: "taxon_rank",
-        type: 'string',
-      }, {
-        identifier: "taxon_parent",
-        type: 'string',
-      }, {
-        identifier: "existences",
-        model: "ExistenceModel",
-        type: "has_many"
-      }]
-    }
-
     values = {
       created_at: new Date,
       updated_at: new Date,
@@ -78,7 +26,7 @@ describe('Editable', () => {
       }]
     } as building_up
     deepfreeze(values)
-    obj = TaxomageiaModel.new(values)
+    obj = CoreModel.new(values, 'taxomageia')
   })
 
   it('is defined', () => {
@@ -86,10 +34,7 @@ describe('Editable', () => {
     expect(obj.data).toBeDefined()
     expect(obj.data.taxons).toBeDefined()
     expect(obj.data.taxons.length).toBe(1)
-    expect(obj.taxons_json).toBeDefined()
-    expect(obj.taxons_json.length).toBe(1)
-    expect(obj.className).toBe('TaxomageiaModel')
-    expect(TaxomageiaModel.className).toBe('TaxomageiaModel')
+    expect(obj.className).toBe('Taxomageia')    
   })
 
   it('has cloned data', () => {
@@ -104,36 +49,15 @@ describe('Editable', () => {
     expect(obj.identifier).toBeDefined()
   })
 
-  it('has taxons', () => {
-    expect(obj.taxons).toBeDefined()
-    expect(obj.taxons[0].identifier).toBeDefined()
-    expect(obj.taxons[0].identifier.match(/^TaxonModel_[0-9]+$/)).toBeTruthy()
-  })
-
-  it('sets and gets metadata with static methods', () => {
-    const metadata = {
-      identifier: 'taxomageia',
-      name: 'Taxomageia',
-      attribute_metadata: [{
-        name: "id", 
-        type: 'number'
-      }, {
-        name: "identifier",
-        type: 'string',
-      }, {
-        name: "created_at",
-        type: "date"
-      }]
-    }
-    TaxomageiaModel.metadata = metadata
-    expect(TaxomageiaModel.metadata).toBeDefined()
-    expect(TaxomageiaModel.metadata.attribute_metadata).toBeDefined()
-    expect(TaxomageiaModel.metadata).toBeDefined()
-    expect(TaxomageiaModel.metadata).toEqual(metadata)
+  it('finds has_many', () => {
+    let taxons = obj.findHasManyObjects('taxons')
+    expect(taxons).toBeDefined()
+    expect(taxons[0].identifier).toBeDefined()
+    expect(taxons[0].identifier.match(/^Taxon_[0-9]+$/)).toBeTruthy()
   })
 
   it('gets metadata', () => {
-    expect(obj.className).toBe('TaxomageiaModel')
+    //expect(obj.className).toBe('TaxomageiaModel')
     expect(obj.model_metadata).toBeDefined()
     expect(obj.model_metadata.identifier).toBe('taxomageia')
     expect(obj.model_metadata.name).toBe('Taxomageia')
@@ -156,6 +80,12 @@ describe('Editable', () => {
     expect(obj.taxons.length).toBe(2)
     obj.addAssociated('taxons', { 'name_fi': "testiä taas" })
     expect(obj.taxons.length).toBe(3)
+  })
+
+  it('returns associations', () => {
+    expect(obj.associations).toBeDefined()
+    expect(obj.associations.length).toBe(1)
+    expect(obj.associations[0].identifier).toBe('taxons')
   })
 
   it('finds objects', () => {
@@ -182,8 +112,7 @@ describe('Editable', () => {
     tax.setValue('name_fi', 'testi123')
     expect(obj.taxons[0].name_fi).toBe('testi123')
     e = obj.export()
-    expect(e.taxons[0].name_fi).toBe('testi123')
-    
+    expect(e.taxons[0].name_fi).toBe('testi123')   
   })
 })
 

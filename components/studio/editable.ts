@@ -1,9 +1,9 @@
-import { isNullishCoalesce } from 'typescript'
 import * as types from './editor.types'
 import { breadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumb.type'
 import * as taxon from '@/lib/interfaces/taxon.interface'
 import * as taxomageia from '@/lib/interfaces/taxomageia.interface'
 import { random_number, random_identifier } from '@/lib/utils/functions'
+import * as metadata from '@/lib/config/metadata'
 
 export interface editable {
   data: any
@@ -34,13 +34,21 @@ export interface editable {
    *   }]  
    * }
    */
-abstract class CoreModel implements editable {
+class CoreModel implements editable {
   #data: any
-  static _metadata: any = {}
-  constructor(data: any) {
+  #model_metadata: types.model_metadata
+
+  /**
+   * When creating a new model its class is known and metadata can be passed.
+   * 
+   * 
+   * @param data 
+   * @param metadata 
+   */
+  constructor(data: any, metadata: any) {
     this.#data = structuredClone(data)
+    this.#model_metadata = structuredClone(metadata)
   }
-  abstract updateAssociations(): void
 
   get identifier() { 
     if (this.data.identifier) return this.data.identifier
@@ -53,11 +61,11 @@ abstract class CoreModel implements editable {
   set data(value: any) { this.#data = value }
   get name_fi() { return this.data.name_fi }
   get name_en() { return this.data.name_en }
-  get className() { return this.constructor.name }
-  get model(): any { return this.constructor } 
-  get model_metadata() { return this.model.metadata }
-  get attribute_metadata() { return this.model_metadata.attribute_metadata }
   setValue(key:string, value:string) { this.data[key] = value }
+
+  get model_metadata() { return this.#model_metadata }
+  get className() { return this.model_metadata.name }
+  get attribute_metadata() { return this.#model_metadata.attribute_metadata }
  
   addAssociated(association: string, data: any) {
     if (!this.verifyAssociation(association)) throw new Error(`association ${association} not defined`)
@@ -72,12 +80,11 @@ abstract class CoreModel implements editable {
     })
   }
 
-  static get className() { return this.name }
-  static get metadata() { return this._metadata }
-  static set metadata(value: any) { this._metadata = value } 
-  static new (data: any) { 
+  static new (data: any, identifier: string) { 
+    const meta = metadata.find(identifier)    
+    if (!meta) throw new Error(`metadata for ${identifier} not found`)
     const constructor: any = this.prototype.constructor
-    const obj = new constructor(data)
+    const obj = new constructor(data, meta)
     obj.identifier
     obj.updateAssociations()
     return obj
@@ -124,39 +131,68 @@ abstract class CoreModel implements editable {
     })
     return exported
   }
-}
 
-class TaxomageiaModel extends CoreModel {
-  #taxons: TaxonModel[]
-  constructor(data: taxomageia.building_up) {
-    super(data)
-    this.#taxons = []
-  }
-  get taxons() { return this.#taxons }
-  set taxons(value: TaxonModel[]) { this.#taxons = value }
-  get taxons_json() { return this.data.taxons || [] }
-  updateAssociations() {
-    if (!this.taxons_json) return
-    if (this.taxons_json.length === 0) return
-    const taxons = this.taxons_json.map((t:any) => {
-      const exists = this.taxons.find(ex => ex.identifier === t.identifier)
-      if (exists) return exists
-      return TaxonModel.new(t)
+  get associations(): any[] {
+    return this.attribute_metadata.filter((a:any) => {
+      return (a.type === 'has_many' || a.type === 'has_one')
     })
-    this.taxons = taxons
   }
-}
-class TaxonModel extends CoreModel {
-  constructor(data: taxon.building_up) {
-    super(data)
+
+  findAssociationMetadata(identifier: string) {
+    return this.associations.find((a:any) => {
+      return a.identifier === identifier
+    })
   }
+
+  findHasManyObjects(association_identifier: string): any[] {
+    return this[association_identifier]
+  }
+  findHasOneObjects(association_identifier: string): any {
+    return this[association_identifier]
+  }
+
+  /**
+   * Add new associated objects if missing.
+   * TODO: rename
+   * 
+   * 1) find associations from attribute metadata
+   * 2) check if identifier is already created
+   * 3) create new object 
+   * 
+   */
   updateAssociations() {
+    this.associations.map((a:any) => {
+      const json_data = this.data[a.identifier]
+      if (!json_data) return
+      if (json_data.length === 0) return
 
+      // json data of associated objects
+      const objs = json_data.map((o:any) => {
+        let exists
+        switch (a.type) {
+          case 'has_many':           
+            exists = this.findHasManyObjects(a.identifier)?.find((ex:any) => ex.identifier === o.identifier)
+            break
+          case 'has_one':
+            exists = this.findHasOneObjects(a.identifier)
+            break
+        }
+        if (exists) return exists
+
+        console.log('updateAssociations() a', a)
+        return CoreModel.new(o, a.model)        
+      })
+
+      switch (a.type) {
+        case 'has_many':
+          this[a.identifier] = objs
+          break
+        case 'has_one':
+          this[a.identifier] = objs[0]
+          break
+      }
+    })
   }
 }
 
-export {
-  TaxomageiaModel,
-  TaxonModel
-}
-
+export default CoreModel

@@ -3,19 +3,14 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumbReducer'
 import { TState } from '@/lib/store'
+import { useEffect } from "react"
 
 import EditorContainer from "@/components/studio/editor.container"
-import { useState, useEffect } from "react"
-
-import { TaxomageiaModel } from "@/components/studio/editable"
-import { TaxonModel } from "@/components/studio/editable"
 import Breadcrumbs from "@/components/studio/breadcrumbs"
 
 import * as types from "@/components/studio/editor.types"
-
 import * as taxomageia from "@/lib/interfaces/taxomageia.interface"
 import * as taxon from "@/lib/interfaces/taxon.interface"
-
 import * as studio_config from "@/components/studio/studio.config"
 
 /**
@@ -24,22 +19,11 @@ import * as studio_config from "@/components/studio/studio.config"
  */
 function Studio() {
   const dispatch = useDispatch()
-
-  // const [ taxomageia_data, setTaxomageiaData ] = useState({} as taxomageia.building_up)
-  // const [ taxomageia, setTaxomageia ] = useState({} as TaxomageiaModel)
-  // const [ breadcrumbs, setBreadcrumbs ] = useState([{name: "Taxomageia", model: TaxomageiaModel}] as types.breadcrumb[])
-  // useEffect(() => {
-  //   const from_storage = JSON.parse(localStorage.getItem(studio_config.LOCALSTORAGE_KEY) || '{}');
-  //   console.log('Studio() from_storage:', from_storage)
-  //   const ta: TaxomageiaModel = TaxomageiaModel.new(from_storage);
-  //   setTaxomageia(ta);
-  //   (global as any).taxomageia = ta
-  // }, [])
   const taxomageia_data = useSelector((state: TState) => state.taxomageia)
   const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
   console.log('Studio() breadcrumbs:', breadcrumbs)
 
-  // Double taxomageia breadcrumb when refreshing whole page.
+  // Double taxomageia breadcrumb when refreshing whole page... dunno?
   let allow = true
   useEffect(() => {    
     if (allow && breadcrumbs.length === 0) {
