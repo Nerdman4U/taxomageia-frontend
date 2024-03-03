@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import breadcrumbsReducer from './features/studio/breadcrumbs/breadcrumbReducer'
 import taxomageiaReducer from './features/studio/editor/taxomageiaReducer'
+import metadataReducer from './features/studio/metadata/metadataReducer'
 
 const makeStore = () => {
  return configureStore({
    reducer: {
     breadcrumbs: breadcrumbsReducer,
-    taxomageia: taxomageiaReducer
+    taxomageia: taxomageiaReducer,
+    metadata: metadataReducer
    }
  })
 }

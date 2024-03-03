@@ -24,6 +24,7 @@
     "commitizen": "^4.3.0",
     "eslint": "^8.57.0",
     "eslint-prettier": "^0.0.0-empty",
+    "localforage": "^1.10.0",
     "next": "^14.0.4",
     "prettier": "^3.2.5",
     "react": "18.2.0",

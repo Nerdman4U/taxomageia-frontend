@@ -80,11 +80,11 @@
       "description": null,
       "editable": true,
       "model_metadatum_id": 8,
-      "model_metadatum": "taxomageia",
+      "model_metadatum_name": "taxomageia",
       "showAtWidgetList": false
     }
   ]
-}, 
+},
 {
   "id": 9,
   "identifier": "taxon",
@@ -211,7 +211,7 @@
       "description": null,
       "editable": true,
       "model_metadatum_id": 9,
-      "model_metadatum": "taxon",
+      "model_metadatum_name": "taxon",
       "showAtWidgetList": false
     }
   ]
@@ -243,7 +243,6 @@
       "type": "string",
       "widget": "string",
       "editable": true,
-      "model_metadatum": "existence",
       "showAtWidgetList": true
     }
   ]
