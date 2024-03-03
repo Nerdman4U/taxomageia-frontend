@@ -48,7 +48,7 @@ const MakeItems = ({model_metadata, object, handleInputChange, handleNewClick}: 
   if (!ams) return <></>
   const metadata = useSelector((state: TState) => state.metadata)
 
-  console.log('10 makeItems() object:', object, 'model_metadata:', model_metadata)
+  //console.log('10 makeItems() object:', object, 'model_metadata:', model_metadata)
   return (
     <table className='table-auto w-full'>
       <caption className="text-center text-xl font-bold">{model_metadata.name}</caption>
@@ -69,7 +69,7 @@ const MakeItems = ({model_metadata, object, handleInputChange, handleNewClick}: 
             item_metadata: item_metadata,
             data: value
           } as editable_item
-          console.log('20 makeItems() editable_item:', editable_item)
+          //console.log('20 makeItems() editable_item:', editable_item)
           return <MakeItem key={am.identifier} item={editable_item} handleInputChange={handleInputChange} handleNewClick={handleNewClick} />
         })
       }
@@ -85,7 +85,7 @@ const MakeItems = ({model_metadata, object, handleInputChange, handleNewClick}: 
 }
 
 const TaxomageiaEditor = ({object}: {object: any}) => {
-  console.log('10 TaxomageiaEditor() object:', object)
+  //console.log('10 TaxomageiaEditor() object:', object)
   const dispatch = useDispatch()
   const taxomageia_data = useSelector((state: TState) => state.taxomageia)
   const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
@@ -96,10 +96,14 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
 
   const handleNewClick = (e: React.MouseEvent, am: any) => {
     e.preventDefault()
-    const identifier = random_identifier(am.name)
-    console.log('20 TaxomageiaEditor.addNewHandler()', e.target, 'current', current, 'am:', am, 'identifier:', identifier)
+    if (!taxomageia) {
+      console.error('20 TaxomageiaEditor.addNewHandler() taxomageia not found')
+      return
+    }
+    const identifier = random_identifier(am.identifier)
+    //console.log('20 TaxomageiaEditor.addNewHandler()', e.target, 'current', current, 'am:', am, 'identifier:', identifier)
     const object = taxomageia.find(breadcrumbs)
-    console.log('30 TaxomageiaEditor.addNewHandler() object:', object.data)
+    //console.log('30 TaxomageiaEditor.addNewHandler() object:', object.data)
 
     if (am.type === 'has_many') {
       object.addHasMany(am.identifier, {identifier})
@@ -111,7 +115,7 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
     }
 
     const final = taxomageia.export()
-    console.log('50 TaxomageiaEditor.addNewHandler() object:', object.data, 'am.model:', am.model, 'am.identifier:', am.identifier, 'final:', final)
+    //console.log('50 TaxomageiaEditor.addNewHandler() object:', object.data, 'am.model:', am.model, 'am.identifier:', am.identifier, 'final:', final)
     dispatch(setTaxomageia(final))
     dispatch(createBreadcrumb({name: am.model, 'association': am.identifier, identifier}))
 
@@ -124,15 +128,15 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
   const handleChange = (e: React.ChangeEvent) => {
     e.preventDefault
     const targetElement = e.target as HTMLInputElement
-    console.log('10 handleChange() e:', e, 'targetElement:', targetElement)
+    //console.log('10 handleChange() e:', e, 'targetElement:', targetElement)
     if (!taxomageia) throw new Error('no taxomageia')
     const object = taxomageia.find(breadcrumbs)
     if (!object) return
-    console.log('20 handleChange() object.data:', object.data, 'breadcrumbs:', breadcrumbs)
+    //console.log('20 handleChange() object.data:', object.data, 'breadcrumbs:', breadcrumbs)
     object.setValue(targetElement.name, targetElement.value)
-    console.log('30 handleChange() object.data:', object.data)
+    //console.log('30 handleChange() object.data:', object.data)
     const final = taxomageia.export()
-    console.log('40 handleChange() final:', final)
+    //console.log('40 handleChange() final:', final)
     dispatch(setTaxomageia(final))
 
     // save to localforage

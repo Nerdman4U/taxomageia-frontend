@@ -22,7 +22,7 @@ function Studio() {
   const dispatch = useDispatch()
   const taxomageia_data = useSelector((state: TState) => state.taxomageia)
   const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
-  console.log('Studio() breadcrumbs:', breadcrumbs)
+  //console.log('Studio() breadcrumbs:', breadcrumbs)
 
   // Double taxomageia breadcrumb when refreshing whole page... dunno?
   let allow = true

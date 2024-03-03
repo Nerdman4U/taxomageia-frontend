@@ -1,9 +1,3 @@
-function clone<T>(instance: T): T {
-  const copy = new (instance.constructor as { new (): T })();
-  Object.assign(copy, instance);
-  return copy;
-}
-
 function random_number() {
   return `${Date.now()}${Math.floor(Math.random() * 10000)}`
 }
@@ -18,7 +12,6 @@ function anonymous_user(): string {
 }
 
 export {
-  clone,
   random_number,
   random_identifier,
   anonymous_user

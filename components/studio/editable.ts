@@ -72,18 +72,18 @@ class CoreModel {
    * @returns
    */
   static new (data: any, model_metadatum_name: string, metadata?: any) {
-    console.log('10 CoreModel.new() data:', data, 'model_metadatum_name:', model_metadatum_name, 'metadata:', metadata, 'this.metadata:', this.#metadata)
+    //console.log('10 CoreModel.new() data:', data, 'model_metadatum_name:', model_metadatum_name, 'metadata:', metadata, 'this.metadata:', this.#metadata)
     if (!metadata && !this.#metadata) return null
-    console.log('20 CoreModel.new()')
+    //console.log('20 CoreModel.new()')
     if (metadata) this.#metadata = metadata
     const metadatum = this.#metadata[model_metadatum_name]
     if (!metadatum) return null
-    console.log('30 CoreModel.new()')
+    //console.log('30 CoreModel.new()')
     if (!metadatum.attribute_metadata) return null
-    console.log('40 CoreModel.new()')
+    //console.log('40 CoreModel.new()')
     if (!data.identifier) throw new Error(`data has no identifier`)
     const obj = new CoreModel(data, metadatum)
-    console.log('40 CoreModel.new() identifier:', obj.identifier)
+    //console.log('40 CoreModel.new() identifier:', obj.identifier)
     obj.updateAssociations()
     return obj
   }
@@ -122,14 +122,14 @@ class CoreModel {
      *  */
   find(p: breadcrumb[] = []): any {
     const path = structuredClone(p)
-    console.log('10 editable.find() path:', path)
+    //console.log('10 editable.find() path:', path)
     if (!path) return this
     const path_item = path.splice(0, 1)[0]
-    console.log('20 editable.find() path_item:', path_item)
+    //console.log('20 editable.find() path_item:', path_item)
     if (!path_item) return this
     if (!path_item.association) {
       // first taxomageia model
-      console.log('22 editable.find() path:', path)
+      //console.log('22 editable.find() path:', path)
       return this.find(path)
     }
     let objs = this[path_item.association]
@@ -137,34 +137,14 @@ class CoreModel {
     if (objs instanceof Array === false) objs = [objs] // has_one
     objs = objs.filter((o: any) => o.identifier)
     if (objs.length === 0) throw new Error ('No objects in ' + path_item.association)
-    console.log('30 editable.find() objs:', objs.map((o:any) => o.identifier))
+    //console.log('30 editable.find() objs:', objs.map((o:any) => o.identifier))
 
     // has_one
     if (objs instanceof Array === false) objs = [objs]
     const obj = objs.find((o: any) => o.identifier === path_item.identifier)
-    console.log('40 editable.find() obj.data:', obj.data, 'objs:', objs.map(o => o.identifier), 'path_item:', path_item.identifier)
+    //console.log('40 editable.find() obj.data:', obj.data, 'objs:', objs.map(o => o.identifier), 'path_item:', path_item.identifier)
     if (!obj) throw new Error('Wooops! Where is the object?') // found associations but not the object
     if (path.length === 0) return obj
-    return obj.find(path)
-  }
-
-  find2(p: breadcrumb[] = []) {
-    const path = structuredClone(p)
-    console.log('10 editable.find() path:', path)
-    if (!path) return this
-    const path_item = path.splice(path.length - 1, 1)[0]
-    console.log('20 editable.find() path_item:', path_item)
-    if (!path_item) return this
-    if (!path_item.association) return this
-    let objs = this[path_item.association as keyof this] as any[]
-    console.log('30 editable.find() objs:', objs)
-    if (!objs) return null
-    // has_one
-    if (objs instanceof Array === false) objs = [objs]
-    const obj = objs.find((o: any) => o.identifier === path_item.identifier)
-    console.log('40 editable.find() obj:', obj)
-    if (!obj) return null
-    if (path.length === 1) return obj
     return obj.find(path)
   }
 
@@ -176,7 +156,7 @@ class CoreModel {
       // console.log('10 editable.export() am:', a)
       if (a.type === 'has_many') {
         if (!this[a.identifier]) return
-        console.log('20 editable.export() a.identifier:', a.identifier, 'identifiers:', this[a.identifier].map((o:any) => o.identifier))
+        //console.log('20 editable.export() a.identifier:', a.identifier, 'identifiers:', this[a.identifier].map((o:any) => o.identifier))
         exported[a.identifier] = this[a.identifier].map((o:any) => o.export())
       } else if (a.type === 'has_one') {
         if (!this[a.identifier]) return
@@ -225,7 +205,7 @@ class CoreModel {
   updateAssociations() {
     this.associations.map((a:any) => {
       let json_data = this.data[a.identifier]
-      console.log('10 updateAssociations() json_data:', json_data, 'a.identifier:', a.identifier)
+      //console.log('10 updateAssociations() json_data:', json_data, 'a.identifier:', a.identifier)
       if (!json_data) return
       if (json_data instanceof Array === false) json_data = [json_data]
       if (json_data.length === 0) return
@@ -244,7 +224,7 @@ class CoreModel {
         if (exists) return exists
         if (!CoreModel.#metadata) throw new Error('CoreModel.#metadata not defined')
 
-        console.log('20 updateAssociations() attribute_metadata:', a, 'object.identifier:', o.identifier)
+        //console.log('20 updateAssociations() attribute_metadata:', a, 'object.identifier:', o.identifier)
         const obj = CoreModel.new(o, a.model)
         if (!obj) throw new Error('obj not defined')
         return obj

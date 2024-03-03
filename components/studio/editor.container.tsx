@@ -23,7 +23,7 @@ const EditorContainer = () => {
   if (!taxomageia) return <></>
   const current = breadcrumbs[breadcrumbs.length - 1]
   const object = taxomageia.find(breadcrumbs)
-  console.log('50 EditorContainer() object:', object, 'breadcrumbs.current:', current)
+  //console.log('50 EditorContainer() object:', object, 'breadcrumbs.current:', current)
   if (!current) {
     console.error('No breadcrumbs')
     return <></>

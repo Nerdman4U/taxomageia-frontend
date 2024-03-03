@@ -7,7 +7,7 @@ import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/br
 const EditorTextItem = ({editable_item, handleInputChange}: {editable_item: editable_item, handleInputChange: any}) => {
   const item = editable_item.association_metadata
   const value = editable_item.data || ""
-  console.log('EditorTextItem() item.identifier:', item.identifier, 'value:', value)
+  //console.log('EditorTextItem() item.identifier:', item.identifier, 'value:', value)
   if (!item.editable) return
 
   return (<tr>
@@ -34,13 +34,13 @@ const AssociatedObject = ({editable_item}: {editable_item: editable_item}) => {
 
   const handleClick = ((e: React.MouseEvent) => {
     e.preventDefault()
-    console.log('10 AssociatedObject() editable_item:', editable_item)
+    //console.log('10 AssociatedObject() editable_item:', editable_item)
     const breadcrumb = {
       name: editable_item.item_metadata.identifier,
       association: editable_item.association_metadata.identifier,
       identifier: editable_item.data.identifier
     }
-    console.log('20 AssociatedObject() breadcrumb:', breadcrumb)
+    //console.log('20 AssociatedObject() breadcrumb:', breadcrumb)
     dispatch(createBreadcrumb(breadcrumb))
   })
 
@@ -56,7 +56,7 @@ const AssociatedObject = ({editable_item}: {editable_item: editable_item}) => {
       {
         attribute_metadata_of_item.map((am:any) => {
           if (!am.showAtWidgetList) return
-          console.log('50 AssociatedObject() am:', am.identifier, 'value:', value)
+          //console.log('50 AssociatedObject() am:', am.identifier, 'value:', value)
           return <td role="button" onClick={handleClick} className="flex-1 pr-5" key={am.identifier}>{value[am.identifier]}</td>
         })
       }
@@ -71,7 +71,7 @@ const AssociatedObjects = ({editable_items, headers}: {editable_items: editable_
   let data = editable_items.data || []
   if (data instanceof Array !== true) data = [data]
   if (data.length === 0) return <></>
-  console.log('AssociatedObjects() data:', data)
+  //console.log('AssociatedObjects() data:', data)
 
   return (
     <table className="table-auto text-left">
@@ -112,7 +112,7 @@ const EditorHasManyWidget = ({editable_items, handleNewClick}: {editable_items: 
     if (!am.showAtWidgetList) return
     return am.name
   }).filter((v:any) => v)
-  console.log('EditorHasManyWidget() headers:', headers)
+  //console.log('EditorHasManyWidget() headers:', headers)
 
   return (
     <tr>
