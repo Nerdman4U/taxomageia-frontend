@@ -105,7 +105,7 @@ class CoreModel {
 
   verifyAssociation(association: string) {
     return this.attribute_metadata.find((a: any) => {
-      return a.type === 'has_many' && a.identifier === association
+      return (a.type === 'has_many' || a.type === 'has_one') && a.identifier === association
     })
   }
 
@@ -134,6 +134,7 @@ class CoreModel {
     }
     let objs = this[path_item.association]
     if (!objs) return null
+    if (objs instanceof Array === false) objs = [objs] // has_one
     objs = objs.filter((o: any) => o.identifier)
     if (objs.length === 0) throw new Error ('No objects in ' + path_item.association)
     console.log('30 editable.find() objs:', objs.map((o:any) => o.identifier))
@@ -175,9 +176,14 @@ class CoreModel {
       // console.log('10 editable.export() am:', a)
       if (a.type === 'has_many') {
         if (!this[a.identifier]) return
-        // console.log('20 editable.export() a.identifier:', a.identifier, 'identifiers:', this[a.identifier].map((o:any) => o.identifier))
+        console.log('20 editable.export() a.identifier:', a.identifier, 'identifiers:', this[a.identifier].map((o:any) => o.identifier))
         exported[a.identifier] = this[a.identifier].map((o:any) => o.export())
-      } else {
+      } else if (a.type === 'has_one') {
+        if (!this[a.identifier]) return
+        if (!this[a.identifier].export) throw new Error('No export method in ' + a.identifier)
+        exported[a.identifier] = this[a.identifier].export()
+      }
+      else {
         exported[a.identifier] = this.data[a.identifier]
       }
     })
@@ -218,9 +224,10 @@ class CoreModel {
    */
   updateAssociations() {
     this.associations.map((a:any) => {
-      const json_data = this.data[a.identifier]
+      let json_data = this.data[a.identifier]
       console.log('10 updateAssociations() json_data:', json_data, 'a.identifier:', a.identifier)
       if (!json_data) return
+      if (json_data instanceof Array === false) json_data = [json_data]
       if (json_data.length === 0) return
 
       // json data of associated objects

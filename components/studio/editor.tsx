@@ -122,16 +122,18 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
   }
 
   const handleChange = (e: React.ChangeEvent) => {
-    console.log('handleChange() e:', e)
     e.preventDefault
     const targetElement = e.target as HTMLInputElement
+    console.log('10 handleChange() e:', e, 'targetElement:', targetElement)
+    if (!taxomageia) throw new Error('no taxomageia')
     const object = taxomageia.find(breadcrumbs)
-    console.log('handleChange() object:', object, 'breadcrumbs:', breadcrumbs)
     if (!object) return
+    console.log('20 handleChange() object.data:', object.data, 'breadcrumbs:', breadcrumbs)
     object.setValue(targetElement.name, targetElement.value)
+    console.log('30 handleChange() object.data:', object.data)
     const final = taxomageia.export()
+    console.log('40 handleChange() final:', final)
     dispatch(setTaxomageia(final))
-    console.log('handleChange() final:', final)
 
     // save to localforage
     localForage.setItem('taxomageia', final)
@@ -144,57 +146,4 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
   )
 }
 
-// const TaxonEditor = ({object}: {object: any}) => {
-//   const dispatch = useDispatch()
-//   const taxomageia_data = useSelector((state: TState) => state.taxomageia)
-//   const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
-//   const currentBeadcrumb = useSelector((state: TState) => state.breadcrumbs[state.breadcrumbs.length - 1])
-//   console.log('TaxonEditor() currentBeadcrumb:', currentBeadcrumb)
-
-//   const handleNewClick = (e: React.MouseEvent) => {
-//     e.preventDefault()
-//     console.log('TaxonEditor.addNewHandler()', e.target)
-//     dispatch(createBreadcrumb({name: "Existence"}))
-//   }
-
-//   const handleChange = (e: React.ChangeEvent) => {
-//     e.preventDefault
-//     const targetElement = e.target as HTMLInputElement
-//     const taxomageia = CoreModel.new(taxomageia_data, 'taxomageia')
-//     const modifiedTaxon = taxomageia.find(breadcrumbs)
-//     console.log('modifiedTaxon:', modifiedTaxon)
-//     if (!modifiedTaxon) return
-//     modifiedTaxon.setValue(targetElement.name, targetElement.value)
-//     const final = taxomageia.export()
-//     console.log('handleChange() modifiedTaxon.export:', modifiedTaxon.export())
-//     console.log('handleChange() taxomageia.export():', final)
-//     console.log('handleChange() taxons:', taxomageia.taxons[0].data)
-
-//     dispatch(setTaxomageia(final))
-//     console.log('handleChange() targetElement:', targetElement, 'result:', taxomageia.data)
-//   }
-
-//   const meta = metadata.find('taxon') as types.model_metadata
-//   return (
-//     <MakeItems model_metadata={meta} object={object} handleInputChange={handleChange} handleNewClick={handleNewClick}/>
-//   )
-// }
-
 export default TaxomageiaEditor
-
-
-
-
-  // const [metadata, setMetadata] = useState({identifier:"", name: "", attribute_metadata: []} as types.model_metadata)
-  // useEffect(() => {
-  //   fetch("/api/1/taxomageias/metadata")
-  //     .then(response => { return response.json() })
-  //     .then(metadata => {
-  //       setMetadata(metadata)
-  //       console.log('20 TaxomageiaEditor() fetch, metadata', metadata)
-  //     })
-  //     .catch(e => {
-  //       console.error(e)
-  //     })
-  // }, [])
-

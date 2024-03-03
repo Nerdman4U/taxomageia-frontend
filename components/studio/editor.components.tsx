@@ -25,9 +25,9 @@ const EditorNumberItem = ({editable_item}: {editable_item: editable_item}) => {
 }
 
 /**
- * 
+ *
  * @param {object} editable_item  has association metadata, item model metadata and item data
- * @returns 
+ * @returns
  */
 const AssociatedObject = ({editable_item}: {editable_item: editable_item}) => {
   const dispatch = useDispatch()
@@ -68,7 +68,8 @@ const AssociatedObjects = ({editable_items, headers}: {editable_items: editable_
   if (!editable_items) return <></>
   if (!editable_items.association_metadata) return <></>
   if (!editable_items.association_metadata.editable) return <></>
-  const data = editable_items.data || [] // has_one => [has_one]?
+  let data = editable_items.data || []
+  if (data instanceof Array !== true) data = [data]
   if (data.length === 0) return <></>
   console.log('AssociatedObjects() data:', data)
 
