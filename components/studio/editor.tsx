@@ -1,3 +1,4 @@
+import localForage from 'localforage'
 import { useSelector, useDispatch } from 'react-redux'
 import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumbReducer'
 import { TState } from '@/lib/store'
@@ -131,6 +132,9 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
     const final = taxomageia.export()
     dispatch(setTaxomageia(final))
     console.log('handleChange() final:', final)
+
+    // save to localforage
+    localForage.setItem('taxomageia', final)
   }
 
   const meta = metadata[current.name] as types.model_metadata

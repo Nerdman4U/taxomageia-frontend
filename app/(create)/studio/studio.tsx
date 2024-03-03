@@ -1,5 +1,7 @@
 'use client'
 
+import localForage from 'localforage'
+
 import { useSelector, useDispatch } from 'react-redux'
 import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumbReducer'
 import { TState } from '@/lib/store'
@@ -9,8 +11,8 @@ import EditorContainer from "@/components/studio/editor.container"
 import Breadcrumbs from "@/components/studio/breadcrumbs"
 
 import * as config from '@/lib/config'
-import * as types from '@/lib/features/studio/metadata/metadata.type'
 import { set } from '@/lib/features/studio/metadata/metadataReducer'
+import { setTaxomageia } from '@/lib/features/studio/editor/taxomageiaReducer'
 
 /**
  *
@@ -32,6 +34,7 @@ function Studio() {
   }, [breadcrumbs])
 
   useEffect(() => {
+    // if metadata has been loaded, do not fetch
     fetch(config.metadata)
       .then(response => {
         return response.json()
@@ -39,6 +42,19 @@ function Studio() {
       .then(data => {
         console.log('Studio() fetch metadata, data: ', data)
         dispatch(set(data))
+      })
+      .catch(e => {
+        console.error(e)
+      })
+  }, [])
+
+  useEffect(() => {
+    localForage.getItem('taxomageia')
+      .then(obj => {
+        console.log('Studio() getting item from localForage, obj:', obj)
+        if (obj) {
+          dispatch(setTaxomageia(obj))
+        }
       })
       .catch(e => {
         console.error(e)
