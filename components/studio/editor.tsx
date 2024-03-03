@@ -10,10 +10,6 @@ import { editable_item } from './editor.types'
 import * as metadata from '@/lib/config/metadata'
 import * as types from "./editor.types"
 
-import taxomageiaReducer from '@/lib/features/studio/editor/taxomageiaReducer'
-import { useState, useEffect } from 'react'
-import Breadcrumbs from './breadcrumbs'
-
 const MakeItem = ({item, handleInputChange, handleNewClick}: {item: any, handleInputChange: any, handleNewClick: any}) => {
   if (!item) return <></>
   if (!item.association_metadata) return <></>

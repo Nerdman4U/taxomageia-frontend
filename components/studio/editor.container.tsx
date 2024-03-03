@@ -6,15 +6,6 @@ import { TState } from '@/lib/store'
 import * as editor from "./editor"
 import CoreModel from "./editable"
 
-import * as metadata from '@/lib/config/metadata'
-import { useState, useEffect } from 'react'
-import * as config from '@/lib/config'
-import * as types from "./editor.types"
-import Breadcrumbs from "./breadcrumbs"
-import * as taxomageia from '@/lib/interfaces/taxomageia.interface'
-import * as taxon from '@/lib/interfaces/taxon.interface'
-import * as studio_config from "@/components/studio/studio.config"
-
 /**
  * 
  * taxomageia: TaxomageiaModel, holds metadata of all models and full data.

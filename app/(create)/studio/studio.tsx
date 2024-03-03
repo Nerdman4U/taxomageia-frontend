@@ -8,11 +8,6 @@ import { useEffect } from "react"
 import EditorContainer from "@/components/studio/editor.container"
 import Breadcrumbs from "@/components/studio/breadcrumbs"
 
-import * as types from "@/components/studio/editor.types"
-import * as taxomageia from "@/lib/interfaces/taxomageia.interface"
-import * as taxon from "@/lib/interfaces/taxon.interface"
-import * as studio_config from "@/components/studio/studio.config"
-
 /**
  * 
  * @returns 
