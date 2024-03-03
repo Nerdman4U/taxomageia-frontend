@@ -36,12 +36,13 @@ const EditorContainer = () => {
   }
   // console.log('51 EditorContainer() current.name:', current.name)
   // TODO: Generic
-  switch (current.name) {
-    case 'taxomageia':
-      return <editor.TaxomageiaEditor object={object} />
-    case 'taxon':
-      return <editor.TaxonEditor object={object} />
-  }
+  // switch (current.name) {
+  //   case 'taxomageia':
+  //     return <editor.TaxomageiaEditor object={object} />
+  //   case 'taxon':
+  //     return <editor.TaxonEditor object={object} />
+  // }
+  return <editor.TaxomageiaEditor object={object} />
 }
     
 

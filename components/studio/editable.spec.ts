@@ -22,7 +22,13 @@ describe('Editable', () => {
         name_fi: "testi",
         name_en: "testi",
         taxon_rank: "domain",
-        taxon_parent: "test2"
+        taxon_parent: "test2",
+        existences: [{
+          identifier: "testi",
+          type: "physical",
+          name_fi: "testi",
+          name_en: "testi",
+        }]
       }]
     } as building_up
     deepfreeze(values)
@@ -88,13 +94,39 @@ describe('Editable', () => {
     expect(obj.associations[0].identifier).toBe('taxons')
   })
 
-  it('finds objects', () => {
+  it.only('finds objects', () => {
     expect(obj.taxons.length).toBe(1)
+    expect(obj.taxons[0].existences.length).toBe(1)
     const id = obj.taxons[0].identifier
-    expect(obj.find()).toEqual(obj)
-    expect(obj.find([{name: "Taxomageia", identifier: obj.identifier}])).toEqual(obj)
-    expect(obj.find([{name: "Taxons", association:'taxons', identifier:id}])).toBeDefined()
-    obj.addAssociated('taxons', { identifier: 'TaxonModel_123456' })
+    const existence_id = obj.taxons[0].existences[0].identifier
+    // expect(id).toBeDefined()
+    // expect(existence_id).toBeDefined()
+    // expect(obj.find()).toEqual(obj)
+
+    let found
+    let bc = [{name: "Taxomageia", identifier: obj.identifier}]
+    expect(obj.find(bc)).toEqual(obj)
+
+    bc = [
+      {name: "taxomageia", identifier: obj.identifier},
+      {name: "taxon", association:'taxons', identifier:id}
+    ] as any[]
+    expect(obj.find(bc)).toBeDefined()
+
+    bc = [
+      { name: "taxomageia", identifier: obj.identifier },
+      { name: "taxon", association: 'taxons', identifier: id },
+      { name: "existence", association: 'existences', identifier: existence_id }
+    ] as any[]
+    found = obj.find(bc)
+    expect(found).toBeDefined()
+    expect(found.data).toBeDefined()
+    expect(found.data.identifier).toBe('testi')
+    expect(found.data.type).toBe('physical')
+    expect(found.data.name_fi).toBe('testi')
+    expect(found.data.name_en).toBe('testi')
+
+    obj.addHasMany('taxons', { identifier: 'TaxonModel_123456' })
     expect(obj.find([{name: "Taxons", association:'taxons', identifier:id}])).toBeDefined()
     expect(obj.find([{name: "Taxons", association:'taxons', identifier:'TaxonModel_123456'}])).toBeDefined()
   })

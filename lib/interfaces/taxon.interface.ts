@@ -1,4 +1,5 @@
-import metamorphosisChain from './metamorphosis_chain.interface.js';
+import existence from './existence.interface.js';
+import metamorphosisChain from './existence.interface.js';
 
 interface saved extends about_to_save {
   id: number;
@@ -21,7 +22,7 @@ type building_up = {
   description_en?: string;
   urls?: string[];
   parent_id?: number;
-  existences?: metamorphosisChain[];
+  existences?: existence[];
   created_at?: Date;
   updated_at?: Date;
   properties?: string[]

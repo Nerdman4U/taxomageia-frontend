@@ -6,11 +6,13 @@ import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/br
 
 const EditorTextItem = ({editable_item, handleInputChange}: {editable_item: editable_item, handleInputChange: any}) => {
   const item = editable_item.association_metadata
-  const value = editable_item.data
+  const value = editable_item.data || ""
+  console.log('EditorTextItem() item.identifier:', item.identifier, 'value:', value)
   if (!item.editable) return
+
   return (<tr>
     <td className="text-left pr-3">{item.name}</td>
-    <td className="text-left"><input className="w-4/5" type="text" name={item.identifier} defaultValue={value} onChange={handleInputChange}/></td>
+    <td className="text-left"><input className="w-4/5 text-gray-900" type="text" name={item.identifier} value={value} onChange={handleInputChange}/></td>
   </tr>)
 }
 const EditorNumberItem = ({editable_item}: {editable_item: editable_item}) => {

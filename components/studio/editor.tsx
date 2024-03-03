@@ -58,7 +58,10 @@ const MakeItems = ({model_metadata, object, handleInputChange, handleNewClick}: 
       {         
         ams.map((am: any) => {           
           let value
-          value = object.data[am.identifier]
+          if (!object.data) value = ""
+          else {
+            value = object.data[am.identifier]
+          }
           let item_metadata = model_metadata
           if (am.type === 'has_many' || am.type === 'has_one') item_metadata = metadata.find(am.model) as types.model_metadata
           console.log(am.identifier)
@@ -107,8 +110,9 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
       return
     }
 
-    console.log('TaxomageiaEditor.addNewHandler() object:', object.data)
-    dispatch(setTaxomageia({...taxomageia.data}))
+    const final = taxomageia.export()
+    console.log('TaxomageiaEditor.addNewHandler() object:', object.data, 'am.model:', am.model, 'am.identifier:', am.identifier, 'final:', final)
+    dispatch(setTaxomageia(final))
     dispatch(createBreadcrumb({name: am.model, 'association': am.identifier, identifier}))
 
     //let taxons = taxomageia_data.taxons || []
@@ -118,17 +122,19 @@ const TaxomageiaEditor = ({object}: {object: any}) => {
   }
 
   const handleChange = (e: React.ChangeEvent) => {
+    console.log('handleChange() e:', e)
     e.preventDefault
     const targetElement = e.target as HTMLInputElement
-    const taxomageia = CoreModel.new(taxomageia_data, 'taxomageia')
-
-    // TODO: Find correct taxomageia ( if multiple )
-    taxomageia.setValue(targetElement.name, targetElement.value)
-    dispatch(setTaxomageia(taxomageia.data))
-    console.log('handleChange() targetElement:', targetElement, 'result:', taxomageia.data)
+    const object = taxomageia.find(breadcrumbs)
+    console.log('handleChange() object:', object, 'breadcrumbs:', breadcrumbs)
+    if (!object) return    
+    object.setValue(targetElement.name, targetElement.value)
+    const final = taxomageia.export()
+    dispatch(setTaxomageia(final))
+    console.log('handleChange() final:', final)
   }
 
-  const meta = metadata.find('taxomageia') as types.model_metadata
+  const meta = metadata.find(current.name) as types.model_metadata
   return (
     <MakeItems model_metadata={meta} object={object} handleInputChange={handleChange} handleNewClick={handleNewClick}/>
   )

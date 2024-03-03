@@ -233,14 +233,18 @@
       "id": 158,
       "identifier": "identifier",
       "name": "Identifier",
-      "type": "string"
+      "type": "string",
+      "widget": "string"
     },
     {
       "id": 159,
       "identifier": "name_en",
       "name": "Name (en)",
       "type": "string",
-      "editable": true
+      "widget": "string",
+      "editable": true,
+      "model_metadatum": "existence",
+      "showAtWidgetList": true
     }
   ]
 }

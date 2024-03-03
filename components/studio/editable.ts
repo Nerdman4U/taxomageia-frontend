@@ -7,7 +7,6 @@ import * as metadata from '@/lib/config/metadata'
 
 export interface editable {
   data: any
-  addAssociated(association:string, data:any): void
   updateAssociations(): void
 }
 
@@ -48,9 +47,6 @@ class CoreModel implements editable {
   constructor(data: any, metadata: any) {
     this.#data = structuredClone(data)
     this.#model_metadata = structuredClone(metadata)
-  }
-  addAssociated(association: string, data: any): void {
-    throw new Error('Method not implemented.')
   }
 
   get identifier() { 
@@ -100,27 +96,55 @@ class CoreModel implements editable {
   }
 
     /**
+     * 
+     * Find associated object recursively based on information on breadcrumbs[object]
+     * 
+     * Example
      * const obj = taxomageia.find([
-     *   {name:'Taxomageia', id:'TaxomageiaModel_123123123'},
-     *   {name:'Taxon', association:'taxons', id:'TaxonModel_123123123'},
-     *   {name:'Existence', association:'existences', id:'ExistenceModel_123123123'},
+     *   {name:'taxomageia', id:'TaxomageiaModel_123123123'},
+     *   {name:'taxon', association:'taxons', id:'TaxonModel_123123123'},
+     *   {name:'existence', association:'existences', id:'ExistenceModel_123123123'},
      * ])
      *  */ 
-  find(p: breadcrumb[] = []) {
+  find(p: breadcrumb[] = []): any {
     const path = structuredClone(p)
-    //console.log('editable.find() path:', path)
+    //console.log('10 editable.find() path:', path)
     if (!path) return this
-    const path_item = path.splice(path.length - 1, 1)[0]
-    //console.log('editable.find() path_item:', path_item)
+    const path_item = path.splice(0, 1)[0]
+    //console.log('20 editable.find() path_item:', path_item)
     if (!path_item) return this
-    if (!path_item.association) return this
+    if (!path_item.association) {
+      // first taxomageia model
+      //console.log('22 editable.find() path:', path)
+      return this.find(path)
+    }
     let objs = this[path_item.association as keyof this] as any[]
-    //console.log('editable.find() objs:', objs)
+    //console.log('30 editable.find() objs:', objs)
     if (!objs) return null
     // has_one
     if (objs instanceof Array === false) objs = [objs]
     const obj = objs.find((o: any) => o.identifier === path_item.identifier)
-    //console.log('editable.find() obj:', obj)
+    //console.log('40 editable.find() obj:', obj)
+    if (!obj) return null // found associations but not the object
+    if (path.length === 0) return obj
+    return obj.find(path)
+  }
+
+  find2(p: breadcrumb[] = []) {
+    const path = structuredClone(p)
+    console.log('10 editable.find() path:', path)
+    if (!path) return this
+    const path_item = path.splice(path.length - 1, 1)[0]
+    console.log('20 editable.find() path_item:', path_item)
+    if (!path_item) return this
+    if (!path_item.association) return this
+    let objs = this[path_item.association as keyof this] as any[]
+    console.log('30 editable.find() objs:', objs)
+    if (!objs) return null
+    // has_one
+    if (objs instanceof Array === false) objs = [objs]
+    const obj = objs.find((o: any) => o.identifier === path_item.identifier)
+    console.log('40 editable.find() obj:', obj)
     if (!obj) return null
     if (path.length === 1) return obj
     return obj.find(path)
@@ -153,9 +177,13 @@ class CoreModel implements editable {
     })
   }
 
+  // TODO: nämä palauttaa assosioidut objektit, täytyy miettiä 
+  // kuinka lopulta toteutuvat. esim. kannattaako olla kahta metodia? 
+  // nythän on näin että typescript saa listan ja objektin.
   findHasManyObjects(association_identifier: string): any[] {
     return this[association_identifier]
   }
+
   findHasOneObjects(association_identifier: string): any {
     return this[association_identifier]
   }
@@ -205,3 +233,4 @@ class CoreModel implements editable {
 }
 
 export default CoreModel
+

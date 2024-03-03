@@ -1,6 +1,6 @@
 import metamorphosis from './metamorphosis.interface.js';
 
-interface metamorphosisChain {
+interface existence {
   id?: number;
   identifier: string;
   type: string
@@ -16,6 +16,6 @@ interface metamorphosisChain {
   description_fi?: string
 }
 
-export default metamorphosisChain
+export default existence
 
 
