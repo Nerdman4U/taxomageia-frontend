@@ -21,10 +21,8 @@ interface building_up {
   taxons?: taxon.building_up[];
 }
 
-export type { 
+export type {
   saved,
   about_to_save,
   building_up
 }
-
-

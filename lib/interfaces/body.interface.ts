@@ -1,7 +1,6 @@
 import bodySegment from './body_segment.interface.js';
 import size from './size.interface.js';
 import attribute from './attribute.interface.js';
-import divergence from './divergence.interface.js';
 
 interface body {
   id?: number;

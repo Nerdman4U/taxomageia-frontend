@@ -7,6 +7,7 @@
     "build": "next build; rm -rf ../backend/out; cp -r out ../backend/out; rm -rf out",
     "start": "next",
     "lint": "next lint",
+    "format": "prettier **/*.{ts,js,json,yml,md} -l",
     "commit": "cz",
     "test": "vitest"
   },
@@ -24,6 +25,7 @@
     "eslint": "^8.57.0",
     "eslint-prettier": "^0.0.0-empty",
     "next": "^14.0.4",
+    "prettier": "^3.2.5",
     "react": "18.2.0",
     "react-bootstrap": "^2.9.2",
     "react-dom": "18.2.0",

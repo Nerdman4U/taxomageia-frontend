@@ -1,5 +1,4 @@
 import existence from './existence.interface.js';
-import metamorphosisChain from './existence.interface.js';
 
 interface saved extends about_to_save {
   id: number;

@@ -16,9 +16,11 @@ const breadcrumbSlice = createSlice({
       state.push(action.payload)
       return state
     },
-    pop(state) {
-      state.pop()
-      return state      
+
+    // pop a row \o/
+    pop(state, action) {
+      state.splice(action.payload, state.length)
+      return state
     }
   }
 })
