@@ -34,11 +34,12 @@ const BodyPowersTableRow = ({powerName, value}: bodyPowersTableRowProps) => {
 
 const BodyPowers = ({ powers }: { powers: powers }) => {
   return (
-    <Table striped bordered hover variant="dark">
-      <caption>Powers of this body.</caption>
+    <div className="mt-10">
+    <table className="table-auto w-full">
+      <caption className="text-blue-500">Powers of this body.</caption>
       <tbody>
         <tr><td>Abilities</td><td>
-        <Table striped bordered hover variant="dark">
+        <table className="table-auto w-full">
           <tbody>
            {
              Object.keys(powers.abilities).map((key) => (
@@ -46,14 +47,15 @@ const BodyPowers = ({ powers }: { powers: powers }) => {
              ))
            }
           </tbody>
-        </Table>
+        </table>
 
         </td></tr>
         <tr><td>Properties</td><td>{powers.properties?.join(",")}</td></tr>
         <tr><td>Inputs</td><td>{powers.inputs?.join(",")}</td></tr>
         <tr><td>Outputs</td><td>{powers.outputs?.join(",")}</td></tr>
       </tbody>
-    </Table>
+    </table>
+    </div>
   )
 }
 
@@ -61,7 +63,8 @@ const BodyPart = ({ body_part }: { body_part: bodyPart }) => {
   const type = body_part?.type || "Unknown";
   const desc = body_part?.description_en || body_part?.description_fi || "Unknown"
   return (
-    <Table striped bordered hover variant="dark">
+    <div className="mt-10">
+    <table className="table-auto w-full">
       <caption>Body of this metamorphosis.</caption>
       <tbody>
         <tr><td>Type</td><td>{type}</td></tr>
@@ -73,7 +76,8 @@ const BodyPart = ({ body_part }: { body_part: bodyPart }) => {
           ))}
         </td></tr>
       </tbody>
-    </Table>
+    </table>
+    </div>
   );
 }
 
@@ -81,8 +85,9 @@ const BodySegment = ({ body_segment }: { body_segment: bodySegment }) => {
   const type = body_segment?.type || "Unknown";
   const desc = body_segment?.description_en || body_segment?.description_fi || "Unknown"
   return (
-    <Table striped bordered hover variant="dark">
-      <caption>Body of this metamorphosis.</caption>
+    <div className="mt-10">
+    <table className="table-auto w-full">
+      <caption className="text-blue-500">Body of this metamorphosis.</caption>
       <tbody>
         <tr><td>Type</td><td>{type}</td></tr>
         <tr><td>Percentage</td><td>{body_segment?.percentage}</td></tr>
@@ -99,7 +104,8 @@ const BodySegment = ({ body_segment }: { body_segment: bodySegment }) => {
           }
         </td></tr>
       </tbody>
-    </Table>
+    </table>
+    </div>
   );
 }
 
@@ -110,7 +116,8 @@ const Attribute = ({ attribute }: { attribute: attribute }) => {
 
 const Attributes = ({ attributes }: { attributes: [] | attribute[] }) => {
   return (
-    <Table striped hover variant="dark">
+    <div className="mt-10">
+    <table className="table-auto w-full">
       <tbody>
         {
           attributes?.map((attr,i) => {
@@ -118,7 +125,8 @@ const Attributes = ({ attributes }: { attributes: [] | attribute[] }) => {
           })
         }
       </tbody>
-    </Table>
+    </table>
+    </div>
   )
 }
 
@@ -148,27 +156,29 @@ const Body = ({
   const skills = body?.skills || []
 
   return (
-    <Table striped bordered hover variant="dark">
-      <caption>Body of this metamorphosis.</caption>
+    <div className="bg-gray-100 rounded px-10">
+    <table className="table-auto w-full text-left">
+      <caption className="text-blue-500">Creature data</caption>
       <tbody>
-        <tr><td>Type</td><td>{metamorphosis_name}, {type} ({existence_name})</td></tr>
-        <tr><td>Metamorphosis</td><td>Interval {metamorphosis_interval} hours - Period {metamorphosis_period} days (values are more or less abstract)</td></tr>
-        <tr><td>Materia</td><td>{materia}</td></tr>
-        <tr><td>Minimum attributes</td><td><Attributes attributes={mins} /></td></tr>
-        <tr><td>Maximum attributes</td><td><Attributes attributes={maxes} /></td></tr>
-        <tr><td>Attribute growths</td><td><Attributes attributes={growths} /></td></tr>
-        <tr><td>Skills</td><td><Attributes attributes={skills} /></td></tr>
-        <tr><td>Powers</td><td></td></tr>
-        <tr><td>Description</td><td>{description}</td></tr>
-        <tr><td>Symmetric sides</td><td>{symmetricSides}</td></tr>
-        <tr><td>Powers</td><td><BodyPowers powers={powers} /></td></tr>
-        <tr><td>Segments</td><td>{
+        <tr><td className="pr-6">Type</td><td>{metamorphosis_name}, {type} ({existence_name})</td></tr>
+        <tr><td className="pr-6">Metamorphosis</td><td>Interval {metamorphosis_interval} hours - Period {metamorphosis_period} days (values are more or less abstract)</td></tr>
+        <tr><td className="pr-6">Materia</td><td>{materia}</td></tr>
+        <tr><td className="pr-6">Minimum attributes</td><td><Attributes attributes={mins} /></td></tr>
+        <tr><td className="pr-6">Maximum attributes</td><td><Attributes attributes={maxes} /></td></tr>
+        <tr><td className="pr-6">Attribute growths</td><td><Attributes attributes={growths} /></td></tr>
+        <tr><td className="pr-6">Skills</td><td><Attributes attributes={skills} /></td></tr>
+        <tr><td className="pr-6">Powers</td><td></td></tr>
+        <tr><td className="pr-6">Description</td><td>{description}</td></tr>
+        <tr><td className="pr-6">Symmetric sides</td><td>{symmetricSides}</td></tr>
+        <tr><td className="pr-6">Powers</td><td><BodyPowers powers={powers} /></td></tr>
+        <tr><td className="pr-6">Segments</td><td>{
           segments.map((segment,i) => {
             return <BodySegment body_segment={segment} key={segment.identifier+"-"+i} />
           })}
         </td></tr>
       </tbody>
-    </Table>
+    </table>
+    </div>
   );
 }
 
@@ -268,10 +278,10 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick, click
               <p className="text-xl text-gray-400">It has {existences.length} {existences_word}, {mmCount} {metamorphoses_word} and {bodyCount} {body_word}</p>
             </div>
             <div>
-              <a role="button" onClick={handleClearSelectRankClick}>Back</a>
+              <a role="button" className="text-blue-500 test-bold" onClick={handleClearSelectRankClick}>Back</a>
            </div>
            <div>
-              <Table bordered striped hover size="sm" variant="dark">
+              <table className="table-auto w-full">
                 <tbody>
                   <tr><td>Identifier</td><td>{identifier}</td></tr>
                   <tr><td>Taxon rank</td><td>{taxon_rank}</td></tr>
@@ -291,23 +301,28 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick, click
 
                     </td></tr>
                 </tbody>
-              </Table>
+              </table>
            </div>
            <div>
-              <Tabs>
+              <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-gray-200 dark:border-gray-700 dark:text-gray-400">
                 {
                   existences.map((existence) => {
                     if (!existence.identifier) return "<></>"
                     if (!existence.type) return "<></>"
                     const ename = existence.name_en || existence.name_fi || existence.type
                     return (
-                      <Tab eventKey={existence.identifier} title={ename} key={existence.identifier}>
-                        <Existence existence={existence} key={existence.identifier}/>
-                      </Tab>
+                      //<li eventKey={existence.identifier} title={ename} key={existence.identifier}>
+                      <li className="me-2">
+                         <a href="#" aria-current="page" className="inline-block p-4 text-gray-500 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
+                          {existence.identifier}
+                         </a>
+
+                         <Existence existence={existence} key={existence.identifier}/>
+                      </li>
                     )
                   })
                 }
-              </Tabs>
+              </ul>
            </div>
           </div>
         </div>

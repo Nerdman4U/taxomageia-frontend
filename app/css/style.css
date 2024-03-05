@@ -28,15 +28,7 @@ ol { list-style-type: decimal; }
 /* See Alpine.js: https://github.com/alpinejs/alpine#x-cloak */
 [x-cloak=""] { display: none; }
 
-.bg-purple-600 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(93 93 255 / var(--tw-bg-opacity)) !important;
-}
-.bg-gray-700 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(37 40 44 / var(--tw-bg-opacity)) !important;
-}
-
+/*
 .h1 {
   font-size: 2.5rem;
   font-weight: 800;
@@ -84,4 +76,4 @@ ol { list-style-type: decimal; }
 .w-30 { width: 30% }
 .w-20 { width: 20% }
 
-ul, ol { padding-left: 2rem; }
+ul, ol { padding-left: 2rem; } */

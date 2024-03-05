@@ -2,9 +2,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import * as config from '../../lib/config'
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import Hero from '@/components/hero'
 import Features from '@/components/features'
 import Newsletter from '@/components/newsletter'
