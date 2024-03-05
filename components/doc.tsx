@@ -1,15 +1,15 @@
 /**
- * 
+ *
  * This is for to have some documentation on how to understand Taxomageia.
- * 
+ *
  */
 
 const Doc = () => {
-  return ( 
+  return (
     <section id="documentation">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 text-gray-400">
         <div className="py-12 md:py-20 border-t border-gray-800">
-    
+
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
             {/* <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">Reach goals that matter</div> */}
@@ -42,15 +42,15 @@ const Doc = () => {
               </ul>
             </div>
           </div>
-    
+
           {/* Items */}
           <div id="what-is-taxomageia" className="max-w-3xl mx-auto md:pb-16">
             <h3 className="h3 mb-3 text-gray-400">1. What is Taxomageia?</h3>
             <p>
-              Taxomageia or Biomagical classification extends biological classification and adds magical, immortal, summoned, fantasy, undead and other creatures and monsters. Each Taxonomic rank inherits properties from parent ranks. 
+              Taxomageia or Biomagical classification extends biological classification and adds magical, immortal, summoned, fantasy, undead and other creatures and monsters. Each Taxonomic rank inherits properties from parent ranks.
             </p>
             <p>
-              Taxomageia is not a game. It is information to build a magical ecosystem. Not yet. It just started. 
+              Taxomageia is not a game. It is information to build a magical ecosystem. Not yet. It just started.
             </p>
           </div>
 
@@ -90,10 +90,10 @@ const Doc = () => {
               </p>
               <h4 className="h4 mt-6 mb-1 text-gray-400">Meditation</h4>
               <p>
-                Most of the creatures are surviving with their existences in the dimension and plane where their existences are. This leads them to be blind to the fact that they are also conscious beings. Meditation is an ability and a skill which, if exists, allows creature to recognize this. 
+                Most of the creatures are surviving with their existences in the dimension and plane where their existences are. This leads them to be blind to the fact that they are also conscious beings. Meditation is an ability and a skill which, if exists, allows creature to recognize this.
               </p>
 
-            
+
 
             </div>
           </div>
@@ -107,7 +107,7 @@ const Doc = () => {
                 <tr><td>Identifier</td><td className="pl-3">Unique identifier</td></tr>
                 <tr>
                   <td className="w-20">Name/Description</td><td className="pl-3">Name and description in Finnish and English</td>
-                </tr> 
+                </tr>
                 <tr><td>Taxon rank</td><td className="pl-3">Taxons are inherited from first taxons (domain) to the last (species).</td></tr>
                 <tr><td>Taxon parent</td><td className="pl-3">Parent identifier for this taxon.</td></tr>
                 <tr><td>Properties</td><td className="pl-3">Currently may contain "consciousness".</td></tr>
@@ -122,7 +122,7 @@ const Doc = () => {
                 <tbody>
                 <tr>
                   <td className="w-20">Name/Description</td><td className="pl-3">Name and description in Finnish and English</td>
-                </tr> 
+                </tr>
                 <tr><td className="w-20">Type</td><td className="pl-3">Existence type (e.g. living material, energy, etc.). For fire elementals i use "Plane of Fire" and "Plane of Matter".</td></tr>
                 </tbody>
               </table>
@@ -133,7 +133,7 @@ const Doc = () => {
               <tbody>
                 <tr>
                   <td className="w-20">Name/Description</td><td className="pl-3">Name and description in Finnish and English</td>
-                </tr> 
+                </tr>
                 <tr>
                   <td className="w-20">Interval (hours?)</td><td className="pl-3">Numeric value to describe how ofter (in game time) this metamorphosis "activates". This is just a simple idea to make bodies grow different paces. Current values are abstact. I have however started to think that interval is a value in hours at game time.</td></tr>
                 <tr>
@@ -242,7 +242,7 @@ const Doc = () => {
               <h4 className="h4 mt-6 mb-1">User interface</h4>
               <ul>
                 <li className="my-3">
-                  Ability to add and share self made taxomageias ( needs sign up, sign in etc. ). 
+                  Ability to add and share self made taxomageias ( needs sign up, sign in etc. ).
                 </li>
                 <li className="my-3">Templates. No need to create from scratch.</li>
                 <li className="my-3">
@@ -260,11 +260,11 @@ const Doc = () => {
                   What skills are needed from magic-user or summoner?
                 </li>
                 <li className="my-3">
-                  Body segments or parts could hold "muscle mass" and similar information which would add up to 
+                  Body segments or parts could hold "muscle mass" and similar information which would add up to
                   the creature's strength.
                 </li>
                 <li className="my-3">
-                  Strength of an segment or part could be calculated from amount of muscle cells and quality of muscle cells. 
+                  Strength of an segment or part could be calculated from amount of muscle cells and quality of muscle cells.
                   Calculation could be enchanced by different magical factors. Also, bodies without living cells could have a method to measure strength more precisely.
                 </li>
                 <li className="my-3">
@@ -280,7 +280,7 @@ const Doc = () => {
                   (Bi/tri/etc.)lateral creatures should have their generated body segments body parts to have locations (LEFT, RIGHT, X, ...). Currently their identifier is only name differently i.e. leg_1, leg_2.
                 </li>
               </ul>
-            </div>          
+            </div>
           </div>
         </div>
       </div>

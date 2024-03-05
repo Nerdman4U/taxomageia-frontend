@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import * as config from '@/lib/config'
 
 const Partner = () => {
@@ -12,9 +11,9 @@ const Partner = () => {
           <h1 className="h2 mb-4">Partner</h1>
           <p className="text-xl text-gray-400">
             Are you a Game Developer or Game Designer? Would you like to partner with Taxomageia?
-            I can deliver believable creature and monster data for your game. All ideas are welcome.   
+            I can deliver believable creature and monster data for your game. All ideas are welcome.
           </p>
-        </div> 
+        </div>
 
         <div className="max-w-3xl mx-auto md:pb-16">
           <p>Send email to <a href={config.email}>info@taxomageia.pro</a>.</p>

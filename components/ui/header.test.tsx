@@ -5,10 +5,10 @@ import * as config from '@/lib/config'
 import Header from "./header";
 
 describe("Header", () => {
-  
+
   test("should render header links", async () => {
     const { container } = render(<Header />)
-   
+
     const e1 = await screen.getByText('Server:', {exact: false})
     const e2 = await screen.getByText('Client:', {exact: false})
     const e3 = await screen.getByText('the First', {exact: false})

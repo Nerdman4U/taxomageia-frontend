@@ -1,6 +1,3 @@
-import * as taxomageia from '@/lib/interfaces/taxomageia.interface.js'
-import * as taxon from '@/lib/interfaces/taxon.interface.js'
-
 type model_metadata = {
   identifier: string
   name: string

@@ -12,7 +12,7 @@ const Contact = () => {
           {/* <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">Reach goals that matter</div> */}
           <h1 className="h2 mb-4">Contact</h1>
           <p className="text-xl text-gray-400">You can reach me via Facebook, LinkedIn, Forums or Email.</p>
-        </div> 
+        </div>
 
         <Image className="max-w-full mx-auto md:max-w-none h-auto" src={Joni01} width={1200} height={900} priority={true} alt="Joni and Taxomageia" />
 

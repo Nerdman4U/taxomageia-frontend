@@ -20,11 +20,10 @@ describe("Footer", () => {
     expect(screen.getByText('Linkedin').closest('a')).toHaveProperty('href', config.linkedin)
     expect(screen.getByText('Contact').closest('a')).toHaveProperty('href', "http://localhost:3000" + config.contact)
     expect(screen.getByText('taxomageia.pro', {exact: false}).closest('a')).toHaveProperty('href', "http://localhost:3000/")
-   
+
     expect(container.querySelector('[aria-label="Github"]')?.closest('a')).toHaveProperty('href', config.github)
-    expect(container.querySelector('[aria-label="Facebook"]')?.closest('a')).toHaveProperty('href', config.facebook) 
+    expect(container.querySelector('[aria-label="Facebook"]')?.closest('a')).toHaveProperty('href', config.facebook)
     expect(container.querySelector('[aria-label="Cruip"]')?.closest('a')).toHaveProperty('href', "http://localhost:3000/")
   })
 
 })
-

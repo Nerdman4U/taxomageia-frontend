@@ -10,35 +10,35 @@ const Items = ({items, topic}: {items: items[], topic:string}) => {
   return (
     <div className="max-w-3xl mx-auto md:pb-16">
       <h3 className="h3 mb-3 text-gray-400">{topic}</h3>
-      <div>    
+      <div>
         <ul className="text-gray-200">
-          { 
+          {
             items.map((item) => {
               const name = (!!item.for) ? `${item.name} (${item.for})` : item.name
               return <li key={item.name}><a target="_blank" href={item.url}>{name} from {item.from}</a></li>
-            }) 
+            })
           }
         </ul>
       </div>
-    </div>  
+    </div>
   )
 }
 
 const Credits = () => {
   const templates = credits.templates as items[]
   const images = credits.images as items[]
-  return ( 
+  return (
     <section id="credits">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 text-gray-400">
         <div className="py-12 md:py-20 border-t border-gray-800">
-    
+
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
             {/* <div className="inline-flex text-sm font-semibold py-1 px-3 m-2 text-green-600 bg-green-200 rounded-full mb-4">Reach goals that matter</div> */}
             <h1 className="h2 mb-4">Credits</h1>
             <p className="text-xl text-gray-400">Following items have been and are used at Taxomageia. Thank you!</p>
           </div>
-   
+
           {/* Images */}
           { <Items items={images} topic="Images" /> }
 
@@ -73,7 +73,7 @@ const Credits = () => {
 		            <li>IP, TCP</li>
                 <li>Internet</li>
                 <li><a href="https://en.wikipedia.org/wiki/Turing_machine" target="_top">Turing machine</a></li>
-                <li><a href="https://en.wikipedia.org/wiki/Plankalk%C3%BCl" target="_blank">Plankalkül</a></li>                
+                <li><a href="https://en.wikipedia.org/wiki/Plankalk%C3%BCl" target="_blank">Plankalkül</a></li>
                 <li>And lots of more ... ;)</li>
               </ul>
             </div>

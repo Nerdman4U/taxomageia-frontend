@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { createContext, useEffect, useState  } from 'react';
+import { useEffect, useState  } from 'react';
 import pkg from '../../package.json' assert { type: "json" }
 import axios from 'axios'
 import * as config from '@/lib/config'
@@ -42,12 +42,12 @@ export const ContextProvider = ({children}: {children: React.ReactNode[]}) => {
       setServerVersion(response.data.current)
       if (!response.data.info) return
       setVersionInfo(response.data.info)
-    })    
+    })
   }, [])
 
   let serverStr = ""
   let clientStr = ""
-  if (serverVersion) { serverStr = `Server: v${serverVersion}` } 
+  if (serverVersion) { serverStr = `Server: v${serverVersion}` }
   if (clientVersion) { clientStr = `Client: v${clientVersion}` }
 
   const value = {

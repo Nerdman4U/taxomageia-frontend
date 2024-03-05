@@ -19,7 +19,7 @@ import * as taxon from '@/lib/interfaces/taxon.interface'
     const [ featured, setFeatured ] = useState<taxon.saved[]>([])
     const [ selectedTaxon, setSelectedTaxon ] = useState<taxon.saved | undefined>()
     const [ clicked, setClicked ] = useState(false)
-  
+
     useEffect(() => {
       axios.get(config.api).then((response): void => {
         //console.log(`connected to server at ${taxonsUrl}`, response.data)
@@ -31,7 +31,7 @@ import * as taxon from '@/lib/interfaces/taxon.interface'
         setTaxons(filteredTaxons)
       })
     }, [])
-  
+
     const handleSelectRankClick = (e: React.MouseEvent) => {
       e.preventDefault
       const url = config.api_complete + '/' + e.currentTarget.id
@@ -39,16 +39,16 @@ import * as taxon from '@/lib/interfaces/taxon.interface'
         if (!response.data) return
         setSelectedTaxon(response.data as taxon.saved)
         setClicked(true)
-      })  
+      })
     }
-  
+
     const handleClearSelectRankClick = (e: React.MouseEvent) => {
       e.preventDefault
       setSelectedTaxon(undefined)
       setClicked(true)
     }
-  
-    if (selectedTaxon) {     
+
+    if (selectedTaxon) {
       return (
         <>
           <Hero />
@@ -63,7 +63,7 @@ import * as taxon from '@/lib/interfaces/taxon.interface'
         <>
           <Hero />
           <Features ranks={taxons}/>
-          <Zigzag clicked={clicked} taxons={taxons} handleSelectRankClick={handleSelectRankClick} />  
+          <Zigzag clicked={clicked} taxons={taxons} handleSelectRankClick={handleSelectRankClick} />
           <Testimonials featured={featured} handleSelectRankClick={handleSelectRankClick} />
           <Newsletter />
         </>

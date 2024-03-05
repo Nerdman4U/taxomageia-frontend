@@ -4,19 +4,11 @@ import { useContext } from 'react'
 import AppContext from '@/app/context/application.context'
 import * as config from '@/lib/config'
 
-export default function Header({server, client}: {server?: string, client?: string}) {
+export default function Header() {
   const value = useContext(AppContext)
-  const clientVersion = value.clientVersion || "0.0.0"
-  const serverVersion = value.serverVersion || "0.0.0"
   const clientVersionStr = value.clientVersionStr || "Client: v0.0.0"
   const serverVersionStr = value.serverVersionStr || "Server: v0.0.0"
-  const versionInfo = value.versionInfo || []
 
-  // console.log('value:', value)
-  // let serverVersionStr = ""
-  // let clientStr = ""
-  // if (server) { serverVersionStr = `Server: v${server}` }
-  // if (client) { clientStr = `Client: v${client}` }
   return (
     <header className="absolute w-full z-30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">

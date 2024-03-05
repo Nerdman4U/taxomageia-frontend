@@ -1,7 +1,7 @@
-import rank from '../lib/interfaces/taxon.interface'
+import * as taxon from '../lib/interfaces/taxon.interface'
 import * as config from '../lib/config'
 
-export default function Features({ranks}: {ranks: rank[]}) {
+export default function Features({ranks}: {ranks: taxon.building_up[]}) {
   const amount = ranks?.length || ""
   return (
     <section id="features">

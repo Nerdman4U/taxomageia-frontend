@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useContext} from "react"
-import AppContext from '@/app/context/application.context'
-import { AppContextType, VersionInfoType } from "@/app/context/application.context"
+import { useState } from "react"
+
+import { VersionInfoType } from "@/app/context/application.context"
 import serverVersions from "../../app/versions/server.json" assert { type: "json" }
 import clientVersions from "../../app/versions/client.json" assert { type: "json" }
 import dataVersions from "../../app/versions/data.json" assert { type: "json" }
@@ -22,10 +22,10 @@ const Versions = () => {
       <Toggleable visible={visible} id={id} topic={topic} toggleVisibility={toggleVisibility}>
         <VersionsList versions={versions} />
       </Toggleable>
-    )    
+    )
   }
 
-  return ( 
+  return (
     <div className="mt-24 ml-14">
     { show({visible: serverVisible, topic: "Server (Backend)", toggleVisibility: toggleServer, id: "server", versions: serverVersions}) }
     { show({visible: clientVisible, topic: "Client (Frontend)", toggleVisibility: toggleClient, id: "client", versions: clientVersions}) }
@@ -38,9 +38,9 @@ const VersionsList = ({versions}: {versions: VersionInfoType[]}) => {
   return (
     <section>
       <div className="max-w-3xl px-4 sm:pb-6 text-gray-400">
-        <div className="md:py-2">   
+        <div className="md:py-2">
           {/* Items */}
-          { versions?.map((info) => <Version key={info.version} info={info} />) }    
+          { versions?.map((info) => <Version key={info.version} info={info} />) }
         </div>
       </div>
     </section>
@@ -55,13 +55,13 @@ const Version = ({info}: {info: VersionInfoType}) => {
   return (
     <div className="">
       <h3 className="h3 mt-1 text-gray-400">{info.version}</h3>
-      <div>    
+      <div>
         <VersionItems topic="Features" items={features}/>
         <VersionItems topic="Known problems" items={problems} />
         <VersionItems topic="Next" items={next} />
         <VersionItems topic="Notes" items={notes} />
       </div>
-    </div>  
+    </div>
   )
 }
 

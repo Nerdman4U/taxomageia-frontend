@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import VideoThumb from '@/public/images/hero-image-01.jpg'
-import ModalVideo from '@/components/modal-video'
+// import VideoThumb from '@/public/images/hero-image-01.jpg'
+// import ModalVideo from '@/components/modal-video'
 
 import logo from '@/public/images/dragon-130-130.png'
 
@@ -39,6 +39,9 @@ export default function Hero() {
               </div>
               <div data-aos="fade-up" data-aos-delay="600">
                 <a className="btn text-white bg-gray-700 hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href={config.documentation}>Learn more</a>
+              </div>
+              <div data-aos="fade-up" data-aos-delay="600">
+                <a className="btn text-white bg-yellow-600 hover:bg-yellow-800 w-full sm:w-auto sm:ml-4" href={config.studio}>Studio</a>
               </div>
             </div>
           </div>

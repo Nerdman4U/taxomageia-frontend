@@ -23,7 +23,7 @@ export default function Footer() {
                 </Link>
               </div>
               <div className="text-gray-400">
-                The First Taxomageia ( creatures shown at this webpage ) is an example of features and possibilies of taxon inheritance and capabilies of current version of taxomageia application. 
+                The First Taxomageia ( creatures shown at this webpage ) is an example of features and possibilies of taxon inheritance and capabilies of current version of taxomageia application.
                 Creatures and monsters represented here are examples and subject to change. In future versions anybody (You) can create new taxomageias, new creatures and modify existing ones.
               </div>
             </div>

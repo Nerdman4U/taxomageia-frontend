@@ -1,28 +1,28 @@
 import Image from 'next/image'
-import TaxonParentItem from './taxon-parent-item'
+//import TaxonParentItem from './taxon-parent-item'
 
-import rank from '../lib/interfaces/taxon.interface'
-import metamorphosis from '@/lib/interfaces/metamorphosis.interface'
+import * as taxon from '@/lib/interfaces/taxon.interface'
+//import metamorphosis from '@/lib/interfaces/metamorphosis.interface'
 
 import FeatImage01 from '@/public/images/features-03-image-01.png'
 
-const TaxonPreviewItem = ({rank, handleSelectRankClick, handleClearSelectRankClick}: {rank: rank, handleSelectRankClick: any, handleClearSelectRankClick: any}) => {
+const TaxonPreviewItem = ({rank, handleSelectRankClick}: {rank: taxon.about_to_save, handleClearSelectRankClick: any}) => {
   if (!rank?.identifier) {
     return null
   }
   const identifier = rank.identifier
   const name = rank.name_en || rank.name_fi || identifier
-  const taxonRank = rank.taxon_rank 
-  const taxonParent = rank.taxon_parent
+  const taxonRank = rank.taxon_rank
+  //const taxonParent = rank.taxon_parent
   const taxonRanks = rank.taxon_ranks || []
-  const description = rank.description_en || rank.description_fi || ''
-  // const existences = rank.ages || []  
+  //const description = rank.description_en || rank.description_fi || ''
+  // const existences = rank.ages || []
   // const metamorphoses: metamorphosis[] = []
   // if ( existences.length > 0 ) {
   //   existences.map(age => { return age.metamorphoses })
   // }
   // const bodies = []
-  // if ( metamorphoses.length > 0 ) { 
+  // if ( metamorphoses.length > 0 ) {
   //   metamorphoses.map(m => { return m.bodies })
   // }
 
@@ -41,9 +41,9 @@ const TaxonPreviewItem = ({rank, handleSelectRankClick, handleClearSelectRankCli
         <div className="font-architects-daughter text-xl text-purple-600 mb-2">{taxonRank}</div>
         <h3 className="h3 mb-3"><a id={identifier} onClick={handleSelectRankClick}>{name}</a></h3>
 
-        { 
+        {
           taxonRanks.map((name => {
-            return <TaxonParentItem key={name} name={name}/> 
+            return <TaxonParentItem key={name} name={name}/>
           }))
         }
 
@@ -61,7 +61,6 @@ const TaxonPreviewItem = ({rank, handleSelectRankClick, handleClearSelectRankCli
     </>
   )
 
- 
 }
 
 export default TaxonPreviewItem

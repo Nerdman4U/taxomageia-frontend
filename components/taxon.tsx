@@ -1,7 +1,6 @@
 import Table from 'react-bootstrap/Table';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import PropTypes from 'prop-types';
 
 import TaxonPreviewListItem from '@/components/taxon-preview-list-item';
 
@@ -9,9 +8,9 @@ import body from '@/lib/interfaces/body.interface.js';
 import bodySegment from '@/lib/interfaces/body_segment.interface.js';
 import bodyPart from '@/lib/interfaces/body_part.interface.js';
 import attribute from '@/lib/interfaces/attribute.interface.js';
-import metamorphosis from '@/lib/interfaces/metamorphosis.interface.js';
-import metamorphosisChain from '@/lib/interfaces/metamorphosis_chain.interface.js';
-import taxon from '../lib/interfaces/taxon.interface.js';
+//import metamorphosis from '@/lib/interfaces/metamorphosis.interface.js';
+import existence from '@/lib/interfaces/existence.interface.js';
+import * as taxon from '@/lib/interfaces/taxon.interface.js';
 
 import { useRef, useEffect } from 'react';
 
@@ -28,8 +27,8 @@ type powers = {
 
 // {string, number}
 const BodyPowersTableRow = ({powerName, value}: bodyPowersTableRowProps) => {
-  return ( 
-    <tr><td>{powerName}</td><td>{value}</td></tr> 
+  return (
+    <tr><td>{powerName}</td><td>{value}</td></tr>
   )
 }
 
@@ -40,15 +39,15 @@ const BodyPowers = ({ powers }: { powers: powers }) => {
       <tbody>
         <tr><td>Abilities</td><td>
         <Table striped bordered hover variant="dark">
-          <tbody>     
+          <tbody>
            {
              Object.keys(powers.abilities).map((key) => (
-              <BodyPowersTableRow key={key} powerName={key} value={powers.abilities[key]} />               
+              <BodyPowersTableRow key={key} powerName={key} value={powers.abilities[key]} />
              ))
            }
           </tbody>
         </Table>
-  
+
         </td></tr>
         <tr><td>Properties</td><td>{powers.properties?.join(",")}</td></tr>
         <tr><td>Inputs</td><td>{powers.inputs?.join(",")}</td></tr>
@@ -74,8 +73,8 @@ const BodyPart = ({ body_part }: { body_part: bodyPart }) => {
           ))}
         </td></tr>
       </tbody>
-    </Table> 
-  );   
+    </Table>
+  );
 }
 
 const BodySegment = ({ body_segment }: { body_segment: bodySegment }) => {
@@ -88,7 +87,7 @@ const BodySegment = ({ body_segment }: { body_segment: bodySegment }) => {
         <tr><td>Type</td><td>{type}</td></tr>
         <tr><td>Percentage</td><td>{body_segment?.percentage}</td></tr>
         <tr><td>Description</td><td>{desc}</td></tr>
-        <tr><td>BodyParts</td><td>{ 
+        <tr><td>BodyParts</td><td>{
             body_segment?.body_parts?.map((body_part,i) => (
              <BodyPart key={body_part.identifier+"-"+i} body_part={body_part} />
            ))}
@@ -100,13 +99,13 @@ const BodySegment = ({ body_segment }: { body_segment: bodySegment }) => {
           }
         </td></tr>
       </tbody>
-    </Table> 
+    </Table>
   );
 }
 
 const Attribute = ({ attribute }: { attribute: attribute }) => {
   return <tr key={attribute.identifier}><td>{attribute.key}</td><td>{attribute.value}</td></tr>
- 
+
 }
 
 const Attributes = ({ attributes }: { attributes: [] | attribute[] }) => {
@@ -120,33 +119,30 @@ const Attributes = ({ attributes }: { attributes: [] | attribute[] }) => {
         }
       </tbody>
     </Table>
-  )  
+  )
 }
 
-const Body = ({ 
-  body, 
+const Body = ({
+  body,
   existence_name,
-  existence_type,
   metamorphosis_name,
   metamorphosis_interval,
   metamorphosis_period
-}: { 
-  body: body, 
+}: {
+  body: body,
   existence_name: string,
-  existence_type: string,
   metamorphosis_name: string,
   metamorphosis_interval: number,
   metamorphosis_period: number
 }) => {
-  const etype = body?.etype || "Unknown";
   const type = body?.type || "Unknown";
   const materia = body?.materia || "Unknown";
   const powers = body?.powers || "Unknown";
   const description = body?.description_en || body?.description_fi || "No description available"
   const segments = body?.body_segments || []
   const centerSides = body?.center_sides || 0
-  const symmetricSides = ( centerSides > 1 ) ? centerSides : "No" 
-  const mins = body?.mins || []  
+  const symmetricSides = ( centerSides > 1 ) ? centerSides : "No"
+  const mins = body?.mins || []
   const maxes = body?.maxes || []
   const growths = body?.growths || []
   const skills = body?.skills || []
@@ -155,7 +151,7 @@ const Body = ({
     <Table striped bordered hover variant="dark">
       <caption>Body of this metamorphosis.</caption>
       <tbody>
-        <tr><td>Type</td><td>{metamorphosis_name} ({existence_name})</td></tr>
+        <tr><td>Type</td><td>{metamorphosis_name}, {type} ({existence_name})</td></tr>
         <tr><td>Metamorphosis</td><td>Interval {metamorphosis_interval} hours - Period {metamorphosis_period} days (values are more or less abstract)</td></tr>
         <tr><td>Materia</td><td>{materia}</td></tr>
         <tr><td>Minimum attributes</td><td><Attributes attributes={mins} /></td></tr>
@@ -172,12 +168,12 @@ const Body = ({
           })}
         </td></tr>
       </tbody>
-    </Table> 
-  );  
+    </Table>
+  );
 }
 
 // const Metamorphosis = ({ metamorphosis }: { metamorphosis:metamorphosis }) => {
-//   console.log(metamorphosis)  
+//   console.log(metamorphosis)
 //   const interval = metamorphosis?.interval || "Unknown";
 //   const period = metamorphosis?.period || "Unknown";
 //   const bodies = metamorphosis?.bodies || []
@@ -197,12 +193,11 @@ const Body = ({
 //   );
 // }
 
-const Existence = ({ existence }: { existence: metamorphosisChain }) => {
+const Existence = ({ existence }: { existence: existence }) => {
   const identifier = existence?.identifier || "Unknown";
   const metamorphoses = existence?.metamorphoses || []
   const existence_name = existence?.name_en || existence?.name_fi || identifier
-  const existence_type = existence?.type || "Unknown";
- 
+
   return (
     <>
       {
@@ -212,11 +207,10 @@ const Existence = ({ existence }: { existence: metamorphosisChain }) => {
           const metamorphosis_interval = metamorphosis?.interval || 0
           const metamorphosis_period = metamorphosis?.period || 0
           return metamorphosis.bodies?.map((body,i) => {
-            return <Body 
-                body={body} 
-                existence_name={ename} 
-                metamorphosis_name={metamorphosis_name} 
-                existence_type={existence_type}
+            return <Body
+                body={body}
+                existence_name={ename}
+                metamorphosis_name={metamorphosis_name}
                 metamorphosis_interval={metamorphosis_interval}
                 metamorphosis_period={metamorphosis_period}
                 key={body.identifier+"-"+i}/>
@@ -228,15 +222,15 @@ const Existence = ({ existence }: { existence: metamorphosisChain }) => {
   );
 }
 
-const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick, clicked }: {taxon: taxon | undefined, handleClearSelectRankClick: any, handleSelectRankClick: any, clicked: boolean}) => {
+const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick, clicked }: {taxon: taxon.about_to_save | undefined, handleClearSelectRankClick: any, handleSelectRankClick: any, clicked: boolean}) => {
   if (!taxon) return
   const ref = useRef<HTMLDivElement>(null)
 
-  const identifier = taxon?.identifier || "Unknown";  
+  const identifier = taxon?.identifier || "Unknown";
   const name = taxon?.name_en || taxon?.name_fi || identifier
   const taxon_rank = taxon?.taxon_rank || "Unknown";
   const taxon_parent = taxon?.taxon_parent || "Unknown";
-  const existences = taxon?.existences || []; 
+  const existences = taxon?.existences || [];
 
   useEffect(() => {
     if (!ref) return
@@ -246,7 +240,7 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick, click
     if (el) el.scrollIntoView()
   }, [])
 
-  const mmCount = existences.reduce((sum, i) => { 
+  const mmCount = existences.reduce((sum, i) => {
     const count = i.metamorphoses?.length || 0
     return sum + count }, 0)
   let bodyCount = 0;
@@ -254,14 +248,14 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick, click
     const mm = e.metamorphoses || []
     for (const m of mm) {
       const bb = m.bodies || []
-      bodyCount += bb.length     
+      bodyCount += bb.length
     }
   }
 
   const existences_word = existences.length > 1 ? "existences" : "existence"
   const metamorphoses_word = mmCount > 1 ? "metamorphoses" : "metamorphosis"
   const body_word = bodyCount > 1 ? "bodies" : "body"
-  
+
 
   return (
     <>
@@ -289,19 +283,19 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick, click
                   <tr><td>Taxon parents</td>
                     <td>
                       {
-                        taxon.taxon_ranks?.map((r) => { 
+                        taxon.taxon_ranks?.map((r) => {
                           const name = r.name_en || r.name_fi || r.identifier
                           return <TaxonPreviewListItem name={name} taxon_rank={r.taxon_rank} identifier={r.identifier} key={r.identifier} handleSelectRankClick={handleSelectRankClick}/>
                         })
                       }
-                  
+
                     </td></tr>
                 </tbody>
               </Table>
-           </div>        
+           </div>
            <div>
               <Tabs>
-                { 
+                {
                   existences.map((existence) => {
                     if (!existence.identifier) return "<></>"
                     if (!existence.type) return "<></>"
@@ -311,14 +305,14 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick, click
                         <Existence existence={existence} key={existence.identifier}/>
                       </Tab>
                     )
-                  }) 
+                  })
                 }
               </Tabs>
            </div>
           </div>
         </div>
-      </section>   
-    </>  
+      </section>
+    </>
   );
 };
 

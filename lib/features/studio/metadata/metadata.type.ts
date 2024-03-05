@@ -17,6 +17,7 @@ type attribute_metadata = {
   model_metadatum_id?: number
   description?: string
   editable: boolean
+  showAtWidgetList: boolean
 }
 
 export type {

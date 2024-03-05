@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TState } from "@/lib/store";
 import * as types from "./metadata.type";
 
 const initialState = <Record<string, types.model_metadata>>{}

@@ -14,7 +14,6 @@ export const find = (identifier: string) => {
   })
 }
 
-
 /**
  * 1. load a list of to be updated metadata models
  * 2. load metadata

@@ -2,15 +2,12 @@ import { beforeEach, expect, describe, it, vi } from 'vitest'
 import CoreModel from './editable.js'
 import { building_up } from '@/lib/interfaces/taxomageia.interface.js'
 import deepfreeze from 'deep-freeze'
-import * as util from 'util'
-import * as metadata from '@/lib/config/metadata'
-import * as types from './editor.types.js'
 
 vi.mock('@/lib/config/metadata')
 
 describe('Editable', () => {
 
-  let obj: CoreModel
+  let obj: any
   let values: any
   beforeEach(async () => {
     values = {
@@ -36,14 +33,16 @@ describe('Editable', () => {
   })
 
   it('is defined', () => {
-    expect(obj).toBeDefined()    
+    if (!obj) throw new Error('obj is not defined')
+    expect(obj).toBeDefined()
     expect(obj.data).toBeDefined()
     expect(obj.data.taxons).toBeDefined()
     expect(obj.data.taxons.length).toBe(1)
-    expect(obj.className).toBe('Taxomageia')    
+    expect(obj.className).toBe('Taxomageia')
   })
 
   it('has cloned data', () => {
+    if (!obj) throw new Error('obj is not defined')
     expect(obj.data === values).toBe(false)
     expect(obj.data['taxons']).toBeDefined()
     expect(obj.data.taxons[0] === values.taxons[0]).toBe(false)
@@ -51,18 +50,21 @@ describe('Editable', () => {
   })
 
   it('has a random identifier', () => {
+    if (!obj) throw new Error('obj is not defined')
     console.log('identifier:', obj.identifier)
     expect(obj.identifier).toBeDefined()
   })
 
   it('finds has_many', () => {
-    let taxons = obj.findHasManyObjects('taxons')
+    if (!obj) throw new Error('obj is not defined')
+    const taxons = obj.findHasManyObjects('taxons')
     expect(taxons).toBeDefined()
     expect(taxons[0].identifier).toBeDefined()
     expect(taxons[0].identifier.match(/^Taxon_[0-9]+$/)).toBeTruthy()
   })
 
   it('gets metadata', () => {
+    if (!obj) throw new Error('obj is not defined')
     //expect(obj.className).toBe('TaxomageiaModel')
     expect(obj.model_metadata).toBeDefined()
     expect(obj.model_metadata.identifier).toBe('taxomageia')
@@ -74,12 +76,14 @@ describe('Editable', () => {
   })
 
   it('verifies that association exists', () => {
+    if (!obj) throw new Error('obj is not defined')
     expect(obj.verifyAssociation('taxons')).toBeDefined()
     expect(obj.verifyAssociation('existences')).toBeUndefined()
     expect(obj.verifyAssociation('')).toBeUndefined()
   })
 
   it('adds new associated object', () => {
+    if (!obj) throw new Error('obj is not defined')
     expect(obj.taxons.length).toBe(1)
     expect(obj.taxons[0].name_fi).toBe('testi')
     obj.addAssociated('taxons', { identifier: 'TaxonModel_123456' })
@@ -89,12 +93,14 @@ describe('Editable', () => {
   })
 
   it('returns associations', () => {
+    if (!obj) throw new Error('obj is not defined')
     expect(obj.associations).toBeDefined()
     expect(obj.associations.length).toBe(1)
     expect(obj.associations[0].identifier).toBe('taxons')
   })
 
   it.only('finds objects', () => {
+    if (!obj) throw new Error('obj is not defined')
     expect(obj.taxons.length).toBe(1)
     expect(obj.taxons[0].existences.length).toBe(1)
     const id = obj.taxons[0].identifier
@@ -103,7 +109,6 @@ describe('Editable', () => {
     // expect(existence_id).toBeDefined()
     // expect(obj.find()).toEqual(obj)
 
-    let found
     let bc = [{name: "Taxomageia", identifier: obj.identifier}]
     expect(obj.find(bc)).toEqual(obj)
 
@@ -118,7 +123,7 @@ describe('Editable', () => {
       { name: "taxon", association: 'taxons', identifier: id },
       { name: "existence", association: 'existences', identifier: existence_id }
     ] as any[]
-    found = obj.find(bc)
+    const found = obj.find(bc)
     expect(found).toBeDefined()
     expect(found.data).toBeDefined()
     expect(found.data.identifier).toBe('testi')
@@ -144,7 +149,7 @@ describe('Editable', () => {
     tax.setValue('name_fi', 'testi123')
     expect(obj.taxons[0].name_fi).toBe('testi123')
     e = obj.export()
-    expect(e.taxons[0].name_fi).toBe('testi123')   
+    expect(e.taxons[0].name_fi).toBe('testi123')
   })
 })
 

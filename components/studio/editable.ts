@@ -1,24 +1,13 @@
 import * as types from './editor.types'
+import * as metadata from '@/lib/features/studio/metadata/metadata.type'
 import { breadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumb.type'
-import * as taxon from '@/lib/interfaces/taxon.interface'
-import * as taxomageia from '@/lib/interfaces/taxomageia.interface'
-import { random_number, random_identifier } from '@/lib/utils/functions'
 
+interface core {
+  [key: string]: any
+}
+
+class CoreModel implements core {
   /**
-   * TaxomageiaModel
-   *
-   * Has full data as json. Associated models are intantiated from this data.
-   *
-   * Every model has its own metadata.
-   *
-   *
-   * metadata:
-   * {
-   *   taxomageia: { name_fi: '', description_fi: '', attribute_metadata: {} },
-   *   taxon: { name_fi: '', ... },
-   *   existence: { ... }
-   * }
-   *
    * data:
    * {
    *   name_fi, name_en, ...
@@ -27,17 +16,25 @@ import { random_number, random_identifier } from '@/lib/utils/functions'
    *   }]
    * }
    */
-class CoreModel {
   #data: any
+  /**
+   * metadata:
+   * {
+   *   taxomageia: { name_fi: '', description_fi: '', attribute_metadata: {} },
+   *   taxon: { name_fi: '', ... },
+   *   existence: { ... }
+   * }
+
+   */
   #model_metadata: types.model_metadata
+  // #taxons: any[] = []
   static #metadata: Record<string, types.model_metadata> = {} // metadata for all models
 
   /**
    * When creating a new model its class is known and metadata can be passed.
    *
-   *
-   * @param data
-   * @param metadata
+   * @param data the data for the new model. This is cloned and stored internally
+   * @param metadata the metadata for the new model. This is cloned and stored internally
    */
   constructor(data: any, metadata: any) {
     if (!data) throw new Error('data is missing')
@@ -45,7 +42,6 @@ class CoreModel {
     this.#model_metadata = structuredClone(metadata) // clone?
   }
 
-  // TODO: not indempotent
   get identifier() {
     // if (this.data.identifier) return this.data.identifier
     // this.data.identifier = random_identifier(this.className)
@@ -65,29 +61,44 @@ class CoreModel {
   get className() { return this.model_metadata.name }
   get attribute_metadata() { return this.#model_metadata.attribute_metadata }
 
+  // get taxons() { return this.#taxons }
+  // set taxons(value: any[]) { this.#taxons = value }
+
+
   /**
+   * Creates a new instance of the model class based on metadatum name and
+   * optionally new metadata.
    *
-   * @param data
-   * @param {key: string, value: types.model_metadata} meta all metadata
-   * @returns
+   * If metadata is given it sets the static class metadata for all instances
+   * of the class and all future instances.
+   *
+   * @param data the data to be used for the new model
+   * @param model_metadatum_name the name of the metadatum that defines the model
+   * @param metadata optional metadata for the class that is used for all
+   *        instances of the class and all future instances
+   * @returns a new instance of the model or null if the metadata did not
+   *          contain the metadatum
    */
   static new (data: any, model_metadatum_name: string, metadata?: any) {
-    //console.log('10 CoreModel.new() data:', data, 'model_metadatum_name:', model_metadatum_name, 'metadata:', metadata, 'this.metadata:', this.#metadata)
     if (!metadata && !this.#metadata) return null
-    //console.log('20 CoreModel.new()')
     if (metadata) this.#metadata = metadata
     const metadatum = this.#metadata[model_metadatum_name]
     if (!metadatum) return null
-    //console.log('30 CoreModel.new()')
     if (!metadatum.attribute_metadata) return null
-    //console.log('40 CoreModel.new()')
     if (!data.identifier) throw new Error(`data has no identifier`)
     const obj = new CoreModel(data, metadatum)
-    //console.log('40 CoreModel.new() identifier:', obj.identifier)
     obj.updateAssociations()
     return obj
   }
 
+  /**
+   * Adds new data to the has_many association.
+   *
+   * @param association the association to add data to
+   * @param data the data to add to the association
+   * @throws Error if the association does not exist or if the data does not
+   *         have an identifier
+   */
   addHasMany(association: string, data: any) {
     if (!this.verifyAssociation(association)) throw new Error(`association ${association} not defined`)
     if (!this.data[association]) this.data[association] = []
@@ -97,29 +108,43 @@ class CoreModel {
     this.updateAssociations()
   }
 
+
+  /**
+   * Adds new data to the has_one association.
+   *
+   * @param association the association to add data to
+   * @param data the data to add to the association
+   * @throws Error if the association does not exist
+   */
   addHasOne(association: string, data: any) {
     if (!this.verifyAssociation(association)) throw new Error(`association ${association} not defined`)
     this.data[association] = data
     this.updateAssociations()
   }
 
-  verifyAssociation(association: string) {
+  /**
+   * Verifies that the association exists in the model metadata.
+   *
+   * @param association the identifier of the association to check
+   * @returns the metadata object if the association exists, otherwise undefined
+   */
+  verifyAssociation(association: string): any | undefined {
     return this.attribute_metadata.find((a: any) => {
       return (a.type === 'has_many' || a.type === 'has_one') && a.identifier === association
     })
   }
 
-    /**
-     *
-     * Find associated object recursively based on information on breadcrumbs[object]
-     *
-     * Example
-     * const obj = taxomageia.find([
-     *   {name:'taxomageia', id:'TaxomageiaModel_123123123'},
-     *   {name:'taxon', association:'taxons', id:'TaxonModel_123123123'},
-     *   {name:'existence', association:'existences', id:'ExistenceModel_123123123'},
-     * ])
-     *  */
+  /**
+   *
+   * Find associated object recursively based on information on breadcrumbs[object]
+   *
+   * Example
+   * const obj = taxomageia.find([
+   *   {name:'taxomageia', id:'TaxomageiaModel_123123123'},
+   *   {name:'taxon', association:'taxons', id:'TaxonModel_123123123'},
+   *   {name:'existence', association:'existences', id:'ExistenceModel_123123123'},
+   * ])
+   *  */
   find(p: breadcrumb[] = []): any {
     const path = structuredClone(p)
     //console.log('10 editable.find() path:', path)
@@ -132,7 +157,7 @@ class CoreModel {
       //console.log('22 editable.find() path:', path)
       return this.find(path)
     }
-    let objs = this[path_item.association]
+    let objs = this[path_item.association as keyof CoreModel]
     if (!objs) return null
     if (objs instanceof Array === false) objs = [objs] // has_one
     objs = objs.filter((o: any) => o.identifier)
@@ -148,20 +173,43 @@ class CoreModel {
     return obj.find(path)
   }
 
+  /**
+   * Export associated objects recursively based on information on attribute_metadata
+   *
+   * Example
+   * const exported = taxomageia.export()
+   * console.log(exported)
+   * {
+   *   taxons: [
+   *     {
+   *       identifier: 'TaxonModel_123123123',
+   *       name: 'Bacteria',
+   *       rank: 'kingdom',
+   *       existences: [
+   *         {
+   *           identifier: 'ExistenceModel_123123123',
+   *           name: 'Bacteria (taxonomic rank)',
+   *           source: 'Wikipedia'
+   *         }
+   *       ]
+   *     }
+   *   ]
+   * }
+   */
   export() {
     const exported = {} as any
     if (!this.attribute_metadata) throw new Error ('attribute_metadata not defined')
     if (!this.identifier) throw new Error ('identifier not defined')
-    this.attribute_metadata.forEach((a:any) => {
+    this.attribute_metadata.forEach((a:metadata.attribute_metadata) => {
       // console.log('10 editable.export() am:', a)
       if (a.type === 'has_many') {
-        if (!this[a.identifier]) return
+        if (!(this as CoreModel)[a.identifier as keyof CoreModel]) return
         //console.log('20 editable.export() a.identifier:', a.identifier, 'identifiers:', this[a.identifier].map((o:any) => o.identifier))
-        exported[a.identifier] = this[a.identifier].map((o:any) => o.export())
+        exported[a.identifier] = this[a.identifier as keyof CoreModel].map((o:any) => o.export())
       } else if (a.type === 'has_one') {
-        if (!this[a.identifier]) return
-        if (!this[a.identifier].export) throw new Error('No export method in ' + a.identifier)
-        exported[a.identifier] = this[a.identifier].export()
+        if (!this[a.identifier as keyof CoreModel]) return
+        if (!this[a.identifier as keyof CoreModel].export) throw new Error('No export method in ' + a.identifier)
+        exported[a.identifier] = this[a.identifier as keyof CoreModel].export()
       }
       else {
         exported[a.identifier] = this.data[a.identifier]
@@ -170,12 +218,23 @@ class CoreModel {
     return exported
   }
 
+  /**
+   * Get associations from the attribute metadata.
+   *
+   * @return {any[]} the array of associations
+   */
   get associations(): any[] {
     return this.attribute_metadata.filter((a:any) => {
       return (a.type === 'has_many' || a.type === 'has_one')
     })
   }
 
+  /**
+   * Find association metadata by identifier.
+   *
+   * @param {string} identifier - The identifier to search for
+   * @return {any} The association metadata with the specified identifier, if found
+   */
   findAssociationMetadata(identifier: string) {
     return this.associations.find((a:any) => {
       return a.identifier === identifier
@@ -186,11 +245,11 @@ class CoreModel {
   // kuinka lopulta toteutuvat. esim. kannattaako olla kahta metodia?
   // nythän on näin että typescript saa listan ja objektin.
   findHasManyObjects(association_identifier: string): any[] {
-    return this[association_identifier]
+    return this[association_identifier as keyof CoreModel]
   }
 
   findHasOneObjects(association_identifier: string): any {
-    return this[association_identifier]
+    return this[association_identifier as keyof CoreModel]
   }
 
   /**
@@ -203,7 +262,7 @@ class CoreModel {
    *
    */
   updateAssociations() {
-    this.associations.map((a:any) => {
+    this.associations.map((a: metadata.attribute_metadata) => {
       let json_data = this.data[a.identifier]
       //console.log('10 updateAssociations() json_data:', json_data, 'a.identifier:', a.identifier)
       if (!json_data) return

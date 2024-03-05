@@ -1,15 +1,13 @@
 import Image from 'next/image'
-import TaxonPreviewItem from './taxon-preview-item'
 import TaxonPreviewListItem from '@/components/taxon-preview-list-item'
 
 import penguin from '@/public/images/penguin-388-576.png'
-import orc from '@/public/images/orc-01.png'
 
-import rank from '../lib/interfaces/taxon.interface'
+import * as taxon from '@/lib/interfaces/taxon.interface'
 
 import { useRef, useEffect } from 'react'
 
-const Zigzag = ({ taxons, handleSelectRankClick, clicked }: { taxons: rank[], handleSelectRankClick: any, clicked: boolean }) => {
+const Zigzag = ({ taxons, handleSelectRankClick, clicked }: { taxons: taxon.about_to_save[], handleSelectRankClick: any, clicked: boolean }) => {
   const ref = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -35,13 +33,13 @@ const Zigzag = ({ taxons, handleSelectRankClick, clicked }: { taxons: rank[], ha
           {/* Items */}
           <div className="max-w-3xl mx-auto md:pb-16">
             {
-              taxons.map((r) => { 
+              taxons.map((r) => {
                 const name = r.name_en || r.name_fi || r.identifier
                 return <TaxonPreviewListItem name={name} taxon_rank={r.taxon_rank} identifier={r.identifier} key={r.identifier} handleSelectRankClick={handleSelectRankClick}/>
               })
             }
             <div className="clearfix:both"></div>
-            {/* { 
+            {/* {
               taxons.map(r => <TaxonPreviewItem key={r.identifier} rank={r} handleSelectRankClick={handleSelectRankClick} handleClearSelectRankClick={handleClearSelectRankClick} />)
             } */}
           </div>

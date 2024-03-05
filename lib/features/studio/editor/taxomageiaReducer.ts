@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { TState } from '@/lib/store'
 import * as taxomageia from '@/lib/interfaces/taxomageia.interface'
-import { random_number, random_identifier } from '@/lib/utils/functions'
+import { random_identifier } from '@/lib/utils/functions'
 
 const initialState = {
   identifier: random_identifier("taxomageia")

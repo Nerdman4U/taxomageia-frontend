@@ -8,11 +8,6 @@ const breadcrumbSlice = createSlice({
   initialState,
   reducers: {
     create(state, action) {
-      const result = {
-        name: action.payload.name,
-        object_id: action.payload.object_id,
-        association: action.payload.association
-      } as breadcrumb
       state.push(action.payload)
       return state
     },

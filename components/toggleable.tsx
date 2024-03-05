@@ -1,7 +1,5 @@
-import { relative } from "path"
-
 const Toggleable = (props: any) => {
-  const hideWhenVisible = (props.visible) ? { display: 'none' } : {}
+  //const hideWhenVisible = (props.visible) ? { display: 'none' } : {}
   const showWhenVisible = (props.visible) ? {} : { display: 'none' }
   return (
     <div>
@@ -13,7 +11,7 @@ const Toggleable = (props: any) => {
       {/* <div style={hideWhenVisible}>
         <button onClick={props.toggleVisibility}>View</button>
       </div> */}
-      <div style={showWhenVisible}>       
+      <div style={showWhenVisible}>
         {props.children}
       </div>
     </div>
