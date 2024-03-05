@@ -1,9 +1,4 @@
-import Table from 'react-bootstrap/Table';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-
 import TaxonPreviewListItem from '@/components/taxon-preview-list-item';
-
 import body from '@/lib/interfaces/body.interface.js';
 import bodySegment from '@/lib/interfaces/body_segment.interface.js';
 import bodyPart from '@/lib/interfaces/body_part.interface.js';
@@ -314,7 +309,7 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick, click
                       //<li eventKey={existence.identifier} title={ename} key={existence.identifier}>
                       <li className="me-2">
                          <a href="#" aria-current="page" className="inline-block p-4 text-gray-500 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
-                          {existence.identifier}
+                          {ename}
                          </a>
 
                          <Existence existence={existence} key={existence.identifier}/>
