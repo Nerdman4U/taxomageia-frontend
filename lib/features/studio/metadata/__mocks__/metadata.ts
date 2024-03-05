@@ -1,6 +1,5 @@
-import * as types from '@/components/studio/editor.types'
-
-const metadata = [
+export const metadata = {
+  'taxomageia':
   {
     identifier: 'taxomageia',
     name: 'Taxomageia',
@@ -28,6 +27,7 @@ const metadata = [
       type: "has_many"
     }]
   },
+  'taxon':
   {
     identifier: 'taxon',
     name: 'Taxon',
@@ -55,6 +55,7 @@ const metadata = [
       type: "has_many"
     }]
   },
+  'existence':
   {
     identifier: 'existence',
     name: 'Existence',
@@ -73,11 +74,4 @@ const metadata = [
       type: 'string',
     }]
   }
-]
-
-export const find = (identifier: string): types.model_metadata | undefined => {
-  console.log('mock metadata.find() identifier:', identifier)
-  return metadata.find((m: any) => {
-    return m.identifier === identifier
-  })
 }

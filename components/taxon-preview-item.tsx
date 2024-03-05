@@ -1,12 +1,12 @@
 import Image from 'next/image'
-//import TaxonParentItem from './taxon-parent-item'
+import TaxonParentItem from './taxon-parent-item'
 
 import * as taxon from '@/lib/interfaces/taxon.interface'
 //import metamorphosis from '@/lib/interfaces/metamorphosis.interface'
 
 import FeatImage01 from '@/public/images/features-03-image-01.png'
 
-const TaxonPreviewItem = ({rank, handleSelectRankClick}: {rank: taxon.about_to_save, handleClearSelectRankClick: any}) => {
+const TaxonPreviewItem = ({rank, handleSelectRankClick}: {rank: taxon.about_to_save, handleSelectRankClick: any}) => {
   if (!rank?.identifier) {
     return null
   }

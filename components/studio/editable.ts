@@ -5,6 +5,22 @@ import { breadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumb.type'
 interface core {
   [key: string]: any
 }
+interface associated_objects {
+  [key: string]: any
+  taxons?: any
+  existences?: any
+  metamorphoses?: any
+  bodies?: any
+  body_segments?: any
+  connections?: any
+  body_parts?: any
+  organs?: any
+  size?: any
+  mins?: any
+  maxes?: any
+  growths?: any
+  skills?: any
+}
 
 class CoreModel implements core {
   /**
@@ -27,7 +43,7 @@ class CoreModel implements core {
 
    */
   #model_metadata: types.model_metadata
-  // #taxons: any[] = []
+  #associated_objects: associated_objects = {}
   static #metadata: Record<string, types.model_metadata> = {} // metadata for all models
 
   /**
@@ -60,10 +76,8 @@ class CoreModel implements core {
   get model_metadata() { return this.#model_metadata }
   get className() { return this.model_metadata.name }
   get attribute_metadata() { return this.#model_metadata.attribute_metadata }
-
-  // get taxons() { return this.#taxons }
-  // set taxons(value: any[]) { this.#taxons = value }
-
+  get associated_objects() { return this.#associated_objects }
+  set associated_objects(value) { this.#associated_objects = value }
 
   /**
    * Creates a new instance of the model class based on metadatum name and
@@ -80,11 +94,20 @@ class CoreModel implements core {
    *          contain the metadatum
    */
   static new (data: any, model_metadatum_name: string, metadata?: any) {
-    if (!metadata && !this.#metadata) return null
+    if (!metadata && !this.#metadata) {
+      console.error('Editable.new() No metadata')
+      return null
+    }
     if (metadata) this.#metadata = metadata
     const metadatum = this.#metadata[model_metadatum_name]
-    if (!metadatum) return null
-    if (!metadatum.attribute_metadata) return null
+    if (!metadatum) {
+      console.error('Editable.new() No metadatum. metadata:', this.#metadata, model_metadatum_name)
+      return null
+    }
+    if (!metadatum.attribute_metadata) {
+      console.error('Editable.new() No attribute metadata')
+      return null
+    }
     if (!data.identifier) throw new Error(`data has no identifier`)
     const obj = new CoreModel(data, metadatum)
     obj.updateAssociations()
@@ -107,7 +130,6 @@ class CoreModel implements core {
     this.data[association].push(data) // add new json data to model.data[] array
     this.updateAssociations()
   }
-
 
   /**
    * Adds new data to the has_one association.
@@ -157,7 +179,7 @@ class CoreModel implements core {
       //console.log('22 editable.find() path:', path)
       return this.find(path)
     }
-    let objs = this[path_item.association as keyof CoreModel]
+    let objs = this.associated_objects[path_item.association as keyof associated_objects]
     if (!objs) return null
     if (objs instanceof Array === false) objs = [objs] // has_one
     objs = objs.filter((o: any) => o.identifier)
@@ -201,15 +223,15 @@ class CoreModel implements core {
     if (!this.attribute_metadata) throw new Error ('attribute_metadata not defined')
     if (!this.identifier) throw new Error ('identifier not defined')
     this.attribute_metadata.forEach((a:metadata.attribute_metadata) => {
-      // console.log('10 editable.export() am:', a)
+      //console.log('10 editable.export() am:', a)
       if (a.type === 'has_many') {
-        if (!(this as CoreModel)[a.identifier as keyof CoreModel]) return
-        //console.log('20 editable.export() a.identifier:', a.identifier, 'identifiers:', this[a.identifier].map((o:any) => o.identifier))
-        exported[a.identifier] = this[a.identifier as keyof CoreModel].map((o:any) => o.export())
+        if (!this.associated_objects[a.identifier as keyof CoreModel]) return
+        //console.log('20 editable.export() a.identifier:', a.identifier, 'identifiers:', this.associated_objects[a.identifier].map(o => o.identifier))
+        exported[a.identifier] = this.associated_objects[a.identifier as keyof associated_objects].map((o:any) => o.export())
       } else if (a.type === 'has_one') {
-        if (!this[a.identifier as keyof CoreModel]) return
-        if (!this[a.identifier as keyof CoreModel].export) throw new Error('No export method in ' + a.identifier)
-        exported[a.identifier] = this[a.identifier as keyof CoreModel].export()
+        if (!this.associated_objects[a.identifier as keyof CoreModel]) return
+        //console.log('30 editable.export() a.identifier:', a.identifier, 'identifiers:', this.associated_objects[a.identifier])
+        exported[a.identifier] = this.associated_objects[a.identifier as keyof CoreModel].export()
       }
       else {
         exported[a.identifier] = this.data[a.identifier]
@@ -245,11 +267,11 @@ class CoreModel implements core {
   // kuinka lopulta toteutuvat. esim. kannattaako olla kahta metodia?
   // nythän on näin että typescript saa listan ja objektin.
   findHasManyObjects(association_identifier: string): any[] {
-    return this[association_identifier as keyof CoreModel]
+    return this.associated_objects[association_identifier as keyof associated_objects]
   }
 
   findHasOneObjects(association_identifier: string): any {
-    return this[association_identifier as keyof CoreModel]
+    return this.associated_objects[association_identifier as keyof associated_objects]
   }
 
   /**
@@ -292,12 +314,13 @@ class CoreModel implements core {
       switch (a.type) {
         case 'has_many':
           if (!objs) objs = []
-          this[a.identifier] = objs.filter((o:any) => o)
+          this.associated_objects[a.identifier] = objs.filter((o:any) => o)
           break
+
         case 'has_one':
           const obj = objs[0]
           if (!obj) throw new Error('obj not defined')
-          this[a.identifier] = obj
+          this.associated_objects[a.identifier] = obj
           break
       }
     })

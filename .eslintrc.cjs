@@ -8,7 +8,8 @@ module.exports = {
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
     'plugin:@typescript-eslint/recommended',
-//    'plugin:prettier/recommended',
+    'plugin:@next/next/recommended',
+    //'plugin:prettier/recommended',
   ],
   root: true,
   env: {
@@ -16,7 +17,7 @@ module.exports = {
     jest: true,
   },
   ignorePatterns: [
-    '.eslintrc.cjs', 
+    '.eslintrc.cjs',
     'vite.config.ts',
     'vitest.config.ts'
   ],
