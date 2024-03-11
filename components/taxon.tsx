@@ -60,7 +60,7 @@ const BodyPart = ({ body_part }: { body_part: bodyPart }) => {
   return (
     <div className="mt-10">
     <table className="table-auto w-full">
-      <caption>Body of this metamorphosis.</caption>
+      <caption>Body part.</caption>
       <tbody>
         <tr><td>Type</td><td>{type}</td></tr>
         <tr><td>Description</td><td>{desc}</td></tr>
@@ -82,7 +82,7 @@ const BodySegment = ({ body_segment }: { body_segment: bodySegment }) => {
   return (
     <div className="mt-10">
     <table className="table-auto w-full">
-      <caption className="text-blue-500">Body of this metamorphosis.</caption>
+      <caption className="text-blue-500">Body segment </caption>
       <tbody>
         <tr><td>Type</td><td>{type}</td></tr>
         <tr><td>Percentage</td><td>{body_segment?.percentage}</td></tr>
@@ -127,18 +127,17 @@ const Attributes = ({ attributes }: { attributes: [] | attribute[] }) => {
 
 const Body = ({
   body,
-  existence_name,
+  existence_type,
   metamorphosis_name,
   metamorphosis_interval,
   metamorphosis_period
 }: {
   body: body,
-  existence_name: string,
+  existence_type: string,
   metamorphosis_name: string,
   metamorphosis_interval: number,
   metamorphosis_period: number
 }) => {
-  const type = body?.type || "Unknown";
   const materia = body?.materia || "Unknown";
   const powers = body?.powers || "Unknown";
   const description = body?.description_en || body?.description_fi || "No description available"
@@ -151,11 +150,12 @@ const Body = ({
   const skills = body?.skills || []
 
   return (
-    <div className="bg-gray-100 rounded px-10">
+    <div className="bg-gray-100 rounded-r-lg px-10 p-10">
     <table className="table-auto w-full text-left">
-      <caption className="text-blue-500">Creature data</caption>
+      <caption className="text-blue-500 text-lg">Creature data</caption>
       <tbody>
-        <tr><td className="pr-6">Type</td><td>{metamorphosis_name}, {type} ({existence_name})</td></tr>
+        <tr><td className="pr-6">Name</td><td>{metamorphosis_name}</td></tr>
+        <tr><td className="pr-6">Type</td><td>{existence_type}</td></tr>
         <tr><td className="pr-6">Metamorphosis</td><td>Interval {metamorphosis_interval} hours - Period {metamorphosis_period} days (values are more or less abstract)</td></tr>
         <tr><td className="pr-6">Materia</td><td>{materia}</td></tr>
         <tr><td className="pr-6">Minimum attributes</td><td><Attributes attributes={mins} /></td></tr>
@@ -199,27 +199,24 @@ const Body = ({
 // }
 
 const Existence = ({ existence }: { existence: existence }) => {
-  const identifier = existence?.identifier || "Unknown";
   const metamorphoses = existence?.metamorphoses || []
-  const existence_name = existence?.name_en || existence?.name_fi || identifier
+  const existence_type = existence.type
 
   return (
     <>
       {
         metamorphoses.map((metamorphosis) => {
-          const ename = existence_name
-          const metamorphosis_name = metamorphosis?.name_en || metamorphosis?.name_fi || metamorphosis.identifier
+          const metamorphosis_name = metamorphosis?.name_en || metamorphosis?.name_fi || "Unknown"
           const metamorphosis_interval = metamorphosis?.interval || 0
           const metamorphosis_period = metamorphosis?.period || 0
           return metamorphosis.bodies?.map((body,i) => {
             return <Body
                 body={body}
-                existence_name={ename}
+                existence_type={existence_type}
                 metamorphosis_name={metamorphosis_name}
                 metamorphosis_interval={metamorphosis_interval}
                 metamorphosis_period={metamorphosis_period}
                 key={body.identifier+"-"+i}/>
-
           })
         })
       }
@@ -299,7 +296,7 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick, click
               </table>
            </div>
            <div>
-              <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-gray-200 dark:border-gray-700 dark:text-gray-400">
+              <ul className="flex flex-wrap text-sm font-medium text-gray-500 border-gray-200 dark:border-gray-700 dark:text-gray-400">
                 {
                   existences.map((existence) => {
                     if (!existence.identifier) return "<></>"
@@ -307,7 +304,7 @@ const Taxon = ({ taxon, handleSelectRankClick, handleClearSelectRankClick, click
                     const ename = existence.name_en || existence.name_fi || existence.type
                     return (
                       //<li eventKey={existence.identifier} title={ename} key={existence.identifier}>
-                      <li className="me-2">
+                      <li className="me-2" key={existence.identifier}>
                          <a href="#" aria-current="page" className="inline-block p-4 text-gray-500 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">
                           {ename}
                          </a>
