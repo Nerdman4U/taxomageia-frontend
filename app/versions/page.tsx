@@ -39,7 +39,7 @@ const Versions = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 text-gray-400">
+    <div className="w-3/5 mx-auto px-4 sm:px-6 text-gray-400">
       <div className="py-12 md:py-20 border-t border-gray-800">
 
         <div className="mb-12">
