@@ -13,7 +13,6 @@ import Breadcrumbs from "@/components/dungeon/breadcrumbs"
 
 import * as contextType from '@/app/context/context.type'
 
-import * as config from '@/config'
 import { set } from '@/lib/features/studio/metadata/metadataReducer'
 import { setTaxomageia } from '@/lib/features/studio/editor/taxomageiaReducer'
 
