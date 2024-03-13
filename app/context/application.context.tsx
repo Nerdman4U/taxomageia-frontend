@@ -4,7 +4,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import pkg from '../../package.json' assert { type: "json" }
 import axios from 'axios'
-import * as config from '@/lib/config'
+import * as config from '@/config'
 import * as contextType from './context.type'
 
 const AppContext = React.createContext({} as contextType.application);

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import * as config from '@/lib/config'
+import * as config from '@/config'
 
 export default function Footer() {
   return (
@@ -36,6 +36,9 @@ export default function Footer() {
                 <ul>
                   <li className="mb-1">
                     <Link href={config.api_complete} className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">API</Link>
+                  </li>
+                  <li className="mb-1">
+                    <Link href={config.dungeon} className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Dungeon</Link>
                   </li>
                   <li className="mb-1">
                     <Link href={config.forum} className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Forum</Link>

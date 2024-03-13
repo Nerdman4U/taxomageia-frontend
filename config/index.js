@@ -3,7 +3,7 @@ const api_complete = "/api/1/taxomageias/first/taxons";
 const api = "/api/1/taxomageias/first/taxons_preview";
 const release_notes = "/api/1/application/release_notes"
 const documentation = "/documentation"
-const studio = "/studio"
+const dungeon = "/dungeon"
 const signin = "/signin"
 const signup = "/signup"
 const versions = "/versions"
@@ -40,7 +40,7 @@ export {
   partner,
   diary,
   inner_creatures,
-  studio,
+  dungeon,
   signin,
   signup,
   metadata,

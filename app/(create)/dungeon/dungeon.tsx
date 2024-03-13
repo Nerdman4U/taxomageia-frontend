@@ -7,10 +7,10 @@ import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/br
 import { TState } from '@/lib/store'
 import { useEffect } from "react"
 
-import EditorContainer from "@/components/studio/editor.container"
-import Breadcrumbs from "@/components/studio/breadcrumbs"
+import EditorContainer from "@/components/dungeon/editor.container"
+import Breadcrumbs from "@/components/dungeon/breadcrumbs"
 
-import * as config from '@/lib/config'
+import * as config from '@/config'
 import { set } from '@/lib/features/studio/metadata/metadataReducer'
 import { setTaxomageia } from '@/lib/features/studio/editor/taxomageiaReducer'
 
@@ -18,7 +18,7 @@ import { setTaxomageia } from '@/lib/features/studio/editor/taxomageiaReducer'
  *
  * @returns
  */
-function Studio() {
+function Dungeon() {
   const dispatch = useDispatch()
   const taxomageia_data = useSelector((state: TState) => state.taxomageia)
   const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
@@ -67,8 +67,9 @@ function Studio() {
         <div className="py-12 md:py-20">
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className="h2 mb-4">Create</h2>
-            <p>Welcome to create your own Taxomageia! <i>Remember to login to save your work!</i></p>
+            <h2 className="h2 mb-4">Dungeon</h2>
+            <p>Welcome to create your own Taxomageia!</p>
+            <p><i>Remember to login to save your work!</i></p>
             <Breadcrumbs/>
             <div className="text-sm text-gray-400 shadow-md p-10">
               <EditorContainer/>
@@ -80,6 +81,6 @@ function Studio() {
   )
 }
 
-export default Studio
+export default Dungeon
 
 

@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 import logo from '@/public/images/dragon-130-130.png'
 
-import * as config from '@/lib/config'
+import * as config from '@/config'
 // import localFont from 'next/font/local'
 // const myFont = localFont({ src: '@/public/fonts/sunday/sunday.woff' })
 
@@ -41,7 +41,7 @@ export default function Hero() {
                 <a className="btn text-white bg-gray-700 rounded hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href={config.documentation}>Learn more</a>
               </div>
               <div data-aos="fade-up" data-aos-delay="600">
-                <a className="btn text-white bg-gray-800 rounded hover:bg-black w-full sm:w-auto sm:ml-4" href={config.studio}>Dungeon</a>
+                <a className="btn text-white bg-gray-800 rounded hover:bg-black w-full sm:w-auto sm:ml-4" href={config.dungeon}>Dungeon</a>
               </div>
             </div>
           </div>

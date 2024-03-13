@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 // import metadata from '../../../config/metadata.json' assert { type: 'json' }
-import * as config from '@/lib/config'
+import * as config from '@/config'
 import * as types from './metadata.type'
 import { setModelMetadata } from './metadataReducer'
 

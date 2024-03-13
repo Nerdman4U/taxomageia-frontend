@@ -1,4 +1,4 @@
-import * as config from '@/lib/config'
+import * as config from '@/config'
 const Contribute = () => {
 
   return (
