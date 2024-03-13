@@ -34,51 +34,6 @@ export const ContextProvider = ({children}: {children: React.ReactNode[]}) => {
     })
   }, [])
 
-  const value = {
-    frontend: {
-      current: "jipii",
-      versions: [
-        { version: "1.2", features: ["cool stuff"], issues: ["not cool stuff"] }
-      ]
-    },
-    backend: {
-      current: "1.5",
-      versions: [
-        { version: "1.5", features: ["cool stuff"], issues: ["not cool stuff"] }
-      ]
-    },
-    data: [
-      {
-        name: "The First",
-        current: "1.0",
-        description: "A draft of the first Taxomageia, mainly for testing purposes.",
-        licence: "MIT",
-        versions: [
-          { version: "1.0", features: ["cool stuff"], issues: ["not cool stuff"] }
-        ]
-      },
-      {
-        name: "Template 1 - Wilderness in central Mystara",
-        current: "1.0",
-        description: "A selected group of creatures of monsters in central Mystara.",
-        licence: "MIT",
-        versions: [
-          { version: "1.0", features: ["cool stuff"], issues: ["not cool stuff"] }
-        ]
-      }
-    ],
-    codenames: [
-      {
-          name: "Lyrical Orc",
-          type: "prerelease",
-          date: "12.3.2024",
-          backend: 1.5,
-          frontend: 1.2,
-          description: "This is a prerelease work to add and edit Taxomageias.",
-      }
-    ],
-  }
-
   return (
     <AppContext.Provider value={releaseNotes}>
       {children}
