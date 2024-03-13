@@ -105,7 +105,7 @@ const BodySegment = ({ body_segment }: { body_segment: bodySegment }) => {
 }
 
 const Attribute = ({ attribute }: { attribute: attribute }) => {
-  return <tr key={attribute.identifier}><td>{attribute.key}</td><td>{attribute.value}</td></tr>
+  return <tr key={attribute.identifier}><td className="w-1/5">{attribute.key}</td><td>{attribute.value}</td></tr>
 
 }
 
