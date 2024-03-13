@@ -1,3 +1,5 @@
+import { model_metadata } from '@/components/dungeon/editor.types'
+
 export type version = {
   version: string
   features?: string[]
@@ -31,5 +33,6 @@ export type application = {
   backend: code
   data: template[]
   codenames: any[]
+  model_metadata: model_metadata[]
 }
 

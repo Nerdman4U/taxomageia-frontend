@@ -95,13 +95,13 @@ class CoreModel implements core {
    */
   static new (data: any, model_metadatum_name: string, metadata?: any) {
     if (!metadata && !this.#metadata) {
-      console.error('Editable.new() No metadata')
+      //console.error('Editable.new() No metadata')
       return null
     }
     if (metadata) this.#metadata = metadata
     const metadatum = this.#metadata[model_metadatum_name]
     if (!metadatum) {
-      console.error('Editable.new() No metadatum. metadata:', this.#metadata, model_metadatum_name)
+      //console.error('Editable.new() No metadatum. metadata:', this.#metadata, model_metadatum_name)
       return null
     }
     if (!metadatum.attribute_metadata) {

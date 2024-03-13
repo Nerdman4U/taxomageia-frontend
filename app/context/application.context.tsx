@@ -6,11 +6,13 @@ import pkg from '../../package.json' assert { type: "json" }
 import axios from 'axios'
 import * as config from '@/config'
 import * as contextType from './context.type'
+import * as editorTypes from '@/components/dungeon/editor.types'
 
 const AppContext = React.createContext({} as contextType.application);
 
 export const ContextProvider = ({children}: {children: React.ReactNode[]}) => {
   const [releaseNotes, setReleaseNotes] = useState({} as contextType.application)
+  const [metadata, setMetadata] = useState([] as editorTypes.model_metadata[])
 
   useEffect(() => {
     axios.get(config.release_notes).then((response): void => {
@@ -34,8 +36,30 @@ export const ContextProvider = ({children}: {children: React.ReactNode[]}) => {
     })
   }, [])
 
+  useEffect(() => {
+    // if metadata has been loaded, do not fetch
+    fetch(config.metadata)
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        console.log('fetched metadata: ', data)
+        setMetadata(data)
+        // dispatch(set(data))
+      })
+      .catch(e => {
+        console.error(e)
+      })
+  }, [])
+
+  const value = {
+    ...releaseNotes,
+    model_metadata: metadata
+  }
+
+
   return (
-    <AppContext.Provider value={releaseNotes}>
+    <AppContext.Provider value={value}>
       {children}
     </AppContext.Provider>
   )

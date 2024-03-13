@@ -5,10 +5,13 @@ import localForage from 'localforage'
 import { useSelector, useDispatch } from 'react-redux'
 import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumbReducer'
 import { TState } from '@/lib/store'
-import { useEffect } from "react"
+import { useEffect, useContext } from "react"
+import AppContext from '@/app/context/application.context'
 
 import EditorContainer from "@/components/dungeon/editor.container"
 import Breadcrumbs from "@/components/dungeon/breadcrumbs"
+
+import * as contextType from '@/app/context/context.type'
 
 import * as config from '@/config'
 import { set } from '@/lib/features/studio/metadata/metadataReducer'
@@ -19,10 +22,16 @@ import { setTaxomageia } from '@/lib/features/studio/editor/taxomageiaReducer'
  * @returns
  */
 function Dungeon() {
+  const value = useContext(AppContext) as contextType.application
+  if (!value.model_metadata) return <></>
+
   const dispatch = useDispatch()
   const taxomageia_data = useSelector((state: TState) => state.taxomageia)
   const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
-  //console.log('Studio() breadcrumbs:', breadcrumbs)
+
+  useEffect(() => {
+    dispatch(set(value.model_metadata))
+  }, [value.model_metadata])
 
   // Double taxomageia breadcrumb when refreshing whole page... dunno?
   let allow = true
@@ -34,24 +43,9 @@ function Dungeon() {
   }, [breadcrumbs])
 
   useEffect(() => {
-    // if metadata has been loaded, do not fetch
-    fetch(config.metadata)
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        console.log('Studio() fetch metadata, data: ', data)
-        dispatch(set(data))
-      })
-      .catch(e => {
-        console.error(e)
-      })
-  }, [])
-
-  useEffect(() => {
     localForage.getItem('taxomageia')
       .then(obj => {
-        console.log('Studio() getting item from localForage, obj:', obj)
+        console.log('Dungeon() getting item from localForage, obj:', obj)
         if (obj) {
           dispatch(setTaxomageia(obj))
         }
