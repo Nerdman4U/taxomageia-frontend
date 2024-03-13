@@ -21,8 +21,8 @@ const Versions = () => {
   console.log(codenames, 'codename:', codename)
   // const templates = value.data
 
-  const [serverVisible, setServerVisible] = useState(true)
-  const [clientVisible, setClientVisible] = useState(true)
+  const [serverVisible, setServerVisible] = useState(false)
+  const [clientVisible, setClientVisible] = useState(false)
   // const [dataVisible, setDataVisible] = useState(true)
 
   const toggleServer = () => { setServerVisible(!serverVisible) }
@@ -30,6 +30,7 @@ const Versions = () => {
   // const toggleData = () => { setDataVisible(!dataVisible) }
 
   const show = ({visible, topic, toggleVisibility, id, versions}: {visible: boolean, topic: string, toggleVisibility: () => void, id: string, versions: contextType.version[]}) => {
+    console.log('visible:', visible)
     return (
       <Toggleable visible={visible} id={id} topic={topic} toggleVisibility={toggleVisibility}>
         <VersionsList versions={versions} />
