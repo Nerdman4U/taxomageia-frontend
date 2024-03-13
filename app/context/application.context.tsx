@@ -1,65 +1,86 @@
 'use client'
 
 import React from 'react';
-import { useEffect, useState  } from 'react';
+import { useEffect, useState } from 'react';
 import pkg from '../../package.json' assert { type: "json" }
 import axios from 'axios'
 import * as config from '@/lib/config'
+import * as contextType from './context.type'
 
-export type VersionInfoType = {
-  version?: string
-  next_en?: string[]
-  next_fi?: string[]
-  features_en?: string[]
-  features_fi?: string[]
-  problems_en?: string[]
-  problems_fi?: string[]
-  notes_en?: string[]
-  notes_fi?: string[]
-}
-
-export type AppContextType = {
-  clientVersion?: string
-  clientVersionStr?: string
-  serverVersion?: string
-  serverVersionStr?: string
-  versionInfo?: VersionInfoType[]
-}
-
-const AppContext = React.createContext({} as AppContextType);
+const AppContext = React.createContext({} as contextType.application);
 
 export const ContextProvider = ({children}: {children: React.ReactNode[]}) => {
-  const clientVersion = pkg.version
-  const [serverVersion, setServerVersion] = useState("0.0.0")
-  const [versionInfo, setVersionInfo] = useState([])
+  const [releaseNotes, setReleaseNotes] = useState({} as contextType.application)
 
   useEffect(() => {
-    axios.get(config.app, {params: {q: 'version'}}).then((response): void => {
-      console.log(`connected to server at ${config.app}`, response.data)
+    axios.get(config.release_notes).then((response): void => {
+      console.log(`connected to server at ${config.release_notes}`, 'data:', response.data)
       if (!response.data) return
-      if (!response.data.current) return
-      console.log(response.data)
-      setServerVersion(response.data.current)
-      if (!response.data.info) return
-      setVersionInfo(response.data.info)
+
+      const client_version = pkg.version
+      const result = {
+        ...response.data,
+        frontend: {
+          ...response.data.frontend,
+          current: client_version
+        }
+      }
+      console.log('result:', result)
+      setReleaseNotes(result)
+      // console.log(response.data)
+      // setServerVersion(response.data.current)
+      // if (!response.data.info) return
+      // setVersionInfo(response.data.info)
     })
   }, [])
 
-  let serverStr = ""
-  let clientStr = ""
-  if (serverVersion) { serverStr = `Server: v${serverVersion}` }
-  if (clientVersion) { clientStr = `Client: v${clientVersion}` }
-
   const value = {
-    clientVersion: clientVersion || "0.0.0",
-    clientVersionStr: clientStr || "Client: v0.0.0",
-    serverVersion: serverVersion || "0.0.0",
-    serverVersionStr: serverStr || "Server: v0.0.0",
-    versionInfo: versionInfo || [],
+    frontend: {
+      current: "jipii",
+      versions: [
+        { version: "1.2", features: ["cool stuff"], issues: ["not cool stuff"] }
+      ]
+    },
+    backend: {
+      current: "1.5",
+      versions: [
+        { version: "1.5", features: ["cool stuff"], issues: ["not cool stuff"] }
+      ]
+    },
+    data: [
+      {
+        name: "The First",
+        current: "1.0",
+        description: "A draft of the first Taxomageia, mainly for testing purposes.",
+        licence: "MIT",
+        versions: [
+          { version: "1.0", features: ["cool stuff"], issues: ["not cool stuff"] }
+        ]
+      },
+      {
+        name: "Template 1 - Wilderness in central Mystara",
+        current: "1.0",
+        description: "A selected group of creatures of monsters in central Mystara.",
+        licence: "MIT",
+        versions: [
+          { version: "1.0", features: ["cool stuff"], issues: ["not cool stuff"] }
+        ]
+      }
+    ],
+    codenames: [
+      {
+          name: "Lyrical Orc",
+          type: "prerelease",
+          date: "12.3.2024",
+          backend: 1.5,
+          frontend: 1.2,
+          description: "This is a prerelease work to add and edit Taxomageias.",
+      }
+    ],
   }
 
   return (
-    <AppContext.Provider value={value}>
+    <AppContext.Provider value={releaseNotes}>
       {children}
     </AppContext.Provider>
   )

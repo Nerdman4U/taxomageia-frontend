@@ -37,11 +37,11 @@ export default function Hero() {
               <div data-aos="fade-up" data-aos-delay="400">
                 <a className="btn text-white bg-purple-600 rounded hover:bg-purple-700 w-full mb-4 sm:w-auto sm:mb-0" href={config.inner_creatures}>Creatures</a>
               </div>
-              <div data-aos="fade-up" data-aos-delay="600">
+              <div data-aos="fade-up" data-aos-delay="500">
                 <a className="btn text-white bg-gray-700 rounded hover:bg-gray-800 w-full sm:w-auto sm:ml-4" href={config.documentation}>Learn more</a>
               </div>
               <div data-aos="fade-up" data-aos-delay="600">
-                <a className="btn text-white bg-yellow-600 rounded hover:bg-yellow-800 w-full sm:w-auto sm:ml-4" href={config.studio}>Studio</a>
+                <a className="btn text-white bg-gray-800 rounded hover:bg-black w-full sm:w-auto sm:ml-4" href={config.studio}>Dungeon</a>
               </div>
             </div>
           </div>

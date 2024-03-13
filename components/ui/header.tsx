@@ -3,14 +3,21 @@ import MobileMenu from './mobile-menu'
 import { useContext } from 'react'
 import AppContext from '@/app/context/application.context'
 import * as config from '@/lib/config'
+import * as contextType from '@/app/context/context.type'
 
 export default function Header() {
-  const value = useContext(AppContext)
-  const clientVersionStr = value.clientVersionStr || "Client: v0.0.0"
-  const serverVersionStr = value.serverVersionStr || "Server: v0.0.0"
+  const value = useContext(AppContext) as contextType.application
+  if (!value.backend) value.backend = { current: "", versions: [] }
+  if (!value.frontend) value.frontend = { current: "", versions: [] }
+  if (!value.codenames) value.codenames = []
+  if (!value.data) value.data = []
+
+  const clientVersionStr = `Client: v${value.frontend.current}`
+  const serverVersionStr = `Server: v${value.backend.current}`
+  const codename = (value.codenames.length > 0) ? value.codenames[0].name : "Mystical Opossum"
 
   return (
-    <header className="absolute w-full z-30">
+    <header className="w-full z-30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-20">
           {/* Site branding */}
@@ -23,9 +30,10 @@ export default function Header() {
             </Link>
           </div>
           <div className="text-sm text-gray-600 ml-3">
+            <p className="mb-0 pb-0 font-semibold text-purple-400">{codename}</p>
             <p className="mb-0 pb-0"><a href={config.versions + "#server"} className='my-0 py-0 version-link'>{serverVersionStr}</a></p>
             <p className="mb-0 pb-0"><a href={config.versions + "#client"} className='my-0 py-0 version-link'>{clientVersionStr}</a></p>
-            <p className="mb-0 pb-0"><a href={config.versions + "#data"} className='my-0 py-0 version-link'>the First</a></p>
+            {/* <p className="mb-0 pb-0"><a href={config.versions + "#data"} className='my-0 py-0 version-link'>the First</a></p> */}
           </div>
 
           {/* Desktop navigation */}

@@ -253,7 +253,7 @@ const Doc = () => {
                 </li>
               </ul>
 
-              <h4 className="h4 mt-6 mb-1 mb-1">Server</h4>
+              <h4 className="h4 mt-6 mb-1">Server</h4>
               <ul>
                 <li className="my-3">
                   Information how creatures are created. By magic? How? Using what components or what kind tools? Environment?
