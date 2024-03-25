@@ -54,11 +54,11 @@ const Credits = () => {
                 <li><a href="https://tc39.es/ecma262/" target="_blank">ECMAScript</a>, <a href="https://www.typescriptlang.org/" target="_blank">Typescript</a></li>
                 <li>Node, ts-node</li>
                 <li>NextJS</li>
-                <li>React, React-Redux, Redux Toolkit</li>
+                <li>React, React-Redux, Redux Toolkit, Tailwind CSS</li>
                 <li><a href="prisma.io" target="_blank">Prisma</a></li>
                 <li>Vitest, Jest, Supertest, Cypress</li>
                 <li><a href="https://codeium.com/" target="_blank">Codeium</a></li>
-                <li>HTML, CSS</li>
+                <li>HTML, CSS, JSON, YAML</li>
             		<li>PostgreSQL, MySQL</li>
                 <li><a href="https://certbot.eff.org/" target="_blank">Certbot</a></li>
                 <li>Apache, Redis</li>
