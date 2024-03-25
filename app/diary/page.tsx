@@ -20,8 +20,8 @@ const Diary = () => {
             <div>
               <p className="mb-3">
                 Basic functionality for signup / signin is done. I have now
-                hopes to manage to have first working version with login and
-                basic editing ready at end of the week.
+                hopes to have first working version with login and basic editing
+                ready at the end of the week.
               </p>
             </div>
           </div>
@@ -56,7 +56,7 @@ const Diary = () => {
                 servers. This is amazing. Im so glad to learn all kinds of new
                 modern developer tools.
               </p>
-              <p className="mb-3">
+              <div className="mb-3">
                 Anyway. After that is done there is still some interesting stuff
                 i want to do. One of the first things after{" "}
                 <span className="text-purple-400">lyrical orc</span> will be to
@@ -77,7 +77,7 @@ const Diary = () => {
                     set of accepted strings, etc.)
                   </li>
                 </ol>
-              </p>
+              </div>
               <p className="mb-3">
                 I also want to add possibility to inherit multiple taxons. This
                 is backend work and it should not be too hard with current
