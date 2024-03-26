@@ -1,15 +1,16 @@
-import StoreProvider from "./StoreProvider";
+// import StoreProvider from "../../../lib/StoreProvider";
 import Dungeon from "./dungeon";
 
 export const metadata = {
-  title: 'Taxomageia Dungeon',
-  description: 'Taxomageia Dungeon to create and edit Taxomageia creatures and monsters',
-}
+  title: "Taxomageia Dungeon",
+  description:
+    "Taxomageia Dungeon to create and edit Taxomageia creatures and monsters",
+};
 
 export default function Page() {
   return (
-    <StoreProvider>
-      <Dungeon />
-    </StoreProvider>
-  )
+    // <StoreProvider>
+    <Dungeon />
+    // </StoreProvider>
+  );
 }

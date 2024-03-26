@@ -3,6 +3,7 @@ import breadcrumbsReducer from "./features/studio/breadcrumbs/breadcrumbReducer"
 import taxomageiaReducer from "./features/studio/editor/taxomageiaReducer";
 import metadataReducer from "./features/studio/metadata/metadataReducer";
 import loginReducer from "./features/login/loginReducer";
+import releaseNotesReducer from "./features/releaseNotesReducer";
 
 const makeStore = () => {
   return configureStore({
@@ -11,6 +12,7 @@ const makeStore = () => {
       taxomageia: taxomageiaReducer,
       metadata: metadataReducer,
       login: loginReducer,
+      release_notes: releaseNotesReducer,
     },
   });
 };

@@ -3,7 +3,7 @@
 import { useState, useContext } from "react";
 
 import AppContext from "@/app/context/application.context";
-import * as contextType from "@/app/context/context.type";
+import * as contextType from "@/app/context/release_notes.types";
 // import serverVersions from "../../app/versions/server.json" assert { type: "json" }
 //import clientVersions from "../../app/versions/client.json" assert { type: "json" }
 //import dataVersions from "../../app/versions/data.json" assert { type: "json" }

@@ -1,58 +1,64 @@
-'use client'
+"use client";
 
-import localForage from 'localforage'
+import localForage from "localforage";
 
-import { useSelector, useDispatch } from 'react-redux'
-import { create as createBreadcrumb } from '@/lib/features/studio/breadcrumbs/breadcrumbReducer'
-import { TState } from '@/lib/store'
-import { useEffect, useContext } from "react"
-import AppContext from '@/app/context/application.context'
+import { useSelector, useDispatch } from "react-redux";
+import { create as createBreadcrumb } from "@/lib/features/studio/breadcrumbs/breadcrumbReducer";
+import { TState } from "@/lib/store";
+import { useEffect } from "react";
+// import AppContext from '@/app/context/application.context'
 
-import EditorContainer from "@/components/dungeon/editor.container"
-import Breadcrumbs from "@/components/dungeon/breadcrumbs"
+import EditorContainer from "@/components/dungeon/editor.container";
+import Breadcrumbs from "@/components/dungeon/breadcrumbs";
 
-import * as contextType from '@/app/context/context.type'
+// import * as contextType from "@/app/context/context.type";
 
-import { set } from '@/lib/features/studio/metadata/metadataReducer'
-import { setTaxomageia } from '@/lib/features/studio/editor/taxomageiaReducer'
+import { setTaxomageia } from "@/lib/features/studio/editor/taxomageiaReducer";
 
 /**
  *
  * @returns
  */
 function Dungeon() {
-  const value = useContext(AppContext) as contextType.application
-  if (!value.model_metadata) return <></>
+  // const value = useContext(AppContext) as contextType.application
+  // if (!value.model_metadata) return <></>
 
-  const dispatch = useDispatch()
-  const taxomageia_data = useSelector((state: TState) => state.taxomageia)
-  const breadcrumbs = useSelector((state: TState) => state.breadcrumbs)
+  const dispatch = useDispatch();
+  const taxomageia_data = useSelector((state: TState) => state.taxomageia);
+  const breadcrumbs = useSelector((state: TState) => state.breadcrumbs);
+  const metadata = useSelector((state: TState) => state.metadata);
 
-  useEffect(() => {
-    dispatch(set(value.model_metadata))
-  }, [value.model_metadata])
+  // useEffect(() => {
+  //   dispatch(set(value.model_metadata))
+  // }, [value.model_metadata])
 
   // Double taxomageia breadcrumb when refreshing whole page... dunno?
-  let allow = true
+  let allow = true;
   useEffect(() => {
     if (allow && breadcrumbs.length === 0) {
-      allow = false
-      dispatch(createBreadcrumb({name: "taxomageia", identifier: taxomageia_data.identifier}))
+      allow = false;
+      dispatch(
+        createBreadcrumb({
+          name: "taxomageia",
+          identifier: taxomageia_data.identifier,
+        })
+      );
     }
-  }, [breadcrumbs])
+  }, [breadcrumbs]);
 
   useEffect(() => {
-    localForage.getItem('taxomageia')
-      .then(obj => {
-        console.log('Dungeon() getting item from localForage, obj:', obj)
+    localForage
+      .getItem("taxomageia")
+      .then((obj) => {
+        console.log("Dungeon() getting item from localForage, obj:", obj);
         if (obj) {
-          dispatch(setTaxomageia(obj))
+          dispatch(setTaxomageia(obj));
         }
       })
-      .catch(e => {
-        console.error(e)
-      })
-  }, [])
+      .catch((e) => {
+        console.error(e);
+      });
+  }, []);
 
   return (
     <section id="features">
@@ -62,18 +68,18 @@ function Dungeon() {
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h2 className="h2 mb-4">Dungeon</h2>
             <p>Welcome to create your own Taxomageia!</p>
-            <p><i>Remember to login to save your work!</i></p>
-            <Breadcrumbs/>
+            <p>
+              <i>Remember to login to save your work!</i>
+            </p>
+            <Breadcrumbs />
             <div className="text-sm text-gray-400 shadow-md p-10">
-              <EditorContainer/>
+              <EditorContainer />
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default Dungeon
-
-
+export default Dungeon;
